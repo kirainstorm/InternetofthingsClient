@@ -1,0 +1,60 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/preview_bottom_layout" 
+    android:background="@android:color/transparent">
+
+    <RelativeLayout
+        android:id="@+id/bottomrelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <ImageButton
+            android:id="@+id/btnBarSossdf33er"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="0dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter" />
+
+        <ImageButton
+            android:id="@+id/btnBarSoundDevice"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="22dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/zz_sound"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/btnBarSossdf33er" />
+
+        <ImageButton
+            android:id="@+id/btnBarCapDevice"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="22dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/zz_player_bar_cap_selector"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/btnBarSoundDevice" />
+
+        <ImageButton
+            android:id="@+id/btnBarRecDevice"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="22dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/zz_record"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/btnBarCapDevice" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

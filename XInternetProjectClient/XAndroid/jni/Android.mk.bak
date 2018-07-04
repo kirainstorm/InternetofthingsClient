@@ -1,0 +1,218 @@
+LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+
+
+#############################################
+ 
+#voaacenc
+#only for ffmpeg write mp4
+include $(CLEAR_VARS)
+LOCAL_MODULE := voaacenc
+LOCAL_SRC_FILES := ../../../__AndroidLib/libvo-aacenc.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+#fdkaac
+include $(CLEAR_VARS)
+LOCAL_MODULE := fdkaac
+LOCAL_SRC_FILES := ../../../__AndroidLib/libfdk-aac.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+#x264
+include $(CLEAR_VARS)
+LOCAL_MODULE := x264
+LOCAL_SRC_FILES := ../../../__AndroidLib/libx264.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+#ffmpeg
+include $(CLEAR_VARS)
+LOCAL_MODULE := avcodec
+LOCAL_SRC_FILES := ../../../__AndroidLib/libavcodec.a
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+include $(PREBUILT_STATIC_LIBRARY)
+include $(CLEAR_VARS)
+LOCAL_MODULE := avformat
+LOCAL_SRC_FILES := ../../../__AndroidLib/libavformat.a
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+include $(PREBUILT_STATIC_LIBRARY)
+include $(CLEAR_VARS)
+LOCAL_MODULE := swscale
+LOCAL_SRC_FILES := ../../../__AndroidLib/libswscale.a
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+include $(PREBUILT_STATIC_LIBRARY)
+include $(CLEAR_VARS)
+LOCAL_MODULE := avutil
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+LOCAL_SRC_FILES := ../../../__AndroidLib/libavutil.a
+include $(PREBUILT_STATIC_LIBRARY)
+LOCAL_MODULE := avfilter
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+LOCAL_SRC_FILES := ../../../__AndroidLib/libavfilter.a
+include $(PREBUILT_STATIC_LIBRARY)
+LOCAL_MODULE := swresample
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+LOCAL_SRC_FILES := ../../../__AndroidLib/libswresample.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+#boost
+include $(CLEAR_VARS)
+LOCAL_MODULE:= boost_system
+LOCAL_SRC_FILES:= ../../../__AndroidLib/libboost_system.a
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE:= boost_thread
+LOCAL_SRC_FILES:= ../../../__AndroidLib/libboost_thread.a
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE:= boost_timer
+LOCAL_SRC_FILES:= ../../../__AndroidLib/libboost_timer.a
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+include $(PREBUILT_STATIC_LIBRARY)
+
+#openssl
+include $(CLEAR_VARS)
+LOCAL_MODULE := lib_crypto
+LOCAL_SRC_FILES := ../../../__AndroidLib/libcrypto.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := lib_ssl
+LOCAL_SRC_FILES := ../../../__AndroidLib/libssl.a
+include $(PREBUILT_STATIC_LIBRARY)
+
+#libjpeg-turbo
+include $(CLEAR_VARS)
+LOCAL_MODULE:= lib_simd
+LOCAL_SRC_FILES:= ../../../__AndroidLib/libsimd.a
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+include $(PREBUILT_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE:= lib_jpeg
+LOCAL_SRC_FILES:= ../../../__AndroidLib/libjpeg.a
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+include $(PREBUILT_STATIC_LIBRARY)
+
+#xnet
+include $(CLEAR_VARS)
+LOCAL_MODULE:= xnet
+LOCAL_SRC_FILES:= ../../../__AndroidLib/libxnet.a
+#LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
+include $(PREBUILT_STATIC_LIBRARY)
+
+
+###################################################################
+include $(CLEAR_VARS)
+PATH_TO_MY_SOURCE :=	$(LOCAL_PATH)/_inc
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../_Include
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../_Include/cpp_cross_download
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../_Include/cpp_nettoserver
+#inc
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../../_Include
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../../_Include/cpp_cross_display
+#libjpeg-turbo
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../../_ThirdParty/libjpeg-turbo/android/inc
+#ffmpeg
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../../_ThirdParty/x264/android/inc
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../../_ThirdParty/fdk_aac_amr/inc
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../../_ThirdParty/vo_aacenc/android/include
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../../_ThirdParty/ffmpeg/android_me/v287_x264_voaacenc/include
+#boost
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../../_ThirdParty/boost/android_1_55_0
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../../_ThirdParty/SmartPointers
+#openssl
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../../_ThirdParty/openssl/android/OpenSSL1.0.1cForAndroid-master/include
+#device
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../../_Common/Mp4File
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../_MediaInterface
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../../_Common/XPlayer
+PATH_TO_MY_SOURCE +=	$(LOCAL_PATH)/../../../_ThirdParty/fdk_aac_amr/inc
+#
+LOCAL_C_INCLUDES  +=$(PATH_TO_MY_SOURCE)
+
+
+ 
+############################################################
+#初步解法:一句话引入单个目录(不包括子目录)下的所有cpp源文件
+MY_CPP_LIST := $(wildcard $(LOCAL_PATH)/*.cpp)
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../_Include/cpp_cross_download/*.cpp)
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../_Include/cpp_nettoserver/*.cpp)
+#inc
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../../_Include/cpp_cross_display/*.cpp)
+#media device
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../../_Common/Mp4File/Mp4File.cpp)
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../../_Common/Mp4File/Mp4Writer.cpp)
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../_MediaInterface/*.cpp)
+
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../../_Common/XPlayer/FFmpegDecoder.cpp)
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../../_Common/XPlayer/openglRenderer.cpp)
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../../_Common/XPlayer/Adpcm.cpp)
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../../_Common/XPlayer/G711.cpp)
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../../_Common/XPlayer/G711uZyx.cpp)
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../../_Common/XPlayer/fdkaac.cpp)
+MY_CPP_LIST += $(wildcard $(LOCAL_PATH)/../../../_Common/XPlayer/XPlayer.cpp)
+
+
+#
+LOCAL_SRC_FILES := $(MY_CPP_LIST:$(LOCAL_PATH)/%=%)
+
+
+##############################################
+# Here we give our module name and sourcefile(s)
+LOCAL_MODULE  := xmedia
+
+    
+###################################################
+# static libraries.
+LOCAL_STATIC_LIBRARIES := 	xnet \
+							lib_jpeg \
+							lib_simd \
+							boost_system \
+							boost_thread \
+							boost_timer \
+							avformat \
+							avcodec \
+							avutil \
+							swscale \
+							swresample \
+							avfilter \
+							fdkaac \
+							voaacenc \
+							x264
+          
+# shared libraries
+LOCAL_SHARED_LIBRARIES := \
+		libandroid_runtime \
+		libnativehelper \
+		libcutils \
+		libutils \
+		lib_crypto \
+		lib_ssl
+
+###############################################
+#we need opengl
+#LOCAL_LDLIBS    := -lGLESv1_CM -ldl -llog
+#LOCAL_LDLIBS    := -llog
+
+LOCAL_LDLIBS    := -llog -lGLESv2 -lz
+
+#添加异常支持
+LOCAL_CPPFLAGS := -fexceptions
+
+#添加模块引用
+#$(call import-module, boost_1_55_0)
+
+
+#APP_PLATFORM := android-8
+
+
+##################################################
+#this is a static library (.a)
+#include $(BUILD_STATIC_LIBRARY)
+
+#this is a shared library (.so)
+include $(BUILD_SHARED_LIBRARY)
+

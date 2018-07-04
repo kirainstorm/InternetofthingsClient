@@ -1,0 +1,1 @@
+pod install MWPhotoBrowser 与ffmpeg头文件冲突，暂时不用

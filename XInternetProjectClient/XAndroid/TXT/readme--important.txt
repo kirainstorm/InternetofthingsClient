@@ -1,0 +1,1 @@
+android studio 编译jni不够方便，所以使用android studio写界面，，用eclipse或者makefile编译jni库，android studio只调用，做上层

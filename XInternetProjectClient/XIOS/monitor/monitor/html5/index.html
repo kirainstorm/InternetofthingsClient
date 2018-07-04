@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>施瑞直播</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="css/sm.min.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="js/swiper.min.js"></script>
+  </head>
+  <body>
+  <div class="page-group">
+    <div id="page-home" class="page page-current">
+      <header class="bar bar-nav" style="padding-right:0;padding-left:0;background: #fff;">
+          <div class="leftNav">
+            <div id="topNav" class="swiper-container" style="padding-bottom:0;">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide active"><span><a href="#page-home">首页</a></span></div>
+                <!-- style="width:5rem;" -->
+                <div class="swiper-slide" data-type="1" data-val="1"><span>旅游</span></div>
+                <div class="swiper-slide" data-type="2" data-val="1"><span>户外</span></div>
+                <div class="swiper-slide" data-type="3" data-val="1"><span>主播</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="rightNav" style="color: #00b7f0;">
+            <span class="icon icon-search open-search-modal"></span>
+          </div>
+      </header>
+      <div class="content pull-to-refresh-content infinite-scroll "  data-distance="100">
+        <div class="pull-to-refresh-layer">
+          <div class="preloader"></div>
+          <div class="pull-to-refresh-arrow"></div>
+        </div>
+        <div id="lunbolist" style="margin-bottom:0.45rem;">
+
+        </div>
+        <div id="hotlivelist">
+        </div>
+      </div>
+    </div>
+
+    <!--div id="page-view" class="page">
+      <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-left back">
+          <span class="icon icon-left"></span>
+          返回
+        </a>
+        <h1 class="title">测试直播1</h1>
+      </header>
+      <div class="content">
+        <div class="card" style="margin:0;">
+          <div class="card-content">
+            <div id="live-video-block" class="card-content-inner" style="height:14rem;padding: .35rem;display:none">
+            </div>
+            <div id="liveload-block" class="card-content-inner" style="height:14rem;padding: .35rem; display: block;">
+            </div>
+          </div>
+          <div class="card-footer" style="padding: .35rem .5rem;padding-bottom:0.15rem;min-height:1rem">
+            <span>台号: <span id="view_room_no">1001</span></span>
+            <span>人气: <span id="view_room_view_num">0</span></span>
+          </div>
+          <div class="card-footer  no-border" style="padding: .35rem .5rem;padding-top:0.15rem;min-height:1rem">
+            <span style="font-size:0.55rem;" id="view_room_intro"></span>
+          </div>
+        </div>
+        <div id="view-chat-tab" class="buttons-tab" style="border-top:1px solid #ccc;">
+          <a href="#tab1" class="tab-link button active">聊天</a>
+        </div>
+
+        <div class="tabs">
+          <div id="tab1" class="tab infinite-scroll active">
+
+           
+          </div>
+        </div>
+      </div>
+      <div class="bar bar-footer">
+
+        <div class="searchbar">
+          <a class="searchbar-cancel" style="color: #0894ec;">发送</a>
+          <div class="search-input">
+            <label class="icon  icon-edit" for="search"></label>
+            <input type="search" id='search' placeholder='输入聊天内容...'/>
+          </div>
+        </div>
+      </div>
+
+    </div-->
+  </div>
+
+
+
+  <script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+  <script>
+      //打开自动初始化页面的功能
+      //建议不要打开自动初始化，而是自己调用 $.init 方法完成初始化
+      $.config = {
+          showPageLoadingIndicator: true
+      }
+  </script>
+  <script type='text/javascript' src='js/sm.min.js' charset='utf-8'></script>
+  <script src="layui/layui.js"></script>
+  <script type='text/javascript' src='js/app.js' charset='utf-8'></script>
+  <link href="video-js-6.2.5/video-js.css" rel="stylesheet">
+  <script src="video-js-6.2.5/ie8/videojs-ie8.min.js"></script><!-- If you'd like to support IE8 -->
+  <script src="video-js-6.2.5/video.js"></script>
+  <script src="videojs-contrib-hls/videojs-contrib-hls.js"></script>
+  <script>
+      function goUrl(url){
+          if(url){
+              window.location.href = url;
+          }
+      }
+  </script>
+  </body>
+</html>

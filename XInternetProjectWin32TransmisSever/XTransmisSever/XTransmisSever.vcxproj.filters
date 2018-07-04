@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="CPP">
+      <UniqueIdentifier>{bc0f55b6-b3fd-449e-a028-fbabce3f1ea2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="l">
+      <UniqueIdentifier>{36a1263d-48da-4764-a98f-cad83f413716}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveConnService.h">
+      <Filter>CPP</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveConnDeviceSession.h">
+      <Filter>CPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XRegisterService.h">
+      <Filter>CPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Common4Sever\cpp_authorized\LicenseDes.h">
+      <Filter>l</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Common4Sever\cpp_authorized\LicenseLocal.h">
+      <Filter>l</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Common4Sever\cpp_server\RecycleService.h">
+      <Filter>CPP</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XTransmisSever.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ActiveConnService.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="ActiveConnDeviceSession.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_Common4Sever\cpp_authorized\LicenseLocal.cpp">
+      <Filter>l</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_Common4Sever\cpp_server\RecycleService.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

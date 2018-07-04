@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="3dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="3dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sricamlive.platform.AppMainActivity"
+    tools:showIn="@layout/activity_aapp_main">
+
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- ListView、ScrollView、RecyclerView、Other -->
+        <ListView
+            android:id="@+id/mainfra_id_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="0.1dip">
+        </ListView>
+    </com.baoyz.widget.PullRefreshLayout>
+
+
+</LinearLayout>

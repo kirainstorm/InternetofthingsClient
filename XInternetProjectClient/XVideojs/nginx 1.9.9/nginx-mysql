@@ -1,0 +1,2 @@
+auth required /lib/security/pam_mysql.so user=pamuser passwd=123456 host=localhost db=pam table=user usercolumn=userid passwdcolumn=passwd crypt=2
+account required /lib/security/pam_mysql.so user=pamuser passwd=123456 host=localhost db=pam table=user usercolumn=userid passwdcolumn=passwd crypt=2

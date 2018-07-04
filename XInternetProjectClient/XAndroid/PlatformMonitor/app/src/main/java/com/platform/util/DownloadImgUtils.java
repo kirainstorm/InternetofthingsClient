@@ -1,0 +1,123 @@
+package com.platform.util;
+
+
+/**
+ * http://blog.csdn.net/lmj623565791/article/details/41874561
+ * @author zhy
+ *
+ */
+public class DownloadImgUtils
+{
+//
+//	/**
+//	 * 
+//	 * @param urlStr
+//	 * @param file
+//	 * @return
+//	 */
+//	public static boolean downloadImgByUrl(String urlStr, File file)
+//	{
+//		FileOutputStream fos = null;
+//		InputStream is = null;
+//		try
+//		{
+//			URL url = new URL(urlStr);
+//			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//
+//			is = conn.getInputStream();
+//			fos = new FileOutputStream(file);
+//			byte[] buf = new byte[512];
+//			int len = 0;
+//			while ((len = is.read(buf)) != -1)
+//			{
+//				fos.write(buf, 0, len);
+//			}
+//			fos.flush();
+//			return true;
+//
+//		} catch (Exception e)
+//		{
+//			e.printStackTrace();
+//		} finally
+//		{
+//			try
+//			{
+//				if (is != null)
+//					is.close();
+//			} catch (IOException e)
+//			{
+//			}
+//
+//			try
+//			{
+//				if (fos != null)
+//					fos.close();
+//			} catch (IOException e)
+//			{
+//			}
+//		}
+//
+//		return false;
+//
+//	}
+//
+//	/**
+//	 * 
+//	 * @param urlStr
+//	 * @param file
+//	 * @return
+//	 */
+//	public static Bitmap downloadImgByUrl(String urlStr, ImageView imageview)
+//	{
+//		FileOutputStream fos = null;
+//		InputStream is = null;
+//		try
+//		{
+//			URL url = new URL(urlStr);
+//			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//			is = new BufferedInputStream(conn.getInputStream());
+//			is.mark(is.available());
+//			
+//			Options opts = new Options();
+//			opts.inJustDecodeBounds = true;
+//			Bitmap bitmap = BitmapFactory.decodeStream(is, null, opts);
+//			
+//			//��ȡimageview��Ҫ��ʾ�Ŀ�͸�
+//			ImageSize imageViewSize = ImageSizeUtil.getImageViewSize(imageview);
+//			opts.inSampleSize = ImageSizeUtil.caculateInSampleSize(opts,
+//					imageViewSize.width, imageViewSize.height);
+//			
+//			opts.inJustDecodeBounds = false;
+//			is.reset();
+//			bitmap = BitmapFactory.decodeStream(is, null, opts);
+//
+//			conn.disconnect();
+//			return bitmap;
+//
+//		} catch (Exception e)
+//		{
+//			e.printStackTrace();
+//		} finally
+//		{
+//			try
+//			{
+//				if (is != null)
+//					is.close();
+//			} catch (IOException e)
+//			{
+//			}
+//
+//			try
+//			{
+//				if (fos != null)
+//					fos.close();
+//			} catch (IOException e)
+//			{
+//			}
+//		}
+//
+//		return null;
+//
+//	}
+
+}

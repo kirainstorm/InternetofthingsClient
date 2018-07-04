@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="cpp">
+      <UniqueIdentifier>{a818d5c8-84cd-4f70-aa2a-0c228970ede8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_common">
+      <UniqueIdentifier>{e8d6aef2-d65d-4313-b88a-195f2addf058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_common\MediaDevice">
+      <UniqueIdentifier>{94da4667-eeb0-4097-be71-2ee247ecd27a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaToRtmpHlsInterface.h">
+      <Filter>cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaToMediaInterface.h">
+      <Filter>cpp</Filter>
+    </ClInclude>
+    <ClInclude Include="TransmisService.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Common4Sever\cpp_server\MediaDevInterface.h">
+      <Filter>_common\MediaDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="librtmpapp.h">
+      <Filter>_common</Filter>
+    </ClInclude>
+    <ClInclude Include="TransmisStreamToPlatform.h">
+      <Filter>_common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XTransmisProc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaToRtmpHlsInterface.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaToMediaInterface.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="TransmisService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_Common4Sever\cpp_server\MediaDevInterface.cpp">
+      <Filter>_common\MediaDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_Common4Sever\cpp_server\MediaDevInterfaceLogin.cpp">
+      <Filter>_common\MediaDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_Common4Sever\cpp_server\MediaDevInterfaceTcp.cpp">
+      <Filter>_common\MediaDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="librtmpapp.cpp">
+      <Filter>_common</Filter>
+    </ClCompile>
+    <ClCompile Include="TransmisStreamToPlatform.cpp">
+      <Filter>_common</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sricamlive.platform.AppMainActivity">
+
+    <item
+        android:id="@+id/platform_id_menu_live_pic"
+        app:showAsAction="withText"
+        android:title="@string/dervice_list_munu_pop_1"/>
+    <item
+        android:id="@+id/platform_id_menu_live_record"
+        app:showAsAction="withText"
+        android:title="@string/dervice_list_munu_pop_2"/>
+</menu>

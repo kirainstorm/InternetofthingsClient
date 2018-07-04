@@ -1,0 +1,4 @@
+toolbar.setVisibility(View.GONE);  ------------ 
+
+
+ toolbar.setVisibility(View.VISIBLE);

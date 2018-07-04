@@ -1,0 +1,13 @@
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--menu-->
+        <item name="actionOverflowMenuStyle">@style/MenuStyle</item>
+        
+        <item name="android:windowBackground">@color/as_windows_bg</item> ¡¶¡¶¡¶¡¶¡¶¡¶¡¶¡¶¡¶-----------
+    </style>
+
+
+<color name="as_windows_bg">#ffffff87</color>

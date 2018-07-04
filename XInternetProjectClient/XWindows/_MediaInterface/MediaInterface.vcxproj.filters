@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="CPP">
+      <UniqueIdentifier>{39ce1be2-f932-4262-becb-0c927bc0202f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_INC">
+      <UniqueIdentifier>{99a5a995-f4a1-4b45-8c61-714a339467e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc">
+      <UniqueIdentifier>{8dd6f853-3512-495f-af96-eda1f8979a72}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MediaInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MediaInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XPlayer.hpp">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XPlayerCapturePictures.h">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XPlayerD3DSurfaceRender.hpp">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XPlayerDecdatacallback.hpp">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XPlayerFdkaac.hpp">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XPlayerFFmpegDecoder.hpp">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XStream.hpp">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XStreamConnect.hpp">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XStreamInterface.h">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XStreamManager.hpp">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\Mp4File.hpp">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\Mp4Reader.hpp">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\Mp4Writer.hpp">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\PlatformDefine.h">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XDes.h">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_Include\XMediaInterface.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XDefineMediaChannelStruct.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MediaInterface.def">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="res\MediaInterface.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MediaInterface.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

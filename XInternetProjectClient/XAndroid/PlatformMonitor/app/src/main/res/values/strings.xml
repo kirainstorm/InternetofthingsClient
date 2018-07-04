@@ -1,0 +1,146 @@
+<resources>
+    <string name="app_name">施瑞直播</string>
+    <string name="app_login">登陆</string>
+
+
+    <!--  -->
+    <string name="app_ok">确定</string>
+    <string name="app_cancel">取消</string>
+    <string name="app_back">返回</string>
+    <string name="app_select_all">全选</string>
+    <string name="app_unselect">取消全选</string>
+    <string name="app_delete">删除</string>
+    <string name="app_delete_1">确定要删除吗?</string>
+    <string name="app_exit">再按一次退出程序</string>
+    <string name="app_refresh">刷新</string>
+    <string name="app_device">我的设备</string>
+    <string name="app_playback">回放</string>
+    <string name="app_live">现场直播</string>
+    <string name="app_information">资讯</string>
+    <string name="app_community">最新资讯</string>
+    <string name="app_about">关于我们</string>
+    <string name="app_refreshing">请稍等......</string>
+    <string name="app_refreshing_error">刷新失败，请重试</string>
+    <string name="app_refreshing_ok">刷新成功</string>
+    <string name="app_preview_device">实时视频</string>
+    <string name="app_look_pic">图片浏览</string>
+    <string name="app_refresh_log">更新封面</string>
+    <string name="app_online_his">远端录像</string>
+    <string name="app_select_date">点击此处选择日期:  </string>
+    <string name="app_save">保存</string>
+    <string name="app_save_1">确定保存已缓冲的数据吗?可能会阻塞界面，没有完成保存前请不要离开该页面！</string>
+    <string name="app_save_2">保存MP4完成！</string>
+    <string name="app_cannot_open_hisplay">保存MP4完成！</string>
+
+
+    <string name="dervice_list_info1">设备名称</string>
+    <string name="dervice_list_info2">设备ID:</string>
+    <string name="dervice_list_info3">在线人数:</string>
+
+
+    <string name="dervice_list_munu_pop_1">本地图片</string>
+    <string name="dervice_list_munu_pop_2">本地录像文件</string>
+    <string name="dervice_list_munu_pop_3">下载的录像文件</string>
+    <string name="dervice_list_munu_pop_4">远端录像查询下载</string>
+
+
+    <string name="preview_main_device_tab_main">普通</string>
+    <string name="preview_main_device_tab_sub1">告警信息</string>
+
+
+    <string name="pic_title_device">本地图片</string>
+    <string name="pic_title_line">直播抓拍的图片</string>
+
+    <string name="record_title_device">本地录像</string>
+    <string name="record_title_onlinedown">下载到本地的录像</string>
+    <string name="record_title_live">直播录像</string>
+
+    <string name="online_list_munu_pop_1">在线回放</string>
+    <string name="online_list_munu_pop_2">下载录像</string>
+
+    <!-- about fra -->
+    <string name="aboutfra_text_company">www.sricam.com\n深圳市施瑞安科技有限公司\深圳市宝安区福永街道怀德翠岗五区46栋4楼\nsupport@sricam.com\n</string>
+    <string name="aboutfra_text_softname">Android Platform</string>
+    <string name="aboutfra_text_vision">V 0.1.0.0 Build:2017/09/02(RS)</string>
+    <string name="aboutfra_text_vision_2">V 0.1.0.0 Build:2017/04/18(RS)</string>
+    <string name="aboutfra_text_vision_1">V 0.1.0.0 Build:2016/08/03(RS)</string>
+
+
+    <!-- main fra -->
+    <string name="mainfra_s_menu_add">添加</string>
+    <string name="mainfra_s_menu_SEARCH">搜索</string>
+    <string name="mainfra_s_menu_exit">退出</string>
+    <string name="mainfra_s_exit_msg">\r\n确定要退出吗?\r\n</string>
+    <string name="mainfra_s_delete_dev_msg">\r\n确定要删除吗?\r\n</string>
+    <string name="mainfra_s_preview_title_choice">请长按选择设备</string>
+    <string name="mainfra_s_toast_info1">抓拍成功</string>
+    <string name="mainfra_s_toast_info2">开始录像</string>
+    <string name="mainfra_s_toast_info3">停止录像</string>
+
+
+    <!-- activity_startup -->
+    <string name="title_activity_startup">StartupActivity</string>
+
+    <!-- play Activity -->
+    <string name="play_s_connect_ing">正在链接设备....</string>
+    <string name="play_s_connect_error">链接设备失败</string>
+
+    <!-- Device Setting Activity -->
+    <string name="title_activity_device_setting">设备: </string>
+    <string name="device_setting_toast_info1">获取参数失败，请重新尝试</string>
+    <string name="device_setting_toast_info2">设置参数失败，请重新尝试</string>
+
+    <!-- 视频文件夹 -->
+    <string name="Video">Video</string>
+    <string name="album_enter_select">选择</string>
+    <string name="api_cancel">取消</string>
+    <string name="album_photo_select_tip">项</string>
+    <string name="album_phoot_select_all">全选</string>
+    <string name="album_phoot_unselect_all">取消全选</string>
+    <string name="pgcommon_share">分享</string>
+    <string name="common_cut">移动</string>
+    <string name="common_delete">删除</string>
+    <string name="common_edit">编辑</string>
+    <string name="album_message">图片&amp;视频</string>
+
+    <!-- activity_local_pic -->
+    <!-- activity_local_record -->
+    <string name="title_activity_local_record">本地录像:</string>
+
+    <!-- dervice_list -->
+
+
+    <!-- play -->
+    <string name="play_back_info1">返回</string>
+
+    <!-- PicTureCatalogue.java -->
+    <string name="PicTureCatalogue_info1">暂无外部存储</string>
+    <string name="PicTureCatalogue_info2">正在加载...</string>
+    <string name="title_activity_device_add">DeviceAddActivity</string>
+    <string name="title_activity_play">PlayActivity</string>
+    <string name="title_activity_multi_screen">MultiScreenActivity</string>
+    <string name="title_activity_playback">PlaybackActivity</string>
+    <string name="title_activity_record_list">RecordListActivity</string>
+
+    <!-- title_activity_plat_login -->
+    <string name="title_activity_plat_login">登陆</string>
+    <string name="title_activity_plat_login_1">密码不能为空</string>
+    <string name="title_activity_plat_login_2">用户名不能为空</string>
+    <string name="title_activity_plat_login_3">正在登陆...</string>
+    <string name="title_activity_plat_login_4">登陆 成功</string>
+    <string name="title_activity_plat_login_5">登陆失败</string>
+    <string name="title_activity_plat_login_6">请检查网络</string>
+    <string name="title_activity_plat_login_7">服务器地址不能为空</string>
+    <string name="title_activity_login_platform">LoginPlatformActivity</string>
+    <string name="title_activity_login_plat">LoginPlatActivity</string>
+    <string name="title_activity_album">AlbumActivity</string>
+    <string name="title_activity_preview_device">PreviewDeviceActivity</string>
+    <string name="title_activity_playback_local">PlaybackLocalActivity</string>
+    <string name="title_activity_playback_media">PlaybackMediaActivity</string>
+    <string name="title_activity_main_live">MainLiveActivity</string>
+    <string name="title_activity_preview_live">PreviewLiveActivity</string>
+    <string name="title_activity_community">CommunityActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="title_activity_online_playback">OnlinePlaybackActivity</string>
+    <string name="title_activity_preview_online">PreviewOnlineActivity</string>
+</resources>

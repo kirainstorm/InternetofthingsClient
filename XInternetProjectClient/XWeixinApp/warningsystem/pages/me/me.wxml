@@ -1,0 +1,11 @@
+<view class='my' style='display:flex;flex-direction: column;'>
+
+<!-- <view class='setview'>
+<label class='setlable'>设置</label>
+</view> -->
+
+<view class='logoutview'>
+<button class='logoutbtn' bindtap='logout'>退出登录</button>
+</view>
+
+</view>

@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  monitor
+
+  Created by xjm on 16/1/25.
+  Copyright © 2016年 warningsys. All rights reserved.
+*/
+//应用名称国际化（InfoPlist.strings）
+//本地化应用程序名称
+CFBundleDisplayName = "Srilive";

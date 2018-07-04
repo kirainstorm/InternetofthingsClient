@@ -1,0 +1,5 @@
+
+8位，文件大小尽可能的小，颜色尽可能的少。ios上660KB图片作为背景图，内存占用15MB.
+
+IPhone下每个app可用的内存是被限制的，如果一个app使用的内存超过20M，则系统会向该app发送Memory Warning消息。苹果公司系统工程师建议，应用程序所占内存不应该超过20MB，开发人员圈内流传着一个粗略的经验法则：当应用程序占用了大约20MB内存时，iphone开始发出内存警告。当应用程序所占内存大约为30MB时，iphone OS会关闭应用程序。收到此消息后，app必须正确处理，否则可能出错或者出现内存泄露。app收到Memory Warning后会调用：UIApplication::didReceiveMemoryWarning -> UIApplicationDelegate::applicationDidReceiveMemoryWarning,然后调用当前所有的 viewController进行处理。因此处理的主要工作是在viewController。
+

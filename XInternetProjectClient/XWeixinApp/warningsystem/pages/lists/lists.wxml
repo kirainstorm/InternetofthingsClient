@@ -1,0 +1,39 @@
+<block class="group" wx:for="{{group}}" wx:key="{{list}}">
+  <view class='contentView' id="{{item.group_id}} " style='display:flex;flex-direction: row;margin:10px' bindtap='selectGroupAction'>
+    <image class='grouplogo' src='../image/folder.png' style='width:60px;height:60px;margin:10px'></image>
+
+    <view class='detail' style='display:flex;flex-direction: column;margin:10px'>
+      <label class='groupName'>{{item.group_name}}</label>
+      <label class='groupText'>[分组]</label>
+    </view>
+
+    <image class='arrow' src='../image/arrow.png'></image>
+  </view>
+</block>
+
+<block class="list" wx:for="{{list}}" wx:key="{{list}}">
+  <view style='display:flex;flex-direction: row;'>
+    <view class="rowview" id="{{item.uuid+';'+item.online+';'+item.rtmpip+';'+item.rtmpuuid}}" bindtap='clickrow' style='display:flex;height:80px;'>
+      <!-- 左边图片 -->
+      <view style='width:120px;height:64px;margin:10px'>
+        <image class='index-logo' style='display:flex;flex-direction: row;width:120px;height:64px;' src='../image/cam_icon.png'>
+          <image class='index-online' style='width:18px;height:18px;' src='{{item.online==1?onlineUrl:offlineUrl}}'>
+          </image>
+        </image>
+      </view>
+
+
+      <!-- 右边标题和设备id 上下结构 -->
+      <view style='display:flex;flex-direction: column;margin:10px'>
+        <label class='item-title'>{{item.name}}</label>
+        <label class='item-devid'>{{item.hid}}</label>
+      </view>
+
+    </view>
+
+    <!--最右边设备信息按钮  -->
+    <button style='width:50px;height:80px;' class='infobtn' bindtap='clickinfobtn'>
+      <image style='width:30px;height:30px;' class='infoimge' src='../image/detail_info.png'></image>
+    </button>
+  </view>
+</block>

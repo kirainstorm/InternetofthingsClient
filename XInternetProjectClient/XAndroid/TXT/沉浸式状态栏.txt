@@ -1,0 +1,88 @@
+新建values-v19
+
+ app\src\main\res\values-v19
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+主要是
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+
+
+
+
+
+然后再.java里
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+	//here
+        setSupportActionBar(toolbar);
+
+变为
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+        {
+            toolbar.getLayoutParams().height = SysApp.Ins().getAppBarHeight(this);
+            toolbar.setPadding(toolbar.getPaddingLeft(),
+                    SysApp.Ins().getStatusBarHeight(this),
+                    toolbar.getPaddingRight(),
+                    toolbar.getPaddingBottom());
+        }
+        setSupportActionBar(toolbar);
+
+
+
+
+
+系统生成的 不用动
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true" ///其实只要是这里
+    tools:context="com.warningsys.application.MainDeviceActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"///其实只要是这里
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+
+
+附录
+public int getAppBarHeight(Context con)
+    {
+        return dip2px(56,con)+getStatusBarHeight(con);
+    }
+
+
+    public int getStatusBarHeight(Context con)
+    {
+        int result = 0;
+        int resourceId = con.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0)
+        {
+            result = con.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+
+    public  int dip2px(float dipValue,Context con)
+    {
+        final float scale = con.getResources().getDisplayMetrics().density;
+        return (int) (dipValue * scale + 0.5f);
+    }

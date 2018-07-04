@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="130dp"
+    android:background="@android:color/transparent" >
+
+    <ImageView
+        android:id="@+id/imgThumbnail"
+        android:layout_width="fill_parent"
+        android:layout_height="110dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/textView"
+        android:layout_gravity="left|bottom" />
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_gravity="right|top"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dip"
+        android:background="@drawable/album_picture_setting_checkbox"
+        android:button="@null"
+        android:checked="false"
+        android:focusable="false"
+        android:visibility="gone" />
+</FrameLayout>

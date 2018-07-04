@@ -1,0 +1,23 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:fitsSystemWindows">true</item>-->
+
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--menu-->
+        <item name="actionOverflowMenuStyle">@style/MenuStyle</item>
+        <!--windowBackground-->
+        <item name="android:windowBackground">@color/as_windows_bg</item>
+
+        <item name="alertDialogProTheme">@style/Theme.AlertDialogPro.Material.Light</item>
+
+    </style>
+    <style name="MenuStyle" parent="@style/Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="android:dropDownVerticalOffset">?attr/actionBarSize</item>
+    </style>
+</resources>

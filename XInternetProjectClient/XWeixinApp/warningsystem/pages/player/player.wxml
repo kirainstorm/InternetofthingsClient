@@ -1,0 +1,78 @@
+<View class="playview">
+  <view>
+    <live-player id="liveplayer" src="{{playurl}}" mode="live" autoplay bindstatechange="statechange" binderror="error" muted="{{isintercomon}}" orientation='{{ishorizontal?"horizontal":"vertical"}}' object-fit='{{ishorizontal?"fillCrop":"contain"}}' style="width: 100%;height=100%;">
+
+      <cover-view class="controls" bindtap='hiddenaction' style='top: {{ishorizontal?top:0}};'>
+        <cover-view class='toolview' hidden='{{ishidden?true:false}}'>
+          <cover-view class="play" hidden='{{false}}' bindtap="play">
+            <cover-image class="img" src='{{placeholderurl}}' />
+          </cover-view>
+
+          <cover-view class="fullscren" bindtap="fullscren">
+            <cover-image class="img" src='{{ishorizontal?fullscreenurl:fullscreenurl}}' />
+          </cover-view>
+        </cover-view>
+
+      </cover-view>
+    </live-player>
+  </view>
+
+
+  <view class='textview' style='display:flex;flex-direction: row;'>
+    <label class='textlable'>{{text}}</label>
+  </view>
+  <!--上下结构  -->
+  <view class='controlview' style='display:flex;flex-direction: row;'>
+
+    <view class='leftview' style='display:flex;flex-direction: column;'>
+
+      <view class='lefttopview' style='display:flex;flex-direction: row;'>
+
+        <image id='4' bindtap='clickbtnAction' class='btnfive' src='{{isavqon?avqoffurl:avqonurl}}'></image>
+        <image id='0' bindtap='clickbtnAction' class='btnone' src="{{flipvurl}}"></image>
+        <!-- <image id='1' bindtap='clickbtnAction' class='btntwo' src='{{isalarmon?alarmonurl:alarmoffurl}}'></image> -->
+      </view>
+      <view class='leftboomview' style='display:flex;flex-direction: row;'>
+        <image id='2' bindtap='clickbtnAction' class='btnthree' src='{{isintercomon?intercomoffurl:intercomonurl}}'></image>
+        <image id='5' bindtap='clickbtnAction' class='btnsix' src="{{fliphurl}}"></image>
+        <!-- <image id='3' bindtap='clickbtnAction' class='btnfour' src="{{videorecordurl}}"></image> -->
+      </view>
+
+    </view>
+    <!--src='{{control1Url}}'  -->
+    <image class="remotecontrol" style="display:flex;flex-direction: row;width : 150px; height : 150px;">
+      <view class="topbtnview" style="display:flex;flex-direction: row;width : 150px; height : 50px;">
+        <image id='8' bindtap='clickbtnAction' class='topbtn' src="{{videotopurl}}"></image>
+      </view>
+
+
+      <view class="midbtnview" style="display:flex;flex-direction: row;width : 150px; height : 50px;">
+        <image id='9' bindtap='clickbtnAction' class='midleftbtn' src="{{videolefturl}}"></image>
+        <view class="midokview"></view>
+        <image id='10' bindtap='clickbtnAction' class='midrightbtn' src="{{videorighturl}}"></image>
+      </view>
+
+      <view class="boombtnview" style="display:flex;flex-direction: row;width : 150px; height : 50px;">
+        <image id='11' bindtap='clickbtnAction' class='boombtn' src="{{videoboomurl}}"></image>
+      </view>
+    </image>
+
+    <!-- <view class='rightview' style='display:flex;flex-direction: column;'>
+ <view class='righttopview' style='display:flex;flex-direction: row;'>
+ 
+
+</view> 
+<view class='rightboomview' style='display:flex;flex-direction: row;'>
+
+
+</view> 
+
+</view>  -->
+
+    <audio id='myaudio' src='{{audiourl}}'></audio>
+
+  </view>
+
+
+
+</View>

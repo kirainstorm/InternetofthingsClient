@@ -1,0 +1,108 @@
+/**index.wxss**/
+ .userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+} 
+
+
+
+.userinfoimage{
+ width: 160rpx;
+  height: 160rpx;
+   margin-top:30px; 
+  margin: 20rpx;
+  border-radius: 50%;
+  background-color:lightgray;
+}
+
+
+
+.loginbtnview{
+  width: 100%;
+ margin-left: 0px;
+ margin-right: 0px;
+ margin-bottom: 10px;
+
+ height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: space-between; */
+  /* padding: 200rpx 0; */
+  box-sizing: border-box;
+  
+}
+.loginbtn{
+   width: 90%; 
+  display: table;
+ align-items: center;
+  height: 50px;
+border-radius: 10rpx;
+background-color:orange;
+}
+
+.usernameview{
+  width: 100%;
+ margin-left: 0px;
+ margin-right: 0px;
+ margin-bottom: 10px;
+ margin-top: 30px;
+ height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: space-between; */
+  /* padding: 200rpx 0; */
+  box-sizing: border-box;
+background-color:white;
+}
+
+.passwordview{
+  width: 100%;
+ margin-left: 10px;
+ margin-right: 10px;
+ margin-bottom: 10px;
+ margin-top: 0px;
+ height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: space-between; */
+  /* padding: 200rpx 0; */
+  box-sizing: border-box;
+background-color:white;
+}
+
+.headimage{
+ width: 80rpx;
+  height: 80rpx;
+  margin-top: 10px;
+  margin: 20rpx;
+  border-radius: 50%;
+ 
+}
+
+.passwordimage{
+ width: 80rpx;
+  height: 80rpx;
+  margin-top: 10px;
+  margin: 20rpx;
+  border-radius: 50%;
+  
+}

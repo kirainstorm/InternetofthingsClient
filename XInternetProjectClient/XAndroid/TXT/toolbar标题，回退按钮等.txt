@@ -1,0 +1,30 @@
+Toolbar toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
+
+        toolbar.setLogo(R.drawable.ic_launcher);//设置图标
+        toolbar.setTitle("My Title");//标题
+        toolbar.setSubtitle("Sub title");//副标题
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.back);//设置Navigation 图标
+
+
+Navigation，为什么在setSupportActionBar(toolbar)后面加入而不在前面，你可以加入到前面试试，虽然可以显示回退的图片，但是点击并没有调用该按钮的点击事件，而在setSupportActionBar(toolbar);后面设置点击才有反应。一定要记住，不然回退是不会起作用的。
+
+
+回退按钮,代码如下
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
+
+        toolbar.setLogo(R.drawable.ic_launcher);//设置图标
+        toolbar.setTitle("My Title");//标题
+        toolbar.setSubtitle("Sub title");//副标题
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.back);//设置Navigation 图标
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });

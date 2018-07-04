@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/me/me",
+    "pages/lists/lists",
+    "pages/player/player",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WarningSystem",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "backgroundColor": "black",
+    "color": "#dddddd",
+    "selectedColor": "#FFD700",
+    "borderStyle": "black",
+    "list": [
+      {
+        "selectedIconPath": "pages/image/list-selected.png",
+        "iconPath": "pages/image/list.png",
+        "pagePath": "pages/lists/lists",
+        "text": "列表"
+      },
+      {
+        "selectedIconPath": "pages/image/me-selected.png",
+        "iconPath": "pages/image/me.png",
+        "pagePath": "pages/me/me",
+        "text": "我的"
+      }
+    ]
+  }
+}

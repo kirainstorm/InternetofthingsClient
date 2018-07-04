@@ -1,0 +1,5 @@
+下载匹配的 Gradle 版本
+把zip直接放到C:\Users\xxx\.gradle\wrapper\dists\gradle-2.10-all\xxxxxxxxxxxxxxx，
+把刚刚下载好的gradle-2.10-all.zip复制进去
+千万不要解压，不要解压，不要解压
+重启as 

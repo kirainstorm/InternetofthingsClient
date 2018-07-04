@@ -1,0 +1,272 @@
+#ifndef _CHECK_DISK_FREE_SPACE_H_23E4KL13JE489HJW3N
+#define _CHECK_DISK_FREE_SPACE_H_23E4KL13JE489HJW3N
+
+
+
+//------------------------------------------------------------------------------------
+typedef struct __Directory_Info_t
+{
+	CTime   createTime;
+	CString strPath;
+	bool operator < (const __Directory_Info_t & val) const
+	{
+		if (createTime == val.createTime)
+		{
+			return strPath.Compare(val.strPath) < 0;
+		}
+		return createTime < val.createTime;
+	}
+
+} Directory_Info_t;
+//------------------------------------------------------------------------------------
+class CCheckDiskFreeSpace;
+
+
+
+//------------------------------------------------------------------------------------
+
+class CCheckDiskFreeSpace
+{
+public:
+	CCheckDiskFreeSpace()
+	{
+
+		m_hCheckDis = NULL;
+		m_nCount = 0;
+	};
+	~CCheckDiskFreeSpace()
+	{
+		//Stop();
+	};
+
+public:
+	static CCheckDiskFreeSpace& Instance()
+	{
+		static CCheckDiskFreeSpace inc;
+		return inc;
+	};
+
+	void SetInfo(char * strRecPath, int diskSpace ,int autoRemain)//只有当线程未启动时才有效
+	{
+		m_cs.Lock();
+		if (NULL != m_hCheckDis)
+		{
+			m_cs.Unlock();
+			return;
+		}
+		WCHAR wszTempPath[256];
+		MultiByteToWideChar(CP_UTF8, 0, strRecPath, strlen(strRecPath) + 1, wszTempPath, sizeof(wszTempPath) / sizeof(wszTempPath[0]));
+		m_strPath = wszTempPath;
+		m_ndiskSpace = diskSpace;
+		m_autoRemain = autoRemain;
+		m_cs.Unlock();
+	}
+
+
+	void Start()
+	{
+		m_cs.Lock();
+		++m_nCount;
+
+
+		if (NULL != m_hCheckDis)
+		{
+			m_cs.Unlock();
+			return;
+		}
+
+		//检测磁盘
+		m_bExit = FALSE;
+		m_hCheckDis = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)__CheckDiskSpace, this, NULL, NULL);
+		m_cs.Unlock();
+	}
+
+	void Stop()
+	{
+		if (m_bExit)
+		{
+			return;
+		}
+
+		m_cs.Lock();
+		--m_nCount;
+		if (m_nCount == 0)
+		{
+			m_bExit = TRUE;
+			if (m_hCheckDis != NULL)
+			{
+				WaitForSingleObject(m_hCheckDis, INFINITE);
+				CloseHandle(m_hCheckDis);
+				m_hCheckDis = NULL;
+			}
+		}
+		m_cs.Unlock();
+	}
+private:
+	CString m_strPath;
+	int m_ndiskSpace;
+	int m_autoRemain;
+	int m_nCount;
+	CrossCriticalSection m_cs;
+
+public:
+	static void __CheckDiskSpace(void *param)
+	{
+		CCheckDiskFreeSpace *pThis = (CCheckDiskFreeSpace *)param;
+		pThis->CheckDiskSpace();
+	}
+
+	void CheckDiskSpace()
+	{
+		ULARGE_INTEGER   lpuse;
+		ULARGE_INTEGER   lptotal;
+		ULARGE_INTEGER   lpfree;
+		DWORD m_DiskSpace;
+
+
+		while (!m_bExit)
+		{
+			//WCHAR wszTempPath[256];
+			//MultiByteToWideChar(CP_UTF8, 0, theApp.m_clientSetting.recPath, strlen(theApp.m_clientSetting.recPath) + 1, wszTempPath, sizeof(wszTempPath) / sizeof(wszTempPath[0]));
+
+			CString strTmp = m_strPath;// wszTempPath;
+			int iPos = strTmp.Find(_T("\\"));
+			CString m_strDisk = strTmp.Left(iPos);
+			m_strDisk += _T("\\");
+
+			GetDiskFreeSpaceEx(m_strDisk, &lpuse, &lptotal, &lpfree);
+			m_DiskSpace = (DWORD)(lpfree.QuadPart / 1024 / 1024);
+
+
+			if (m_DiskSpace < (DWORD)(m_ndiskSpace * 1024))
+			{
+				if (m_autoRemain)
+				{
+					//删除文件
+					deleteOldFile();
+				}
+			}
+
+
+			//////////////////////////////////////////////////////////////////////////
+			//等待10秒
+			for (int m = 0; m < 500; m++)
+			{
+				Sleep(10);
+				if (m_bExit)
+				{
+					return;
+				}
+			}
+		}
+	};
+
+
+private:
+	void deleteOldFile()
+	{
+		SYSTEMTIME   sysTime;
+		GetLocalTime(&sysTime);
+
+		//WCHAR wszTempPath[256];
+		//MultiByteToWideChar(CP_UTF8, 0, theApp.m_clientSetting.recPath, strlen(theApp.m_clientSetting.recPath) + 1, wszTempPath, sizeof(wszTempPath) / sizeof(wszTempPath[0]));
+
+		CString strTempPath;
+		strTempPath.Format(_T("%s\\RecordFiles"), m_strPath);
+
+		//获取录像目录下的所有目录
+		list<Directory_Info_t> dirList;
+		get_dirs(strTempPath, dirList);
+
+
+		//排序
+		if (dirList.size()>0)
+		{
+			dirList.sort();
+		}
+
+
+		if (dirList.size()>0)
+		{
+			Directory_Info_t t = (Directory_Info_t)dirList.front();
+			delete_dir(t.strPath);
+			dirList.clear();
+		}
+
+	}
+	void delete_dir(CString strPath)
+	{
+		//获取文件夹下所有子文件夹名
+		CString strFilePath;
+		strFilePath += strPath;
+		strFilePath += "//*.*";
+		CFileFind finder;
+		BOOL bFind = finder.FindFile(strFilePath);
+		while (bFind)
+		{
+			bFind = finder.FindNextFile();
+			if (!finder.IsDots())
+			{
+				CString strTempPath = finder.GetFilePath();
+				if (finder.IsDirectory())
+				{
+					delete_dir(strTempPath);
+				}
+				else
+				{
+					DeleteFile(strTempPath);
+				}
+			}
+		}
+		finder.Close();
+
+		RemoveDirectory(strPath);
+	}
+
+	void get_dirs(CString strPath, list <Directory_Info_t>& dirs)
+	{
+
+		//获取文件夹下所有子文件夹名
+		CString strFilePath;
+		strFilePath += strPath;
+		strFilePath += "//*.*";
+		CFileFind finder;
+		BOOL bFind = finder.FindFile(strFilePath);
+		while (bFind)
+		{
+			bFind = finder.FindNextFile();
+			if (!finder.IsDots())
+			{
+				CString strTempPath = finder.GetFilePath();
+				if (finder.IsDirectory())
+				{
+					Directory_Info_t t;
+
+					CFileStatus   Status;
+					if (CFile::GetStatus(strTempPath, Status))
+					{
+						t.createTime = Status.m_ctime;
+					}
+					t.strPath = strTempPath;
+					dirs.push_back(t);
+				}
+				else
+				{
+					continue;
+				}
+			}
+		}
+		finder.Close();
+	}
+
+private:
+	HANDLE m_hCheckDis;
+	BOOL m_bExit;
+};
+
+
+
+
+
+
+#endif

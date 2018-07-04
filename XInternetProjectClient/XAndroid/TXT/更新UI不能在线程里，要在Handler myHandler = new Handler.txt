@@ -1,0 +1,22 @@
+    Handler myHandler = new Handler() {
+        public void handleMessage(Message msg) {
+
+            mListView.setEnabled(true);//»Ö¸´µã»÷
+            switch (msg.what) {
+                case 254:
+                {
+                    ptrFrame.setRefreshing(false);
+                    MyToastShortShow(R.string.app_refreshing_ok);
+                    mAdapter.notifyDataSetChanged();
+                }
+                break;
+                case 255:
+                {
+                    ptrFrame.setRefreshing(false);
+                    MyToastShortShow(R.string.app_refreshing_error);
+                }
+                break;
+            }
+            super.handleMessage(msg);
+        }
+    };

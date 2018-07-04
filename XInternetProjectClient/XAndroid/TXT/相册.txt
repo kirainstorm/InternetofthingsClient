@@ -1,0 +1,18 @@
+MultiImageSelector
+https://github.com/lovetuzitong/MultiImageSelector/blob/master/README_zh.md
+
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile 'com.github.lovetuzitong:MultiImageSelector:1.2'
+}
+
+
+
+Step 1 Set your  AndroidManifest.xml  as below:
+
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+

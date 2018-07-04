@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="login">
+      <UniqueIdentifier>{44523be0-0d05-421d-b707-ca137d2854fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__inc">
+      <UniqueIdentifier>{292a130b-9754-4af4-ae55-2a8d9330bf46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_dev_manger">
+      <UniqueIdentifier>{ba63e143-5409-4364-b9b3-dfa399dda9b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="search">
+      <UniqueIdentifier>{6431e469-045e-4971-8c95-da8a041004cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_PAN">
+      <UniqueIdentifier>{3df700ec-9a55-47e4-ae37-8aea229494b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_PAN\logging">
+      <UniqueIdentifier>{72c0ea33-47ed-4517-9843-65203e4080f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_PAN\preview">
+      <UniqueIdentifier>{bc46f3ae-d7c6-40ba-9278-1d0b78c43eb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_deviceconfig">
+      <UniqueIdentifier>{be457169-fe4f-421a-9068-04a39624311c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_title">
+      <UniqueIdentifier>{3986d34a-06a9-49e9-ac56-822f8f54929a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="__mfc">
+      <UniqueIdentifier>{9bf1362e-a4be-4950-b24c-f26a21876282}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="record">
+      <UniqueIdentifier>{06c0591d-36aa-43bb-a6df-411da431cfd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_PAN\record">
+      <UniqueIdentifier>{b359034f-c5fc-4e4f-bf77-c3f253d30958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_PAN\loopplay">
+      <UniqueIdentifier>{aad7a456-52e5-4b31-94a1-676a03ab8250}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoginDlg.h">
+      <Filter>login</Filter>
+    </ClInclude>
+    <ClInclude Include="SysSettingDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SysFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatformClientDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceManager.h">
+      <Filter>_dev_manger</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMessageBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleDlg.h">
+      <Filter>_title</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchDlg.h">
+      <Filter>search</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XStream.hpp">
+      <Filter>__inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XStreamAccept.hpp">
+      <Filter>__inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XStreamConnect.hpp">
+      <Filter>__inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XStreamInterface.h">
+      <Filter>__inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XStreamManager.hpp">
+      <Filter>__inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_MfcClass\BCMenu.h">
+      <Filter>__mfc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_MfcClass\BmpButton.h">
+      <Filter>__mfc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_MfcClass\BtnST.h">
+      <Filter>__mfc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_MfcClass\MyButton.h">
+      <Filter>__mfc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_MfcClass\MyComboBox.h">
+      <Filter>__mfc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_MfcClass\MyListBox.h">
+      <Filter>__mfc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_MfcClass\MyListCtrl.h">
+      <Filter>__mfc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_MfcClass\MyScrollBarEx.h">
+      <Filter>__mfc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_MfcClass\MySliderCtrl.h">
+      <Filter>__mfc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_MfcClass\PictureEx.h">
+      <Filter>__mfc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_MfcClass\waveIn.hpp">
+      <Filter>__mfc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_MfcClass\waveOut.hpp">
+      <Filter>__mfc</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoManageDlg.h">
+      <Filter>_PAN\preview</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoViewDlg.h">
+      <Filter>_PAN\preview</Filter>
+    </ClInclude>
+    <ClInclude Include="LogDialog.h">
+      <Filter>_PAN\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XDefineMediaChannelStruct.h">
+      <Filter>__inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_Include\XClientStructDefine.h">
+      <Filter>__inc</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoViewCtrlButtonDlg.h">
+      <Filter>_PAN\preview</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassicDeviceTree.h">
+      <Filter>_PAN\preview</Filter>
+    </ClInclude>
+    <ClInclude Include="IOTDeviceTree.h">
+      <Filter>_PAN\preview</Filter>
+    </ClInclude>
+    <ClInclude Include="ZPanLive.h">
+      <Filter>_PAN\preview</Filter>
+    </ClInclude>
+    <ClInclude Include="LockDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceSettingDlg.h">
+      <Filter>_deviceconfig</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceSettingDlgWifi.h">
+      <Filter>_deviceconfig</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceSettingDlgImage.h">
+      <Filter>_deviceconfig</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceSettingDlgNet.h">
+      <Filter>_deviceconfig</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceSettingDlgOsd.h">
+      <Filter>_deviceconfig</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceSettingDlgPlatform.h">
+      <Filter>_deviceconfig</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceSettingDlgTime.h">
+      <Filter>_deviceconfig</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceSettingDlgEncode.h">
+      <Filter>_deviceconfig</Filter>
+    </ClInclude>
+    <ClInclude Include="Mp4WaitDlg.h">
+      <Filter>_PAN\record</Filter>
+    </ClInclude>
+    <ClInclude Include="HisOnlineplayDlg.h">
+      <Filter>_PAN\record</Filter>
+    </ClInclude>
+    <ClInclude Include="HisLocalplayDlg.h">
+      <Filter>_PAN\record</Filter>
+    </ClInclude>
+    <ClInclude Include="ZPanPtzDlg.h">
+      <Filter>_PAN\preview</Filter>
+    </ClInclude>
+    <ClInclude Include="LoopPlaySettingDlg.h">
+      <Filter>_PAN\loopplay</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoLoopplayView.h">
+      <Filter>_PAN\loopplay</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoLoopplayManageDlg.h">
+      <Filter>_PAN\loopplay</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LoginDlg.cpp">
+      <Filter>login</Filter>
+    </ClCompile>
+    <ClCompile Include="SysSettingDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformClientDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceManager.cpp">
+      <Filter>_dev_manger</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMessageBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleDlg.cpp">
+      <Filter>_title</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchDlg.cpp">
+      <Filter>search</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_MfcClass\BCMenu.cpp">
+      <Filter>__mfc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_MfcClass\BmpButton.cpp">
+      <Filter>__mfc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_MfcClass\BtnST.cpp">
+      <Filter>__mfc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_MfcClass\MyButton.cpp">
+      <Filter>__mfc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_MfcClass\MyComboBox.cpp">
+      <Filter>__mfc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_MfcClass\MyListBox.cpp">
+      <Filter>__mfc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_MfcClass\MyListCtrl.cpp">
+      <Filter>__mfc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_MfcClass\MyScrollBarEx.cpp">
+      <Filter>__mfc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_MfcClass\MySliderCtrl.cpp">
+      <Filter>__mfc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_MfcClass\PictureEx.cpp">
+      <Filter>__mfc</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoManageDlg.cpp">
+      <Filter>_PAN\preview</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoViewDlg.cpp">
+      <Filter>_PAN\preview</Filter>
+    </ClCompile>
+    <ClCompile Include="LogDialog.cpp">
+      <Filter>_PAN\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoViewCtrlButtonDlg.cpp">
+      <Filter>_PAN\preview</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassicDeviceTree.cpp">
+      <Filter>_PAN\preview</Filter>
+    </ClCompile>
+    <ClCompile Include="IOTDeviceTree.cpp">
+      <Filter>_PAN\preview</Filter>
+    </ClCompile>
+    <ClCompile Include="ZPanLive.cpp">
+      <Filter>_PAN\preview</Filter>
+    </ClCompile>
+    <ClCompile Include="LockDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceSettingDlg.cpp">
+      <Filter>_deviceconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceSettingDlgEncode.cpp">
+      <Filter>_deviceconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceSettingDlgImage.cpp">
+      <Filter>_deviceconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceSettingDlgNet.cpp">
+      <Filter>_deviceconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceSettingDlgOsd.cpp">
+      <Filter>_deviceconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceSettingDlgPlatform.cpp">
+      <Filter>_deviceconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceSettingDlgTime.cpp">
+      <Filter>_deviceconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceSettingDlgWifi.cpp">
+      <Filter>_deviceconfig</Filter>
+    </ClCompile>
+    <ClCompile Include="HisOnlineplayDlg.cpp">
+      <Filter>_PAN\record</Filter>
+    </ClCompile>
+    <ClCompile Include="Mp4WaitDlg.cpp">
+      <Filter>_PAN\record</Filter>
+    </ClCompile>
+    <ClCompile Include="HisLocalplayDlg.cpp">
+      <Filter>_PAN\record</Filter>
+    </ClCompile>
+    <ClCompile Include="ZPanPtzDlg.cpp">
+      <Filter>_PAN\preview</Filter>
+    </ClCompile>
+    <ClCompile Include="LoopPlaySettingDlg.cpp">
+      <Filter>_PAN\loopplay</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoLoopplayView.cpp">
+      <Filter>_PAN\loopplay</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoLoopplayManageDlg.cpp">
+      <Filter>_PAN\loopplay</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PlatClient.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\PlatClient.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ParamHtmlDlg.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\PlatClient.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\loading.gif">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bitmap2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bmp00001.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bimap3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

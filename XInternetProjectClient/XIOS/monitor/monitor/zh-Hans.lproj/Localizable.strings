@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  monitor
+
+  Created by xjm on 16/1/25.
+  Copyright © 2016年 warningsys. All rights reserved.
+*/
+//内容国际化（Localizable.strings）
+
+
+
+
+
+//about view
+"aabout"="深圳市施瑞安科技有限公司";
+"ahelp"="Supports Email:support@sricam.com";
+"acomp"="www.sricam.com";

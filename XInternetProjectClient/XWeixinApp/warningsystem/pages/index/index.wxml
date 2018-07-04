@@ -1,0 +1,48 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view> -->
+
+ <image bindtap="bindViewTap" class="userinfoimage" src="{{userinfoimageUrl}}" background-size="cover"></image>
+
+ <view class="usernameview">
+  <image bindtap="bindViewTap" class="headimage" src="{{headimageUrl}}" background-size="cover"></image>
+ <input class="usernameinput" bindinput="userNameInput" value="{{inputLoginUser}}" placeholder="账号"/>
+</view>
+
+<view class="passwordview">
+  <image bindtap="bindViewTap" class="passwordimage" src="{{passwordimageUrl}}" background-size="cover"></image>
+ <input class="passwordinput" bindinput="passWordInput" password="true" value="{{inputLoginPwd}}" placeholder="密码"/>
+</view>
+
+  <!-- <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>   -->
+
+<view class="loginbtnview"> 
+ <button class='loginbtn' type='primary' loading='{{loading}}' bindtap='clickloginbtn'>{{login}}
+ </button>
+</view> 
+
+
+<view class="registerview" style='display:flex;flex-direction: row;'> 
+ <!-- <button class='fogetpwdbtn'   bindtap='clicfogetbtn'>忘记密码？
+ </button>-->
+
+ <!-- <button class='registerbtn'   bindtap='clickregisterbtn'>新用户注册
+ </button>  -->
+
+
+
+</view> 
+
+
+</view>

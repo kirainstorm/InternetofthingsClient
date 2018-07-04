@@ -1,0 +1,37 @@
+请记得用 support v7 里的 toolbar，不然然只有 API Level 21 也就是 Android 5 以上的版本才能使用。
+ 
+1：
+请将styles.xml默认的DarkActionBar改为NoActionBar
+
+
+<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+改为
+<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+
+然后修改
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+的值
+
+
+2：values-v19的DarkActionBar不用改
+
+如下
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:fitsSystemWindows">true</item>-->
+
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+</resources>

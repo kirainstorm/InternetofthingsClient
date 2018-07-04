@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3a699e</color>
+    <color name="colorPrimaryDark">#3a699e</color>
+    <color name="colorAccent">#3a699e</color>
+    <color name="as_windows_bg">#ffffffff</color>
+
+
+
+
+    <!--  -->
+    <color name="radiobutton_color_bg_selected">#dadada</color>
+    <color name="radiobutton_color_bg_normal">#f2f2f2</color>
+    <color name="radiobutton_color_text_selected">#00a2e9</color>
+    <color name="radiobutton_color_text_normal">#A1A1A1</color>
+
+
+
+    <!--  -->
+    <color name="transparent_bg">#00000000</color>
+    <color name="transparent_half_bg">#e0000000</color>
+    <color name="transparent_preview_bar_bg">#70ffffff</color>
+    <!-- actionbar -->
+    <color name="actionbar_bg">#3a699e</color>
+    <color name="actionbar_text">#ffffff</color>
+    <color name="actionbar_menu_bg">#ffffff</color>
+    <color name="actionbar_menu_text">#fbd924</color>
+    <color name="windows_bg">#ffffffff</color>
+    <!-- fragment_nav -->
+    <color name="fragment_nav_bg">#e3e3e3</color>
+    <color name="fragment_nav_text">#323c54</color>
+    <color name="fragment_nav_activated">#D6D6D6</color>
+    <color name="fragment_nav_pressed">#D6D6D6</color>
+    <!-- main fragment -->
+    <color name="device_list_head_name">#ff2f2f2f</color>
+    <color name="device_list_desc_color">#ff808080</color>
+
+
+
+    <!-- rooter bar -->
+    <color name="activity_rooter_bar_bg">#ffc0cb</color>
+    <color name="activity_rooter_bar_title_bg">#71111213</color>
+    <color name="main_menu_bg">#aa111213</color>
+    <color name="common_title_bg">#aa111213</color>
+    <color name="primary_title_text_color">#ff888888</color>
+    <color name="common_title_text">#ff565555</color>
+    <color name="common_text_yellow">#ffffe049</color>
+    <color name="album_item_bg">#fffcfcfd</color>
+
+
+    <!--  -->
+    <color name="video_player_t_bg">#e0e0e0</color>
+    <color name="video_player_t_bg_f">#3a699e</color>
+    <color name="video_player_bg">#ffffff</color>
+    <color name="video_player_bar_transparent_half_bg">#e0eeeeee</color>
+
+    <color name="video_player_pan_bg">#efefef</color>
+</resources>

@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sricamlive.platform.AppMainActivity">
+    <!--<item-->
+        <!--android:id="@+id/platform_id_menu_live"-->
+        <!--app:showAsAction="withText"-->
+        <!--android:title="@string/app_live"/>-->
+    <!--item
+        android:id="@+id/platform_id_menu_information"
+        android:showAsAction="withText"
+        android:title="@string/app_information"/-->
+    <!--<item-->
+        <!--android:id="@+id/platform_id_menu_community"-->
+        <!--app:showAsAction="withText"-->
+        <!--android:title="@string/app_community"/>-->
+    <item
+        android:id="@+id/platform_id_menu_about"
+        app:showAsAction="withText|ifRoom"
+        android:title="@string/app_about"/>
+</menu>

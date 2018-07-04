@@ -1,0 +1,8 @@
+./b2 threading=multi link=static runtime-link=static toolset=gcc-arm target-os=linux --includedir=android_armv7_inc install --stagedir=android_armv7_lib stage --with-timer --with-thread --with-system
+
+
+
+libraries = --with-container --with-coroutine --with-coroutine2 --with-fiber --with-graph --with-graph_parallel --with-log --with-metaparse 
+--with-python --with-test --with-type_erasure --with-atomic --with-date_time --with-program_options 
+--with-chrono --with-context --with-iostreams --with-locale --with-mpi --with-serialization --with-signals 
+--with-timer --with-wave --with-math --with-random --with-exception --with-filesystem --with-thread --with-system --with-regex --with-program_options ;

@@ -1,0 +1,51 @@
+
+
+.logoutview{
+  width: 100%;
+ margin-left: 0px;
+ margin-right: 0px;
+  margin-top: 10px; 
+ height: 50px;
+  display: flex;
+  flex-direction: row;
+  color: "#dddddd";
+}
+
+.logoutbtn{
+ 
+ width: 100%;
+ height: 100%;
+  color: red;
+  background-color: "#dddddd";
+}
+
+/*去掉按钮边框*/
+ 
+button[class="logoutbtn"]::after {
+  border: 0;
+}
+
+.setview{
+  width: 100%;
+ margin-left: 0px;
+ margin-right: 0px;
+  margin-top: 100px; 
+ height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: "#dddddd";
+  background-color: white;
+}
+
+/*字体居中显示*/
+.setlable{
+ display: table-cell;
+   width: 100%;
+    height: 50px;
+    margin-top: 10px; 
+    text-align: center;
+    vertical-align: middle;
+    /* border: 1px solid #F00; */
+
+}

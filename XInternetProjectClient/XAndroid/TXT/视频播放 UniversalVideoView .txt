@@ -1,0 +1,103 @@
+https://github.com/linsea/UniversalVideoView
+
+For a working implementation of this project see the sample app.
+1.add library dependency to your  build.gradle  file.
+
+            dependencies {
+                compile 'com.linsea:universalvideoview:1.1.0@aar'
+            }
+1.Include the  UniversalVideoView  and  UniversalMediaController  widget in your layout. This should usually be placed in the same parent  ViewGroup , which makes sense when in full screen state.
+
+            <FrameLayout
+                android:id="@+id/video_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:background="@android:color/black">
+
+                <com.universalvideoview.UniversalVideoView
+                    android:id="@+id/videoView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    app:uvv_autoRotation="true"
+                    app:uvv_fitXY="false" />
+
+                <com.universalvideoview.UniversalMediaController
+                    android:id="@+id/media_controller"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    app:uvv_scalable="true" />
+
+            </FrameLayout>
+1.In your  onCreate  method, set the  UniversalMediaController  to the  UniversalVideoView  and implements the  UniversalVideoView.VideoViewCallback  Callback.
+
+            View mBottomLayout;
+            View mVideoLayout;
+            UniversalVideoView mVideoView;
+            UniversalMediaController mMediaController;
+
+            mVideoView = (UniversalVideoView) findViewById(R.id.videoView);
+            mMediaController = (UniversalMediaController) findViewById(R.id.media_controller);
+            mVideoView.setMediaController(mMediaController);
+
+            mVideoView.setVideoViewCallback(new UniversalVideoView.VideoViewCallback() {
+                @Override
+                public void onScaleChange(boolean isFullscreen) {
+                    this.isFullscreen = isFullscreen;
+                    if (isFullscreen) {
+                        ViewGroup.LayoutParams layoutParams = mVideoLayout.getLayoutParams();
+                        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                        mVideoLayout.setLayoutParams(layoutParams);
+                        //GONE the unconcerned views to leave room for video and controller
+                        mBottomLayout.setVisibility(View.GONE);
+                    } else {
+                        ViewGroup.LayoutParams layoutParams = mVideoLayout.getLayoutParams();
+                        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                        layoutParams.height = this.cachedHeight;
+                        mVideoLayout.setLayoutParams(layoutParams);
+                        mBottomLayout.setVisibility(View.VISIBLE);
+                    }
+                }
+
+                @Override
+                public void onPause(MediaPlayer mediaPlayer) { // Video pause
+                    Log.d(TAG, "onPause UniversalVideoView callback");
+                }
+
+                @Override
+                public void onStart(MediaPlayer mediaPlayer) { // Video start/resume to play
+                    Log.d(TAG, "onStart UniversalVideoView callback");
+                }
+
+                @Override
+                public void onBufferingStart(MediaPlayer mediaPlayer) {// steam start loading
+                    Log.d(TAG, "onBufferingStart UniversalVideoView callback");
+                }
+
+                @Override
+                public void onBufferingEnd(MediaPlayer mediaPlayer) {// steam end loading
+                    Log.d(TAG, "onBufferingEnd UniversalVideoView callback");
+                }
+
+            });
+
+
+4 定制属性 
+
+为了保证定制UI的灵活度,提供以下属性: 
+
+uvv_fitXY 
+
+UniversalVideoView的属性,布尔值,true时设置视频缩放时在X,Y方向上铺满View设置的宽度和高度,这样可能使视频变形.false时则缩放时保持视频的长宽比例,与SDK中的VideoView类似. 
+
+
+
+
+uvv_autoRotation 
+
+UniversalVideoView的属性,布尔值,true时视频会根据重力响应通知客户进行全屏与非全屏之间的切换. 
+
+uvv_scalable 
+
+UniversalMediaController属性,布尔值,是否显示控制条右下方的缩放按钮,如果不想全屏播放时,可以设置为false不显示. 

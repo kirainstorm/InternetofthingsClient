@@ -1,0 +1,57 @@
+
+# define platform name of ndk
+import os ;
+if [ os.name ] = CYGWIN || [ os.name ] = NT
+{
+    androidPlatform = windows-x86_64 ;
+}
+else if [ os.name ] = LINUX
+{
+    androidPlatform = linux-x86_64 ;
+}
+else if [ os.name ] = MACOSX
+{
+    androidPlatform = darwin-x86 ;
+}
+
+# replace with your own path
+ANDROID_NDK = "e:/android-ndk-r15c" ;
+
+# compile with gcc, you can change compiler to clang or others
+using gcc : arm : $(ANDROID_NDK)/toolchains/arm-linux-androideabi-4.9/prebuilt/$(androidPlatform)/bin/arm-linux-androideabi-g++ :
+<archiver>$(ANDROID_NDK)/toolchains/arm-linux-androideabi-4.9/prebuilt/$(androidPlatform)/bin/arm-linux-androideabi-ar
+<ranlib>$(ANDROID_NDK)/toolchains/arm-linux-androideabi-4.9/prebuilt/$(androidPlatform)/bin/arm-linux-androideabi-ranlib
+<compileflags>-I$(ANDROID_NDK)/platforms/android-19/arch-arm/usr/include
+<compileflags>-I$(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/include
+<compileflags>-I$(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/include/backward
+<compileflags>-I$(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/include
+<compileflags>-fexceptions
+#<compileflags>-frtti
+<compileflags>-fpic
+<compileflags>-ffunction-sections
+<compileflags>-funwind-tables
+<compileflags>-D__ARM_ARCH_5__
+<compileflags>-D__ARM_ARCH_5T__
+<compileflags>-D__ARM_ARCH_5E__
+<compileflags>-D__ARM_ARCH_5TE__
+<compileflags>-D__ARM_ARCH_7__
+<compileflags>-D__ARM_ARCH_7A__
+<compileflags>-Wno-psabi
+<compileflags>-march=armv7-a
+<compileflags>-mtune=xscale
+<compileflags>-mfloat-abi=softfp
+<compileflags>-marm
+<compileflags>-mthumb
+<compileflags>-Os
+<compileflags>-std=gnu++11
+<compileflags>-fomit-frame-pointer
+<compileflags>-fno-strict-aliasing
+<compileflags>-finline-limit=64
+<compileflags>-Wa,--noexecstack
+<compileflags>-DANDROID
+<compileflags>-D__ANDROID__
+<compileflags>-D__ARM_EABI__
+<compileflags>-DNDEBUG
+<compileflags>-O2
+<compileflags>-g
+;

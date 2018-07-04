@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>localhost</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- Custom Theme files -->
+<link href="css/site.css" rel="stylesheet">
+<script language="JavaScript" src="../js/site.js"></script>
+<style type="text/css"> 
+  a:link,a:visited,a:hover{ 
+   text-decoration:none;  /*超链接无下划线*/ 
+  } 
+  </style>
+<script>	
+
+  var setTextareaMH = function (max_height) {
+    $('textarea').each(function () {
+      this.setAttribute('style', 'width:80%;height:90px;overflow-y:hidden;');
+      if (max_height != 0) {
+        this.setAttribute('style', 'max-height:' + max_height + 'px');
+      }
+    }).on('input', function () {
+      this.style.height = 'auto';
+      this.style.height = (this.scrollHeight) + 'px';
+    });
+  }
+
+
+
+
+/*
+ {
+   "header": {
+     "cmd": "trans",
+     "result": 0
+    },
+    "msguuid":"sasdasdasd",
+    "info":{
+      "a":1
+    }
+  }
+*/
+
+
+	$(document).ready(function() {
+
+ //console.log(utf8.encode('\xA9'));
+	//var xx=new GB2312UTF8();
+	console.log(JsEncodeUnicode("IPC我한국어"));
+	
+	var mmm = Fun_toGBK("星期日a1");
+	console.log((mmm));
+	console.log(Fun_gbkToAscii(mmm));	
+	
+	var utf8jsonmessage = eval('(' + Fun_createJsonHeartbeatInfo() + ')');
+	//alert(utf8jsonmessage);
+console.log(JSON.stringify(utf8jsonmessage));//
+	
+	slider_brightness = $("#d_img_brightness").slider({}).on('slideStop', function (e) { Fun_SetParam_Img_Brightness(e.value); });
+	slider_contrast = $("#d_img_contrast").slider({}).on('slideStop', function (e) { Fun_SetParam_Img_Contrast(e.value); });
+	slider_saturation = $("#d_img_saturation").slider({}).on('slideStop', function (e) { Fun_SetParam_Img_Staturtion(e.value); });
+	slider_sharpness = $("#d_img_sharpness").slider({}).on('slideStop', function (e) { Fun_SetParam_Img_Sharpness(e.value); });
+	
+
+
+
+
+     var textMaxH = '150' //设置最大高度为150
+    setTextareaMH(0) //当textMaxH设置为0时，则不对textarea设置最大高度
+
+
+	/*
+	
+	            var json = [];
+            for (var i = 1; i < 5; i++) {
+                var j = {};
+                j.name = "name";
+                j.cars = "22";
+                j.obj = i;
+                json.push(j);
+            }
+            var a = JSON.stringify(json);
+            alert(a);
+			
+			
+			
+		var s = Fun_createJsonHeartbeatInfo();
+	console.log(s);
+	
+	
+		Fun_loginvalidate();
+
+			
+		$("#usernametext").val("a");
+		$("#pwdtext").val("a");
+	
+	
+		Fun_ShowDiv(0);		
+						
+    */
+    
+    var msg = Fun_createJsonHeartbeatInfo();
+    console.log(msg);
+
+
+    var a = '{"header":{"command":"trans","result":0,"deviceuuid":"1","msguuid":"ADTT3"},"info":{"ptzleft":0}}';
+    $("#logtextareatest").val(a);
+
+		Fun_ShowDiv(0);//
+		Fun_loginValidate();//
+		$("#usernametext").val("13800138000");
+		$("#pwdtext").val("13800138000");				
+		$('#loginbtn').click(function () {
+			if ($("#form-box").valid()) {
+				fun_wslogin();
+			}
+		});
+	});
+
+	
+</script>
+</head>
+<body>
+<!-- 服务器登陆界面  -->
+<div id="divlogin" class="login-form" style="display:none">
+  <form action="/" class="cmxform " id="form-box" method="post" enctype="multipart/form-data" autocomplete="off">
+    <div class="main">
+      <div class="main-w3lsrow" style="text-align:center;">
+        <h1>Login</h1>
+        <div class="login-top">
+          <div class="login-ic"> <i ></i>
+            <input type="text" name="usernametext"  id="usernametext" value=""/>
+            <div class="clear"> </div>
+          </div>
+          <div class="login-ic"> <i class="icon"></i>
+            <input type="password" name="pwdtext"  id="pwdtext"   value="" />
+            <div class="clear"> </div>
+          </div>
+          <div class="log-bwn">
+            <input type="submit"  value="Login"  id="loginbtn"/>
+          </div>
+          <br/>
+          <div class="alert alert-danger" role="alert" id="loginError" style="display:none"><span></span></div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- 主界面  -->
+<div id="divtitle" class="container"  style="display:none" style="padding-top:20px; ">
+<ul class="nav  nav-tabs">
+  <li class="active" id="nav-item-a-1" role="presentation"><a class="nav-link" href="#" onClick="Fun_ShowDiv(2);">我的设备</a></li>
+  <li id="nav-item-a-2" role="presentation"><a class="nav-link" href="#" onClick="Fun_ShowDiv(3)">地图</a></li>
+  <li id="nav-item-a-3" role="presentation"><a class="nav-link" href="#" onClick="Fun_ShowDiv(4)">日志信息</a></li>
+  <li id="nav-item-a-4" role="presentation"><a class="nav-link" href="#" onClick="Fun_ShowDiv(5)">我的设置</a> </li>
+  <li id="nav-item-a-5" role="presentation"><a class="nav-link" href="#" onClick="Fun_ShowDiv(6)">帮助</a></li>
+  <li id="nav-item-a-6" role="presentation"><a class="nav-link" href="#" onClick="fun_wslogout()">退出登陆</a></li>
+</ul>
+</div>
+<div id="divdevices" class="container body-content" style="display:none">
+  <div class="container"> <br/>
+    <h1>我的设备 添加设备</h1>
+    <br/>
+    <div class="row">
+      <div class="col-lg-12" id="divdeviceslistdiv">
+        <!--
+        <ul class="list-unstyled">
+          <div class="media">
+            <div class="media-body">
+              <h5 class="mt-0 mb-1"></h5>
+            </div>
+          </div>
+        </ul>
+-->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- map页面  -->
+<div id="divmap" class="container body-content" style="display:none">
+  <div class="container"> <br/>
+    <h1>地图</h1>
+    <br/>
+  </div>
+</div>
+<!-- log页面  -->
+<div id="divlog" class="container body-content" style="display:none">
+  <div class="container"> 仅仅用于测试<br/>
+    "deviceuuid":  模拟设备3001：1   真实设备5777：2 <br/>
+    "command":trans    getparams  setparam ptz </div>
+  <div class="container">
+    <textarea id="logtextareatest">
+    </textarea>
+    <input type="button" value="提交测试" onClick="Fun_websocketSendJsonTest()">
+    <br/>
+    <div id="logoutput"></div>
+  </div>
+</div>
+<!-- sys set页面  -->
+<div id="divsysset" class="container body-content" style="display:none">
+  <div class="container" id="divsysset_guest" style="display:none"> <br/>
+    <h1>访问者权限无法操作此页面</h1>
+    <br/>
+  </div>
+  <div class="container" id="divsysset_owner"> <br/>
+    <h1>设置</h1>
+    <br/>
+    <div class="row">
+      <div class="col-lg-12">
+        <ul class="list-unstyled">
+          <li class="media">
+            <div class="media-body">
+              <h5 class="mt-0 mb-1">密码重置</h5>
+              <form action="/" class=" " id="form-box11111" method="post" enctype="multipart/form-data" autocomplete="off">
+                <div class="">
+                  <div class="myinput_css">
+                    <input type="text" name="usernametext"  id="usernametext" value="" placeholder="请输入现在使用的密码"/>
+                    <div class="clear"> </div>
+                  </div>
+                  <div class="myinput_css">
+                    <input type="password" name="pwdtext"  id="pwdtext"   value=""  placeholder="请输入新密码"/>
+                    <div class="clear"> </div>
+                  </div>
+                  <div class="myinput_css">
+                    <input type="password" name="pwdtext"  id="pwdtext"   value="" placeholder="请再次输入新密码"/>
+                    <div class="clear"> </div>
+                  </div>
+                  <div class="mysubmit_css">
+                    <input type="submit"  value="修改密码"  id="loginbtn"/>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </li>
+          <li class="media my-4">
+            <div class="media-body">
+              <h5 class="mt-0 mb-1">访客密码</h5>
+              <form action="/" class=" " id="form-box1111221" method="post" enctype="multipart/form-data" autocomplete="off">
+                <div class="">
+                  <div class="myinput_css">
+                    <input type="text" name="usernametext"  id="usernametext" value="" placeholder="请输入访客密码"/>
+                    <div class="clear"> </div>
+                  </div>
+                  <div class="mysubmit_css">
+                    <input type="submit"  value="设置访客密码"  id="loginbtn"/>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- help页面  -->
+<div id="divhelp" class="container body-content" style="display:none">
+  <div class="container"> <br/>
+    <h1>帮助</h1>
+    <br/>
+  </div>
+</div>
+<!-- 服务器登陆加载页面  -->
+<div id="divloading" class="login-form" style="display:none">
+  <div class="main">
+    <div class="main-w3lsrow">
+      <p class="copy"><img src="/images/loading.gif" /></p>
+      <p class="copy"><span id="loadingmsg"></span></p>
+    </div>
+  </div>
+</div>
+<!-- 弹窗消息通知  -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h5 class="mt-0"><span id="myModalMsg"></span></h5>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal -->
+</div>
+<!-- copy ©  -->
+<div id="divcopy"  style="display:nolne">
+  <div class="main-w3lsrow">
+    <p class="copy">© 2016 xxxxxxxxxxx</p>
+  </div>
+</div>
+<!-- 弹窗播放视频，请注意播放视频有问题，视频暂时无法关闭  -->
+<div class="modal fade" id="myModalPreview" tabindex="-1" role="dialog" aria-labelledby="myModalPreview" aria-hidden="true">
+  <div class="modal-dialog  modal-lg"  style="width: 980px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body" style="height: 430px;">
+        <div id="flashContent">
+          <p>To view this page ensure that Adobe Flash Player version 10.3.0 or greater is installed.</p>
+          <script type="text/javascript">
+            var pageHost = ((document.location.protocol == "https:") ? "https://" : "http://");
+            document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" +
+              pageHost +
+              "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>");
+          </script>
+        </div>
+        <noscript>
+        <a href="http://www.adobe.com/go/getflashplayer/" style="color:black"> <img src="images/ERROR_getFlashPlayer.gif" width="640" height="377" /> </a>
+        </noscript>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal -->
+</div>
+<!-- 参数设置窗口  -->
+<div class="modal fade" id="myModalParams" tabindex="-1" role="dialog" aria-labelledby="myModalParams" aria-hidden="true">
+  <div class="modal-dialog  modal-lg"  style="width: 980px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">
+          <label id="myModalParams_title" ></label>
+        </h4>
+      </div>
+      <div id="param_modal_body" class="modal-body" style="height: 470px;">
+        <ul id="ParamTab" class="nav nav-tabs">
+          <li class="active"><a href="#osd" data-toggle="tab">设备名称</a></li>
+          <li> <a href="#encode" data-toggle="tab"> 编码参数 </a> </li>
+          <li><a href="#image" data-toggle="tab">图像参数</a></li>
+          <li><a href="#wired" data-toggle="tab">有线参数</a></li>
+          <li><a href="#wifi" data-toggle="tab">无线参数</a></li>
+          <li><a href="#time" data-toggle="tab">时间设置</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+          <!--=================================================================-->
+          <!--=================================================================-->
+          <!--=================================================================-->
+          <div class="tab-pane fade in active" id="osd">
+            <div class="modal-body form-horizontal">
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">设备名称</label>
+                <div class="col-sm-11">
+                  <!-- disabled="disabled"-->
+                  <input class="form-control text-box single-line" id="d_name" name="d_name" type="text" value="" />
+                </div>
+              </div>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-5 control-label"></label>
+                <div class="col-sm-7">
+                  
+                  <button id="btn_d_name_get" data-loading-text="Loading..." class="btn btn-default" type="button" onClick="Fun_GetParam_Ex()">获取</button>
+                  <button class="btn btn-default" type="button" onClick="Fun_SetParam_Osd()">设置</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--=================================================================-->
+          <!--=================================================================-->
+          <!--=================================================================-->
+          <div class="tab-pane fade list-group form-horizontal" id="encode">
+            <p>主码流参数</p>
+            <div class="modal-body form-horizontal">
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">码流大小</label>
+                <div class="col-sm-11">
+				<!--256, 384, 512, 768, 1000, 1200, 1500, 2000, 2500, 3000, 4000, 5000, 6000, 7000, 8000-->
+                  <select id="d_enc_main_bitrate" name="d_enc_main_bitrate" class="selectpicker show-tick form-control" data-size="12" onChange="Fun_SetParam_MainBitrate()">
+				  <option value="256">256 kbps</option>
+                    <option value="384">384 kbps</option>
+                    <option value="512">512 kbps</option>
+                    <option value="768">768 kbps</option>
+                    <option value="1000">1000 kbps</option>
+					<option value="1200">1200 kbps</option>
+                    <option value="1500">1500 kbps</option>
+                    <option value="2000">2000 kbps</option>
+					<option value="2500">2500 kbps</option>
+					<option value="3000">3000 kbps</option>
+					<option value="4000">4000 kbps</option>
+					<option value="5000">5000 kbps</option>
+					<option value="6000">6000 kbps</option>
+					<option value="7000">7000 kbps</option>
+					<option value="8000">8000 kbps</option>
+                  </select>
+                </div>
+              </div>
+              <div  class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">帧率</label>
+                <div class="col-sm-11">
+                  <select id="d_enc_main_framerate" name="d_enc_main_framerate" class="selectpicker show-tick form-control" data-size="12"  onChange="Fun_SetParam_MainFrameRate()">
+                    <option value="25">25</option>
+                    <option value="24">24</option>
+					<option value="23">23</option>
+					<option value="22">22</option>
+					<option value="21">21</option>
+					<option value="20">20</option>
+					<option value="19">19</option>
+					<option value="18">18</option>
+                    <option value="17">17</option>
+                    <option value="16">16</option>
+                    <option value="15">15</option>
+					<option value="14">14</option>
+					<option value="13">13</option>
+                    <option value="12">12</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">分辨率</label>
+                <div class="col-sm-11">
+                  <!-- disabled="disabled"-->
+                  <select id="d_enc_main_size" name="d_enc_main_size" class="selectpicker show-tick form-control" data-size="7"  onChange="Fun_SetParam_MainSize()" >
+                    <option value="0">1080P</option>
+                    <option value="1">960P</option>
+                    <option value="2">720P</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <p>子码流参数</p>
+            <div class="modal-body form-horizontal">
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">码流大小</label>
+                <div class="col-sm-11">
+				<!--{ 32, 64, 96, 128, 160, 192, 224, 256, 320, 384, 448, 512 }-->
+                  <select id="d_enc_sub_bitrate" name="d_enc_sub_bitrate" class="selectpicker show-tick form-control" data-size="12"  onChange="Fun_SetParam_SubBitrate()">
+				  <option value="32">32 kbps</option>
+				  <option value="64">64 kbps</option>
+				  <option value="96">96 kbps</option>
+                    <option value="128">128 kbps</option>
+					<option value="160">160 kbps</option>
+                    <option value="192">192 kbps</option>
+					<option value="224">224 kbps</option>
+                    <option value="256">256 kbps</option>
+					<option value="320">320 kbps</option>
+                    <option value="384">384 kbps</option>
+					<option value="448">128 kbps</option>
+                    <option value="512">512 kbps</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">分辨率</label>
+                <div class="col-sm-11">
+                  <select id="d_enc_sub_size" name="d_enc_sub_size" class="selectpicker show-tick form-control" data-size="7"  onChange="Fun_SetParam_SubSize()">
+                    <option value="0">D1</option>
+                    <option value="1">CIF</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-5 control-label"></label>
+                <div class="col-sm-7">
+                  <button class="btn btn-default" type="button" onClick="Fun_GetParam_Ex()">获取</button>
+                  <!--button class="btn btn-default" type="button">设置</button-->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--=================================================================-->
+          <!--=================================================================-->
+          <!--=================================================================-->
+          <div class="tab-pane fade" id="image"> <br>
+            <div class="modal-body form-horizontal">
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">亮度</label>
+                <div class="col-sm-11">
+                  <input style="width:100%" id="d_img_brightness" type="text" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="3"/>
+                </div>
+              </div>
+              <br>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">对比度</label>
+                <div class="col-sm-11">
+                  <input style="width:100%" id="d_img_contrast" type="text" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="3"/>
+                </div>
+              </div>
+              <br>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">饱和度</label>
+                <div class="col-sm-11">
+                  <input style="width:100%" id="d_img_saturation" type="text" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="3"/>
+                </div>
+              </div>
+              <br>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">锐度</label>
+                <div class="col-sm-11">
+                  <input style="width:100%" id="d_img_sharpness" type="text" data-slider-min="1" data-slider-max="100" data-slider-step="1" data-slider-value="3" />
+                </div>
+              </div>
+              <br>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">图像翻转</label>
+                <div class="col-sm-11">
+                  <select id="d_img_flip" name="d_img_flip" class="selectpicker show-tick form-control" data-size="7"  onChange="Fun_SetParam_Img_Flip()">
+                    <option value="0">正常</option>
+                    <option value="1">左右翻转</option>
+                    <option value="2">上下翻转</option>
+                    <option value="3">上下左右翻转</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-5 control-label"></label>
+                <div class="col-sm-7">
+                  <button class="btn btn-default" type="button" onClick="Fun_GetParam_Ex()">获取</button>
+                  <!--button class="btn btn-default" type="button">设置</button-->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--=================================================================-->
+          <!--=================================================================-->
+          <!--=================================================================-->
+          <div class="tab-pane fade" id="wired">
+            <div class="modal-body form-horizontal">
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">DHCP</label>
+                <div class="col-sm-11">
+                  <div class="switch" data-on="info" data-off="success">
+                    <input id="d_wired_dhcp" type="checkbox" checked />
+                  </div>
+                </div>
+              </div>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">IP地址</label>
+                <div class="col-sm-11">
+                  <input class="form-control text-box single-line" id="d_wired_ip" name="d_wired_ip" type="text" value="" />
+                </div>
+              </div>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-5 control-label"></label>
+                <div class="col-sm-7">
+                  <button class="btn btn-default" type="button" onClick="Fun_GetParam_Ex()">获取</button>
+                  <button class="btn btn-default" type="button" onClick="Fun_SetParam_Wired()">设置</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--=================================================================-->
+          <!--=================================================================-->
+          <!--=================================================================-->
+          <div class="tab-pane fade" id="wifi">
+            <div class="modal-body form-horizontal">
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">SSID</label>
+                <div class="col-sm-11">
+                  <input class="form-control text-box single-line" id="d_wifi_ssid" name="d_wifi_ssid" type="text" value="" />
+                </div>
+              </div>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">密码</label>
+                <div class="col-sm-11">
+                  <input class="form-control text-box single-line" id="d_wifi_pwd" name="d_wifi_pwd" type="password" value="" />
+                </div>
+              </div>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-5 control-label"></label>
+                <div class="col-sm-7">
+                  <button class="btn btn-default" type="button" onClick="Fun_GetParam_Ex()">获取</button>
+                  <button class="btn btn-default" type="button" onClick="Fun_SetParam_Wifi()">设置</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--=================================================================-->
+          <!--=================================================================-->
+          <!--=================================================================-->
+          <div class="tab-pane fade" id="time">
+            <div class="modal-body form-horizontal">
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">时区</label>
+				<!--int ggg_timezone[30] = { -39600, -36000, -32400, -28800, -25200, -21600, -18000, -14400, -12600, -10800, -7200, -3600, 0,
+3600, 7200, 10800, 12600, 14400, 16200, 18000, 19800, 21600, 25200, 28800, 32400, 34200, 36000, 36800, 39600, 43200 };-->
+                <div class="col-sm-11">
+                  <select id="d_time_zone" name="d_time_zone" class="selectpicker show-tick form-control" data-size="12"   onChange="Fun_SetParam_Timezone()">
+					<option value="-39600">(UTC -11:00)协调世界时-11</option>
+					<option value="-36000">(UTC -10:00) 夏威夷，阿留申群岛</option>
+					<option value="-32400">(UTC -09:00) 阿拉斯加</option>
+					<option value="-28800">(UTC -08:00) 太平洋时间(美国和加拿大),下加利福尼亚州</option>
+					<option value="-25200">(UTC -07:00) 山地时间(美国和加拿大)，拉巴斯，马萨特兰，亚利桑那</option>
+					<option value="-21600">(UTC -06:00) 中部时间(美国和加拿大), 中美洲，墨西哥城</option>
+					<option value="-18000">(UTC -05:00) 东部时间(美国和加拿大), 利马, 波哥大，哈瓦那，海地，切图马尔，印第安纳州(东部)</option>
+					<option value="-14400">(UTC -04:00) 大西洋时间(加拿大), 加拉加斯，库亚巴，乔治敦，圣地亚哥, 拉巴斯，亚松森</option>
+					<option value="-12600">(UTC -03:30) 纽芬兰</option>
+					<option value="-10800">(UTC -03:00) 阿拉瓜伊纳，巴西利亚, 布宜诺斯艾丽斯, 格陵兰</option>
+					<option value="-7200">(UTC -02:00) 中大西洋，协调世界时-02</option>
+					<option value="-3600">(UTC -01:00) 佛得角群岛，亚速尔群岛</option>
+					<option value="0">(UTC) 格林威治平时;协调世界时，都柏林，爱丁堡，里斯本，伦敦，卡萨布兰卡，蒙罗维亚，雷克雅未克</option>
+					<option value="3600">(UTC +01:00) 阿姆斯特丹，柏林，罗马，斯德哥尔摩，维也纳，贝尔格莱德，布达佩斯，哥本哈根，马德里，巴黎，萨拉热窝</option>
+					<option value="7200">(UTC +02:00) 安曼，贝鲁特，大马士革，的黎波里，哈拉雷，赫尔辛基，加里宁格勒，加沙，开罗，雅典, 耶路撒冷, 开罗</option>
+					<option value="10800">(UTC +03:00) 巴格达，科威特，明斯克，圣彼得堡，伊斯塔布尔，内罗毕, 利雅得, 莫斯科</option>
+					<option value="12600">(UTC +03:30) 德黑兰</option>
+					<option value="14400">(UTC +04:00) 巴库, 第比利斯, 阿布扎比, 马斯喀特，阿斯特拉罕，埃里温，路易港，萨拉托夫，伊热夫斯克</option>
+					<option value="16200">(UTC +04:30) 喀布尔</option>
+					<option value="18000">(UTC +05:00) 阿什哈巴德，伊斯兰堡, 卡拉奇, 塔什干，叶卡捷琳堡</option>
+					<option value="19800">(UTC +05:30) 加尔各答, 孟买, 新德里，钦奈</option>
+					<option value="21600">(UTC +06:00) 仰光，鄂木斯克，达卡，阿拉木图, 阿斯塔纳</option>
+					<option value="25200">(UTC +07:00) 曼谷, 河内, 雅加达，新西伯利亚，托木斯克，克拉斯诺亚尔斯克，科布多</option>
+					<option value="28800">(UTC +08:00) 北京，重庆，香港，乌鲁木齐, 吉隆坡，新加坡, 台北，伊尔库茨克，乌兰巴托，柏斯</option>
+					<option value="32400">(UTC +09:00) 首尔, 雅库茨克, 大阪，札幌，东京，赤塔市</option>
+					<option value="34200">(UTC +09:30) 达尔文，阿德莱德</option>
+					<option value="36000">(UTC +10:00) 布里斯班，关岛,霍巴特 , 堪培拉,墨尔本, 悉尼, 莫尔兹比港, 符拉迪沃斯托克</option>
+					<option value="36800">(UTC +10:30) 豪勋爵岛</option>
+					<option value="39600">(UTC +11:00) 布干维尔岛，马加丹, 诺福克岛，乔库尔达赫，萨哈林，所罗门群岛, 新喀里多尼亚</option>
+					<option value="43200">(UTC +12:00) 阿纳德尔，奥克兰, 惠灵顿, 斐济</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-1 control-label">地址</label>
+                <div class="col-sm-11">
+                  <input class="form-control text-box single-line" id="d_time_ntp" name="d_time_ntp" type="text" value="" />
+                </div>
+              </div>
+              <div class="form-group  form-group-sm">
+                <label class="col-sm-5 control-label"></label>
+                <div class="col-sm-7">
+                  <button class="btn btn-default" type="button" onClick="Fun_GetParam_Ex()">获取</button>
+                  <button class="btn btn-default" type="button" onClick="Fun_SetParam_NtpServer()"  >设置</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--=================================================================-->
+          <!--=================================================================-->
+          <!--=================================================================-->
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal -->
+</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+./b2 -j6 -a -q threading=multi link=static runtime-link=static toolset=gcc-aarch64 address-model=64 target-os=linux  --stagedir=android_arm64_lib stage --with-timer --with-thread --with-system

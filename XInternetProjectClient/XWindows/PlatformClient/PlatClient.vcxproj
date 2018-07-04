@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{506E7821-7A10-4926-8C20-202ECC612185}</ProjectGuid>
+    <RootNamespace>PlatClient</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+    <ProjectName>PlatformClient</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>c:\output32\</OutDir>
+    <IntDir>C:\VSIntermediate\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>c:\output32\</OutDir>
+    <IntDir>C:\VSIntermediate\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\_MfcClass;..\..\_Include;..\..\_ThirdParty\windows32_msvc12\include;..\..\_ThirdParty\windows32_msvc12\include\ffmpeg;..\..\_ThirdParty\windows32_msvc12\include\libjpeg-turbo;..\..\_ThirdParty\windows32_msvc12\include\fdk_aac_amr;..\_Include;..\..\_Protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalOptions>-Zm174 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\..\_ThirdParty\windows32_msvc12\lib;..\..\_ThirdParty\windows32_msvc12\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+      <MinimumRequiredVersion>
+      </MinimumRequiredVersion>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\_MfcClass;..\..\_Include;..\..\_ThirdParty\windows32_msvc12\include;..\..\_ThirdParty\windows32_msvc12\include\ffmpeg;..\..\_ThirdParty\windows32_msvc12\include\libjpeg-turbo;..\..\_ThirdParty\windows32_msvc12\include\fdk_aac_amr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>..\..\_ThirdParty\windows32_msvc12\lib;..\..\_ThirdParty\windows32_msvc12\lib\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ImageHasSafeExceptionHandlers />
+      <MinimumRequiredVersion>
+      </MinimumRequiredVersion>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\_Include\XDefineMediaChannelStruct.h" />
+    <ClInclude Include="..\..\_Include\XStream.hpp" />
+    <ClInclude Include="..\..\_Include\XStreamAccept.hpp" />
+    <ClInclude Include="..\..\_Include\XStreamConnect.hpp" />
+    <ClInclude Include="..\..\_Include\XStreamInterface.h" />
+    <ClInclude Include="..\..\_Include\XStreamManager.hpp" />
+    <ClInclude Include="..\_Include\XClientStructDefine.h" />
+    <ClInclude Include="..\_MfcClass\BCMenu.h" />
+    <ClInclude Include="..\_MfcClass\BmpButton.h" />
+    <ClInclude Include="..\_MfcClass\BtnST.h" />
+    <ClInclude Include="..\_MfcClass\MyButton.h" />
+    <ClInclude Include="..\_MfcClass\MyComboBox.h" />
+    <ClInclude Include="..\_MfcClass\MyListBox.h" />
+    <ClInclude Include="..\_MfcClass\MyListCtrl.h" />
+    <ClInclude Include="..\_MfcClass\MyScrollBarEx.h" />
+    <ClInclude Include="..\_MfcClass\MySliderCtrl.h" />
+    <ClInclude Include="..\_MfcClass\PictureEx.h" />
+    <ClInclude Include="..\_MfcClass\waveIn.hpp" />
+    <ClInclude Include="..\_MfcClass\waveOut.hpp" />
+    <ClInclude Include="ClassicDeviceTree.h" />
+    <ClInclude Include="DeviceManager.h" />
+    <ClInclude Include="DeviceSettingDlg.h" />
+    <ClInclude Include="DeviceSettingDlgEncode.h" />
+    <ClInclude Include="DeviceSettingDlgImage.h" />
+    <ClInclude Include="DeviceSettingDlgNet.h" />
+    <ClInclude Include="DeviceSettingDlgOsd.h" />
+    <ClInclude Include="DeviceSettingDlgPlatform.h" />
+    <ClInclude Include="DeviceSettingDlgTime.h" />
+    <ClInclude Include="DeviceSettingDlgWifi.h" />
+    <ClInclude Include="HisLocalplayDlg.h" />
+    <ClInclude Include="LockDlg.h" />
+    <ClInclude Include="LoopPlaySettingDlg.h" />
+    <ClInclude Include="VideoLoopplayManageDlg.h" />
+    <ClInclude Include="VideoLoopplayView.h" />
+    <ClInclude Include="ZPanLive.h" />
+    <ClInclude Include="HisOnlineplayDlg.h" />
+    <ClInclude Include="IOTDeviceTree.h" />
+    <ClInclude Include="LogDialog.h" />
+    <ClInclude Include="Mp4WaitDlg.h" />
+    <ClInclude Include="MyMessageBox.h" />
+    <ClInclude Include="SearchDlg.h" />
+    <ClInclude Include="VideoViewCtrlButtonDlg.h" />
+    <ClInclude Include="LoginDlg.h" />
+    <ClInclude Include="PlatformClient.h" />
+    <ClInclude Include="PlatformClientDlg.h" />
+    <ClInclude Include="ZPanPtzDlg.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SysFile.h" />
+    <ClInclude Include="SysSettingDlg.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="TitleDlg.h" />
+    <ClInclude Include="VideoManageDlg.h" />
+    <ClInclude Include="VideoViewDlg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\_MfcClass\BCMenu.cpp" />
+    <ClCompile Include="..\_MfcClass\BmpButton.cpp" />
+    <ClCompile Include="..\_MfcClass\BtnST.cpp" />
+    <ClCompile Include="..\_MfcClass\MyButton.cpp" />
+    <ClCompile Include="..\_MfcClass\MyComboBox.cpp" />
+    <ClCompile Include="..\_MfcClass\MyListBox.cpp" />
+    <ClCompile Include="..\_MfcClass\MyListCtrl.cpp" />
+    <ClCompile Include="..\_MfcClass\MyScrollBarEx.cpp" />
+    <ClCompile Include="..\_MfcClass\MySliderCtrl.cpp" />
+    <ClCompile Include="..\_MfcClass\PictureEx.cpp" />
+    <ClCompile Include="ClassicDeviceTree.cpp" />
+    <ClCompile Include="DeviceManager.cpp" />
+    <ClCompile Include="DeviceSettingDlg.cpp" />
+    <ClCompile Include="DeviceSettingDlgEncode.cpp" />
+    <ClCompile Include="DeviceSettingDlgImage.cpp" />
+    <ClCompile Include="DeviceSettingDlgNet.cpp" />
+    <ClCompile Include="DeviceSettingDlgOsd.cpp" />
+    <ClCompile Include="DeviceSettingDlgPlatform.cpp" />
+    <ClCompile Include="DeviceSettingDlgTime.cpp" />
+    <ClCompile Include="DeviceSettingDlgWifi.cpp" />
+    <ClCompile Include="HisLocalplayDlg.cpp" />
+    <ClCompile Include="LockDlg.cpp" />
+    <ClCompile Include="LoopPlaySettingDlg.cpp" />
+    <ClCompile Include="VideoLoopplayManageDlg.cpp" />
+    <ClCompile Include="VideoLoopplayView.cpp" />
+    <ClCompile Include="ZPanLive.cpp" />
+    <ClCompile Include="HisOnlineplayDlg.cpp" />
+    <ClCompile Include="IOTDeviceTree.cpp" />
+    <ClCompile Include="LogDialog.cpp" />
+    <ClCompile Include="Mp4WaitDlg.cpp" />
+    <ClCompile Include="MyMessageBox.cpp" />
+    <ClCompile Include="SearchDlg.cpp" />
+    <ClCompile Include="VideoViewCtrlButtonDlg.cpp" />
+    <ClCompile Include="LoginDlg.cpp" />
+    <ClCompile Include="PlatformClient.cpp" />
+    <ClCompile Include="PlatformClientDlg.cpp" />
+    <ClCompile Include="ZPanPtzDlg.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="SysSettingDlg.cpp" />
+    <ClCompile Include="TitleDlg.cpp" />
+    <ClCompile Include="VideoManageDlg.cpp" />
+    <ClCompile Include="VideoViewDlg.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PlatClient.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ParamHtmlDlg.htm">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="res\PlatClient.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\bimap3.bmp" />
+    <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\bitmap2.bmp" />
+    <Image Include="res\bmp00001.bmp" />
+    <Image Include="res\loading.gif" />
+    <Image Include="res\PlatClient.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="PlatClient.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

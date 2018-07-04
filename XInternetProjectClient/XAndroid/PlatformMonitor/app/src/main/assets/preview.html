@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>施瑞直播</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="css/sm.min.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link href="video-js-6.2.5/video-js.css" rel="stylesheet">
+    <script src="js/swiper.min.js"></script>
+
+
+    <style>
+    .video-js .vjs-big-play-button{
+    font-size: 2.5em;
+    line-height: 2.3em;
+    height: 2.5em;
+    width: 2.5em;
+    -webkit-border-radius: 2.5em;
+    -moz-border-radius: 2.5em;
+    border-radius: 2.5em;
+    background-color: #73859f;
+    background-color: rgba(115,133,159,.5);
+    border-width: 0.15em;
+    margin-top: -1.25em;
+    margin-left: -1.75em;
+    }
+    /* 中间的播放箭头 */
+    .vjs-big-play-button .vjs-icon-placeholder {
+        font-size: 1.63em;
+    }
+    /* 加载圆圈 */
+    .vjs-loading-spinner {
+        font-size: 2.5em;
+        width: 2em;
+        height: 2em;
+        border-radius: 1em;
+        margin-top: -1em;
+        margin-left: -1.5em;
+    }
+    .vjs-paused .vjs-big-play-button,
+    .vjs-paused.vjs-has-started .vjs-big-play-button {
+        display: block;
+    }
+    </style>
+  </head>
+  <body>
+  <div class="page-group">
+    <div id="page-view" class="page">
+      <div class="content">
+        <div class="card" style="margin:0;">
+          <div class="card-content">
+            <div id="live-video-block" class="card-content-inner" style="height:14rem;padding: .35rem;display:none">
+            </div>
+            <div id="liveload-block" class="card-content-inner" style="height:14rem;padding: .35rem; display: block;">
+            </div>
+          </div>
+          <div class="card-footer" style="padding: .35rem .5rem;padding-bottom:0.15rem;min-height:1rem">
+            <span>台号: <span id="view_room_no">1001</span></span>
+            <span>人气: <span id="view_room_view_num">0</span></span>
+          </div>
+          <div class="card-footer  no-border" style="padding: .35rem .5rem;padding-top:0.15rem;min-height:1rem">
+            <span style="font-size:0.55rem;" id="view_room_intro"></span>
+          </div>
+        </div>
+        <div id="view-chat-tab" class="buttons-tab" style="border-top:1px solid #ccc;">
+          <a href="#chat-tab" class="tab-link button active">聊天</a>
+          <!--<a href="#tab2" class="tab-link button">精彩推荐</a>-->
+        </div>
+
+        <div class="tabs">
+          <div id="chat-tab" class="tab active">
+            <div class="tabs-content chat-con  ps-container ps-active-y" ><!-- 聊天 start -->
+              <ul id="chat-block">
+                <!--
+                <li class="chat-item">
+                    <div class="message">
+                        <span class="chat-user-name">熄灭猪王:</span>
+                        <span class="chat-content">我要看</span>
+                    </div>
+                </li>
+                <li class="chat-item chat-send-gift">
+                    <div class="message">
+                        <span class="chat-user-name">18岁男孩来评论</span>
+                        <span class="chat-send-gift-name">赠送出饭团</span>
+                        <span class="chat-send-gift-icon"><img class="send-gift-icon" src="/web/img/gift-fantuan.png"></span>
+                        <span class="chat-send-gift-combo">1连击</span>
+                    </div>
+                </li>
+                -->
+              </ul>
+              <div class="room-chat-tips">
+
+              </div>
+              <!-- 聊天 end -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bar bar-footer">
+
+        <div class="searchbar">
+          <a class="searchbar-cancel sendMsg" style="color: #0894ec;">发送</a>
+          <div class="search-input">
+            <label class="icon  icon-edit" for="msginput"></label>
+            <input type="text" id='msginput' placeholder='输入聊天内容...'/>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script type='text/javascript' src='js/zepto.min.js' charset='utf-8'></script>
+  <script>
+      //打开自动初始化页面的功能
+      //建议不要打开自动初始化，而是自己调用 $.init 方法完成初始化
+      $.config = {
+          showPageLoadingIndicator: true
+      }
+  </script>
+  <script type='text/javascript' src='js/sm.min.js' charset='utf-8'></script>
+  <script src="video-js-6.2.5/ie8/videojs-ie8.min.js"></script><!-- If you'd like to support IE8 -->
+  <script src="video-js-6.2.5/video.js"></script>
+  <script src="videojs-contrib-hls/videojs-contrib-hls.js"></script>
+  <script src="js/jquery-1.10.1.min.js"></script>
+  <script src="js/jquery.slimscroll.min.js"></script>
+  <script type='text/javascript' src='js/apppreview.js' charset='utf-8'></script>
+  <script  type="text/html" id="msgtpl">
+    {{# for(var i = 0 ; i < d.list.length ;i++){ }}
+    <li class="chat-item">
+      <div class="message">
+            <span class="chat-user-name"> {{# if(d.list[i].commentUser.nickname){}}
+                {{d.list[i].commentUser.nickname}}
+                {{# }else{ }}
+                {{d.list[i].commentUser.username}}
+                {{# }}}:</span>
+        <span class="chat-content">{{d.list[i].content }}</span>
+      </div>
+    </li>
+    {{#}}}
+
+  </script>
+  </body>
+</html>

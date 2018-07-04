@@ -1,0 +1,63 @@
+# define platform name of ndk
+import os ;
+if [ os.name ] = CYGWIN || [ os.name ] = NT
+{
+    androidPlatform = windows-x86_64 ;
+}
+else if [ os.name ] = LINUX
+{
+    androidPlatform = linux-x86_64 ;
+}
+else if [ os.name ] = MACOSX
+{
+    androidPlatform = darwin-x86 ;
+}
+
+# replace with your own path
+ANDROID_NDK = "e:/android-ndk-r15c" ;
+android_toolchains = "aarch64-linux-android-4.9" ;
+android_androideabi = "aarch64-linux-android" ;
+android_armeabi = "arm64-v8a" ;
+android_march = "armv8-a" ;
+android_arch_arm = "arch-arm64" ;
+# compile with gcc, you can change compiler to clang or others
+using gcc : aarch64 : $(ANDROID_NDK)/toolchains/$(android_toolchains)/prebuilt/$(androidPlatform)/bin/$(android_androideabi)-gcc :
+<archiver>$(ANDROID_NDK)/toolchains/$(android_toolchains)/prebuilt/$(androidPlatform)/bin/$(android_androideabi)-ar
+<ranlib>$(ANDROID_NDK)/toolchains/$(android_toolchains)/prebuilt/$(androidPlatform)/bin/$(android_androideabi)-ranlib
+<compileflags>-I$(ANDROID_NDK)/platforms/android-21/$(android_arch_arm)/usr/include
+<compileflags>-I$(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/include
+<compileflags>-I$(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/include/backward
+<compileflags>-I$(ANDROID_NDK)/sources/cxx-stl/gnu-libstdc++/4.9/libs/$(android_armeabi)/include
+#<compileflags>-frtti
+<compileflags>-fexceptions
+<compileflags>-frtti
+<compileflags>-fpic
+<compileflags>-ffunction-sections
+<compileflags>-funwind-tables
+<compileflags>-fstack-protector
+<compileflags>-Wno-psabi
+<compileflags>-march=armv8-a
+<compileflags>-mtune=cortex-a53
+<linkflags>-march=armv8-a
+<compileflags>-Os
+<compileflags>-fno-short-enums
+<compileflags>-fomit-frame-pointer
+<compileflags>-fno-strict-aliasing
+<compileflags>-finline-limit=64
+<compileflags>-DANDROID
+<compileflags>-D__ANDROID__
+<compileflags>-DNDEBUG
+<compileflags>-O2
+<compileflags>-g
+<root>$(NDK_ROOT)$(ANDROID_TOOLCHAIN_ARM64)/sysroot
+# @Moss - Above are the 'official' android flags
+<architecture>arm
+<compileflags>-fvisibility=hidden
+<compileflags>-fvisibility-inlines-hidden
+<compileflags>-fdata-sections
+<cxxflags>-D_REENTRANT
+<cxxflags>-D_GLIBCXX__PTHREADS
+<compileflags>-Wno-long-long
+<compileflags>-Wno-missing-field-initializers
+<compileflags>-Wno-unused-variable
+;
