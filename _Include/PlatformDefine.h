@@ -2,6 +2,7 @@
 #define PLATFORM_DEFINE_H_34sdfgsfadf
 
 
+
 enum emXInternetType
 {
 	X_INTERNET_XXX_TYPE_CLASSIC = 0,
@@ -18,6 +19,7 @@ enum emXInternetType
 //for ioss
 //#define _PLATFORM_IOS
 //-------------------------------------------------
+
 
 #include <stdint.h>
 #include <string>
@@ -84,7 +86,7 @@ using namespace std;
 #endif
 #endif
 //-----------------------------------------
-//soci //����boostͷ�ļ�֮��,because of <windows.h>
+//soci //define after boost, because of <windows.h>
 
 #ifdef _PLATFORM_WINDOW
 #include "soci/soci.h"
@@ -118,9 +120,9 @@ enum emNetRecieveStep
 };
 // enum emLoginStep
 // {
-// 	LOGIN_STEP_IDLE = 0,//����
+// 	LOGIN_STEP_IDLE = 0,//
 // 	LOGIN_STEP_HAD_SEND_SESSIONID,
-// 	LOGIN_STEP_LOGIN_OK, //ֻ�е��������������������
+// 	LOGIN_STEP_LOGIN_OK, //
 // };
 //-------------------------------------------------
 inline void _SplitString(const string& s, vector<string>& v, const string& c)
@@ -165,7 +167,8 @@ inline void _SplitString(const string& s, vector<string>& v, const string& c)
 #define CROSS_STRCPY strcpy_s
 #define CROSS_DWORD64 DWORD64
 inline CROSS_DWORD64 CrossGetTickCount64() {
-	//GetTickCount64��15ms�����߾�������timeBeginPeriod(1)/timeGetTime
+	//GetTickCount64
+	//timeBeginPeriod(1)/timeGetTime
 	return GetTickCount64();
 }
 inline void CrossSleep(int nMilliseconds){
@@ -217,10 +220,6 @@ inline void CROSS_TRACE(const char * lpszLog, ...)
 
 
 inline void Global_ServiceLog_AddLog(const char * lpszLog, ...){
-
-	//����ԭ���XStream�ġ�Log.h��
-	//CServiceLog ������ӡ̫����������˳�ʱ���� 20170911
-
 #ifdef _DEBUG
 
 	va_list args;
@@ -325,21 +324,21 @@ inline int CreatDir(char *pszDir)
 	int iRet;
 	int iLen = (int)strlen(pszDir);
 
-	//��ĩβ��/
+	//
 	if (pszDir[iLen - 1] != '\\' && pszDir[iLen - 1] != '/')
 	{
 		pszDir[iLen] = '/';
 		pszDir[iLen + 1] = '\0';
 	}
 
-	// ����Ŀ¼
+	//
 	for (i = 1; i <= iLen; i++)//for (i = 0; i <= iLen; i++)
 	{
 		if (pszDir[i] == '\\' || pszDir[i] == '/')
 		{
 			pszDir[i] = '\0';
 
-			//���������,����
+			//
 			iRet = ACCESS(pszDir, 0);
 			if (iRet != 0)
 			{
@@ -349,7 +348,7 @@ inline int CreatDir(char *pszDir)
 					return -1;
 				}
 			}
-			//֧��linux,������\����/
+			//
 			pszDir[i] = '/';
 		}
 	}
@@ -601,8 +600,6 @@ inline void CrossCloseThread(CROSS_THREAD_HANDLE hThread)
 }
 inline void CrossWaitThread(CROSS_THREAD_HANDLE hThread)
 {
-	//����pthread_join��һ���߳������ĺ������������ĺ�����һֱ�ȴ������ȴ����߳̽���Ϊֹ��
-	//����������ʱ�����ȴ��̵߳���Դ���ջ�,���߳�ִ�����
 	void * retval;
 	pthread_join(hThread, &retval);
 }
@@ -673,8 +670,6 @@ inline void CrossCloseThread(CROSS_THREAD_HANDLE hThread)
 }
 inline void CrossWaitThread(CROSS_THREAD_HANDLE hThread)
 {
-	//����pthread_join��һ���߳������ĺ������������ĺ�����һֱ�ȴ������ȴ����߳̽���Ϊֹ��
-	//����������ʱ�����ȴ��̵߳���Դ���ջ�,���߳�ִ�����
 	void * retval;
 	pthread_join(hThread, &retval);
 }

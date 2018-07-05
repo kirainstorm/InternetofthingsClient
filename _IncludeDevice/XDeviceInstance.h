@@ -1,24 +1,13 @@
-#ifndef __x_device_inatance_header_sdghk6543dfg6j5432kh
-#define __x_device_inatance_header_sdghk6543dfg6j5432kh
+#ifndef __x_device_inatance_header_9EC028B5357C450C8DF1A77769029F87
+#define __x_device_inatance_header_9EC028B5357C450C8DF1A77769029F87
+//----------------------------------------
+// kirainstorm
+// https://github.com/kirainstorm
+//----------------------------------------
 #include "PlatformDefine.h"
 #include "XDeviceSignaling.h"
 #include "XDeviceStream.h"
-
-#if XINTERNET_TEST_STATUS
-class CDeviceMessageCb :public XDeviceMessageCallback
-{
-public:
-	CDeviceMessageCb() {};
-	~CDeviceMessageCb() {};
-	virtual void OnDeviceMessageCallback(int type, char *buffer, int len)
-	{
-
-	};
-private:
-
-};
-#endif
-
+//
 class CXDeviceInstance :public XDeviceInterface
 {
 public:
@@ -27,27 +16,29 @@ public:
 public:
 	virtual void XDelete();
 	//
-	virtual int XConnect(XDeviceMessageCallback *callback, char * s_ip, char * uuid);
+	virtual int XConnect(XDeviceMessageCallback *callback, const char * ip, const char * uuid);
 	virtual int XDisconnect();
+	virtual int XGetStatus();
 	//
-	virtual int XSendMeaasge();
-	virtual int XSendStream();
+	virtual int XSendMessage(const char * jsonbuffer, int len);
+	virtual int XSendStream(emMEDIA_FRAME_TYPE_DEFINE nAVFrameType, const char *data, int len, uint64_t tick,
+		uint16_t nVideoFrameRate, uint16_t nVideoWidth, uint16_t nVideoHeight,
+		uint16_t nAudioChannels = 1, uint16_t nAudioSamplesRate = 8000, uint16_t nAudioBitsPerSample = 16);
 private:
 	CXDeviceStream *m_pStream;
 	CXDeviceSignaling *m_pSignaling;
 	XDeviceMessageCallback * m_pMessageCallback;
 private:
-	char m_szsip[64];
-	int s_nsport;
-	char m_szuuid[64];
+	char m_szSvrIp[64];
+	char m_szUuid[64];
 private:
 	volatile BOOL m_bTheadExit;
 	CROSS_THREAD_HANDLE m_hThread;
 	static int ThreadWorker(void * param);
 	void Woker();
 	//
-	char m_sziotip[64];
-	char m_szusername[64];
+	char m_szRealIp[64];
+	char m_szIotUsername[64];//iot need bind username
 	void GetIotServerInfo();
 };
 

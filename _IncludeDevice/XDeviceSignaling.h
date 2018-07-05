@@ -1,9 +1,14 @@
-#ifndef __x_device_signaling_header_kl34fd43sd56f7sfd6d
-#define __x_device_signaling_header_kl34fd43sd56f7sfd6d
+#ifndef __x_device_signaling_header_66BFC80F0AF34612B492883F753EEE51
+#define __x_device_signaling_header_66BFC80F0AF34612B492883F753EEE51
+//----------------------------------------
+// kirainstorm
+// https://github.com/kirainstorm
+//----------------------------------------
 #include "PlatformDefine.h"
 #include "XDeviceStructDefine.h"
 #include "XStream.hpp"
 #include "Pool.hpp"
+//
 //--------------------------------------------------------------------------------------------------------------------
 #define ST_DEVICE_SIGNALING_BUFFER_LEN_LITTLE (LITTLE_BUFFER_SIZE_KB - sizeof(signaling_channel_head_t))
 struct ST_DEVICE_SIGNALING_SEND_BUFFER
@@ -41,11 +46,11 @@ public:
 public:
 	void Connect(char * s_ip, char * uuid, char * user);
 	void Disconnect();
-	BOOL IsError();//当前连接是否出错
+	BOOL IsConnectError();
 	void AddSendMessage(int type,  char *buffer, int len);
 
 private:
-	volatile BOOL m_bIsError;//初始化为TRUE
+	volatile BOOL m_bIsError;//init:TRUE
 	CXNetStream* m_pTcpStream;
 	//
 	XDeviceMessageCallback *m_pCallBack;
@@ -57,13 +62,10 @@ private:
 	void DoMsg();
 	CROSS_DWORD64 m_dwLastTick;
 	//
-	CrossCriticalSection m_csSendList;//list多线程不安全
+	CrossCriticalSection m_csSendList;//for m_msgSendList,   list in multiple-thread not safe.
 	list<ST_DEVICE_SIGNALING_SEND_BUFFER *> m_msgSendList;
 	void ClearSendBufferList();
 	//
-#if XINTERNET_TEST_STATUS
-	volatile BOOL m_bCanReleaseSuccessCounter;
-#endif
 };
 
 #endif

@@ -62,5 +62,8 @@
     <ClCompile Include="..\..\_IncludeDevice\XDeviceStream.cpp">
       <Filter>_inc</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\_IncludeDevice\XDevice.cpp">
+      <Filter>_inc</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -92,6 +92,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\_IncludeDevice\XDevice.cpp" />
     <ClCompile Include="..\..\_IncludeDevice\XDeviceInstance.cpp" />
     <ClCompile Include="..\..\_IncludeDevice\XDeviceSignaling.cpp" />
     <ClCompile Include="..\..\_IncludeDevice\XDeviceStream.cpp" />

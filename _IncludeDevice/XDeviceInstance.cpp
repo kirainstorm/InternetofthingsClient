@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "XDeviceInstance.h"
-#if XINTERNET_TEST_STATUS
-extern HANDLE g_hStartDoing; //手动重置,初始无信号
-#endif
+//----------------------------------------
+// kirainstorm
+// https://github.com/kirainstorm
+//----------------------------------------
 CXDeviceInstance::CXDeviceInstance()
 {
 	m_bTheadExit = FALSE;
@@ -10,41 +11,25 @@ CXDeviceInstance::CXDeviceInstance()
 	m_pStream = NULL;
 	m_pSignaling = NULL;
 }
-
 CXDeviceInstance::~CXDeviceInstance()
 {
 }
-
 void CXDeviceInstance::XDelete()
 {
-	if (m_pSignaling)
-	{
-		m_pSignaling->Disconnect();
-		delete m_pSignaling;
-		m_pSignaling = NULL;
-	}
-
-	if (m_pStream)
-	{
-		m_pStream->Disconnect();
-		delete m_pStream;
-		m_pStream = NULL;
-	}
+	XDisconnect();
+	delete this;
 }
-int CXDeviceInstance::XConnect(XDeviceMessageCallback *callback, char * s_ip, char * uuid)
+int CXDeviceInstance::XConnect(XDeviceMessageCallback *callback, const char * ip, const char * uuid)
 {
 	m_pMessageCallback = callback;
-
 	if (CROSS_THREAD_NULL == m_hThread)
 	{
-		memset(m_szsip, 0, sizeof(m_szsip));
-		memset(m_szuuid, 0, sizeof(m_szuuid));
-		memset(m_szusername, 0, sizeof(m_szusername));
+		memset(m_szSvrIp, 0, sizeof(m_szSvrIp));
+		memset(m_szUuid, 0, sizeof(m_szUuid));
+		memset(m_szIotUsername, 0, sizeof(m_szIotUsername));
 		//
-		memcpy(m_szsip, s_ip, strlen(s_ip));
-		memcpy(m_szuuid, uuid, strlen(uuid));
-		//memcpy(m_szusername, username, strlen(username));
-		s_nsport = 6599;
+		memcpy(m_szSvrIp, ip, strlen(ip));
+		memcpy(m_szUuid, uuid, strlen(uuid));
 		//
 		m_pSignaling = new CXDeviceSignaling(m_pMessageCallback);
 		assert(m_pSignaling);
@@ -57,7 +42,6 @@ int CXDeviceInstance::XConnect(XDeviceMessageCallback *callback, char * s_ip, ch
 }
 int CXDeviceInstance::XDisconnect()
 {
-
 	if (CROSS_THREAD_NULL != m_hThread)
 	{
 		m_bTheadExit = TRUE;
@@ -65,24 +49,60 @@ int CXDeviceInstance::XDisconnect()
 		CrossCloseThread(m_hThread);
 		m_hThread = CROSS_THREAD_NULL;
 		//
+	}
+
+	if (m_pSignaling)
+	{
 		m_pSignaling->Disconnect();
 		delete m_pSignaling;
+		m_pSignaling = NULL;
+	}
+	if (m_pStream)
+	{
 		m_pStream->Disconnect();
 		delete m_pStream;
+		m_pStream = NULL;
 	}
 
 	return 0;
 }
-int CXDeviceInstance::XSendMeaasge()
+int CXDeviceInstance::XGetStatus()
 {
+	if (m_pSignaling->IsConnectError() && m_pStream->IsConnectError())
+	{
+		return -3;
+	}
+	if (m_pSignaling->IsConnectError())
+	{
+		return -2;
+	}
+	if (m_pStream->IsConnectError())
+	{
+		return -1;
+	}
 	return 0;
 }
-int CXDeviceInstance::XSendStream()
+int CXDeviceInstance::XSendMessage(const char * jsonbuffer, int len)
 {
+	if (m_pSignaling->IsConnectError())
+	{
+		return -2;
+	}
+	m_pSignaling->AddSendMessage(SINGNALING_CHANNEL_CMD_TRANS, (char *)jsonbuffer, len);
 	return 0;
 }
-
-
+int CXDeviceInstance::XSendStream(emMEDIA_FRAME_TYPE_DEFINE nAVFrameType, const char *data, int len, uint64_t tick,
+	uint16_t nVideoFrameRate, uint16_t nVideoWidth, uint16_t nVideoHeight,
+	uint16_t nAudioChannels, uint16_t nAudioSamplesRate, uint16_t nAudioBitsPerSample)
+{
+	if (m_pStream->IsConnectError())
+	{
+		return -1;
+	}
+	return m_pStream->AddSendStream(nAVFrameType, data, len, tick,
+		nVideoFrameRate, nVideoWidth, nVideoHeight,
+		nAudioChannels, nAudioSamplesRate, nAudioBitsPerSample);
+}
 int CXDeviceInstance::ThreadWorker(void * param)
 {
 	CXDeviceInstance * p = (CXDeviceInstance *)param;
@@ -91,20 +111,18 @@ int CXDeviceInstance::ThreadWorker(void * param)
 }
 void CXDeviceInstance::Woker()
 {
-#if XINTERNET_TEST_STATUS
-	WaitForSingleObject(g_hStartDoing, INFINITE);
-#endif
 
 	while (FALSE == m_bTheadExit)
 	{
-		if (m_pSignaling->IsError() && m_pStream->IsError())
+		//-----------------------------------------------------------------------------
+		if (m_pSignaling->IsConnectError() && m_pStream->IsConnectError())
 		{
 			//
-			string s1 = m_szuuid;
+			string s1 = m_szUuid;
 			if (____XDeviceInterfaceIsClassicID(s1))
 			{
-				memset(m_sziotip, 0, sizeof(m_sziotip));
-				CROSS_STRCPY(m_sziotip, m_szsip);
+				memset(m_szRealIp, 0, sizeof(m_szRealIp));
+				CROSS_STRCPY(m_szRealIp, m_szSvrIp);
 			}
 			else
 			{
@@ -112,46 +130,51 @@ void CXDeviceInstance::Woker()
 			}
 
 		}
+		//-----------------------------------------------------------------------------
+#if 0
 
-		if (m_pSignaling->IsError())
+		if (m_pSignaling->IsConnectError())
 		{
 
 			//connect
 			m_pSignaling->Disconnect();
-			m_pSignaling->Connect(m_sziotip, m_szuuid, m_szusername);
+			m_pSignaling->Connect(m_szRealIp, m_szUuid, m_szIotUsername);
 		}
 		else
 		{
-			//心跳
-			m_pSignaling->AddSendMessage(SINGNALING_CHANNEL_CMD_HEARBEAT, nullptr, 0);
-			char szttmp[64] = { 0 };
-			sprintf(szttmp, "%s send: hello world (alarm)!", m_szuuid);
-			for (int i = 0; i < 3; i++)
-			{
-				m_pSignaling->AddSendMessage(SINGNALING_CHANNEL_CMD_ALARM, szttmp, strlen(szttmp));
-			}
+			//
+			m_pSignaling->AddSendMessage(SINGNALING_CHANNEL_CMD_HEARTBEAT, nullptr, 0);
+// 			char szttmp[64] = { 0 };
+// 			sprintf(szttmp, "%s send: hello world (alarm)!", m_szUuid);
+// 			for (int i = 0; i < 3; i++)
+// 			{
+// 				m_pSignaling->AddSendMessage(SINGNALING_CHANNEL_CMD_ALARM, szttmp, strlen(szttmp));
+// 			}
 		}
 
-
-// 
-// 
-// 		if (m_pStream->IsError())
-// 		{
-// 			//connect
-// 		}
-// 		else
-// 		{
-// 			//心跳
-// 		}
-
+#endif
+		//-----------------------------------------------------------------------------
+		if (m_pStream->IsConnectError())
+		{
+			//connect
+			m_pStream->Disconnect();
+			m_pStream->Connect(m_szRealIp, m_szUuid, m_szIotUsername);
+		}
+		else
+		{
+			//
+			m_pStream->AddHeartbeat();
+		}
+		//-----------------------------------------------------------------------------
 		for (int i = 0; i< 100; i ++)
 		{
-			CrossSleep(50);
+			CrossSleep(40);
 			if (m_bTheadExit)
 			{
 				break;
 			}
 		}
+		//-----------------------------------------------------------------------------
 	}
 }
 
@@ -159,27 +182,16 @@ void CXDeviceInstance::Woker()
 void CXDeviceInstance::GetIotServerInfo()
 {
 
-#if XINTERNET_TEST_STATUS
-	memset(m_sziotip, 0, sizeof(m_sziotip));
-	memset(m_szusername, 0, sizeof(m_szusername));
-	//CROSS_STRCPY(m_sziotip, "127.0.0.1");
-	CROSS_STRCPY(m_sziotip, "47.96.249.142");
-	//CROSS_STRCPY(m_sziotip, "52.175.25.247");
-	CROSS_STRCPY(m_szusername, "11@qq.com");
-	return;
-#endif
-	//
-
 	ST_DEVICE_SIGNALING_SEND_BUFFER *pSendBuffer = CXDeviceSignalingBufferPool::Instance().malloc();
 	login_redirection_t rt;
 	signaling_channel_head_t msg_recv;
 	char szBuffer[256] = {};
 	CXNetStream* pTcpStream = NULL;
 
-	//m_cs.Lock();
+
 	do
 	{
-		pTcpStream = XNetCreateStream4Connect(m_szsip, s_nsport, 3);
+		pTcpStream = XNetCreateStream4Connect(m_szSvrIp, 6599, 3);
 		if (NULL == pTcpStream)
 		{
 			CROSS_TRACE(">>>GetIOTServerIP Error<<< 1");
@@ -195,7 +207,7 @@ void CXDeviceInstance::GetIotServerInfo()
 		memset(&rt, 0, sizeof(rt));
 		pSendBuffer->head.cmd = SINGNALING_CHANNEL_CMD_REDIRECTION_DEVICE;
 		pSendBuffer->head.datalen = sizeof(rt);
-		CROSS_STRCPY(rt.id, m_szuuid);
+		CROSS_STRCPY(rt.id, m_szUuid);
 		memcpy(pSendBuffer->msg, &rt, sizeof(rt));
 		//
 		if (0 != pTcpStream->SyncWriteAndRead(pSendBuffer, sizeof(signaling_channel_head_t) + pSendBuffer->head.datalen, &msg_recv, sizeof(signaling_channel_head_t)))
@@ -223,10 +235,10 @@ void CXDeviceInstance::GetIotServerInfo()
 		vector<string> v;
 		_SplitString(s, v, "|");
 		//
-		CROSS_STRCPY(m_sziotip, v[0].c_str());
-		CROSS_STRCPY(m_szusername, v[1].c_str());
+		CROSS_STRCPY(m_szRealIp, v[0].c_str());
+		CROSS_STRCPY(m_szIotUsername, v[1].c_str());
 		//
-		CROSS_TRACE(">>>GetIOTServerIP<<< okokok");
+		//CROSS_TRACE(">>>GetIOTServerIP<<< okokok");
 	} while (FALSE);
 	//
 	if (pTcpStream)
@@ -234,8 +246,6 @@ void CXDeviceInstance::GetIotServerInfo()
 		pTcpStream->Release();
 		pTcpStream = NULL;
 	}
-	//
-	//m_cs.Unlock();
-	//return (0 == ret) ? m_szIOTServerIp : nullptr;
+
 
 }

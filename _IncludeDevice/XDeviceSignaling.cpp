@@ -1,16 +1,16 @@
 #include "stdafx.h"
 #include "XDeviceSignaling.h"
 #include "XDes.h"
-
+//----------------------------------------
+// kirainstorm
+// https://github.com/kirainstorm
+//----------------------------------------
 CXDeviceSignaling::CXDeviceSignaling(XDeviceMessageCallback *cb)
 {
 	m_pCallBack = cb;
 	m_pTcpStream = NULL;
 	m_bIsError = TRUE;
 	m_pBuffer = CLittleBufferPool::Instance().malloc();
-#if XINTERNET_TEST_STATUS
-	m_bCanReleaseSuccessCounter = FALSE;
-#endif
 }
 
 CXDeviceSignaling::~CXDeviceSignaling()
@@ -28,8 +28,6 @@ void CXDeviceSignaling::OnPacketCompleteNetStreamData(int32_t bytesTransferred, 
 		m_bIsError = TRUE;
 		return;
 	}
-
-
 	if (ENUM_XTSTREAM_TRANSKEY_READ == transferKey)
 	{
 		if (0 == bytesTransferred)
@@ -42,7 +40,7 @@ void CXDeviceSignaling::OnPacketCompleteNetStreamData(int32_t bytesTransferred, 
 		{
 			if (m_nRecvStep == NET_RECIEVE_STEP_HEAD)
 			{
-				if (m_head.datalen > MIDDLE_BUFFER_SIZE_MB)
+				if (m_head.datalen > LITTLE_BUFFER_SIZE_KB)
 				{
 					return;
 				}
@@ -72,9 +70,11 @@ void CXDeviceSignaling::OnPacketCompleteNetStreamData(int32_t bytesTransferred, 
 	}
 	if (ENUM_XTSTREAM_TRANSKEY_WRITE == transferKey)
 	{
+		volatile BOOL bSendMessage = FALSE;
+		//
+		m_csSendList.Lock();
 		if (m_msgSendList.size() > 0)
 		{
-			m_csSendList.Lock();
 			ST_DEVICE_SIGNALING_SEND_BUFFER * pMsg = (ST_DEVICE_SIGNALING_SEND_BUFFER *)m_msgSendList.front();
 			if (pMsg->head.datalen > 0)
 			{
@@ -83,9 +83,12 @@ void CXDeviceSignaling::OnPacketCompleteNetStreamData(int32_t bytesTransferred, 
 			m_pTcpStream->AsyncWrite(pMsg, pMsg->head.datalen + sizeof(pMsg->head));//·¢ËÍ
 			m_msgSendList.pop_front();
 			CXDeviceSignalingBufferPool::Instance().free(pMsg);
-			m_csSendList.Unlock();
+			//
+			bSendMessage = TRUE;
 		}
-		else
+		m_csSendList.Unlock();
+		//
+		if (FALSE == bSendMessage)
 		{
 			m_pTcpStream->PostDelayWriteStatus();
 		}
@@ -96,18 +99,7 @@ void CXDeviceSignaling::Connect(char * s_ip, char * uuid, char * user)
 {
 	if (NULL == m_pTcpStream)
 	{
-#if XINTERNET_TEST_STATUS
-		if (m_bCanReleaseSuccessCounter)
-		{
-			CXTestCounter::Instance().ReleaseSuccess();
-			CXTestCounter::Instance().AddFailed();
-			m_bCanReleaseSuccessCounter = FALSE;
-		}
-#endif
-
-
 		m_bIsError = FALSE;
-		m_dwLastTick = CrossGetTickCount64();
 		BOOL bLoginOK = FALSE;
 		ST_DEVICE_SIGNALING_SEND_BUFFER *pSendBuffer = CXDeviceSignalingBufferPool::Instance().malloc();;
 		signaling_channel_head_t msg_key_recv;
@@ -121,17 +113,17 @@ void CXDeviceSignaling::Connect(char * s_ip, char * uuid, char * user)
 			string s1 = uuid;
 			if (____XDeviceInterfaceIsClassicID(s1))
 			{
-				m_pTcpStream = XNetCreateStream4Connect(s_ip, 6501, 10);
+				m_pTcpStream = XNetCreateStream4Connect(s_ip, 6501, 4);
 			}
 			else
 			{
-				m_pTcpStream = XNetCreateStream4Connect(s_ip, 6601, 10);
+				m_pTcpStream = XNetCreateStream4Connect(s_ip, 6601, 4);
 			}
 			
 			
 			if (0 != XNetConnectStream(m_pTcpStream))
 			{
-				//CROSS_TRACE("CMediaDevInterface::Login -- conn svr error");
+				CROSS_TRACE("CXDeviceSignaling::Connect -- error --- 1");
 				break;
 			}
 			//--------------------------------------------------------------------------------------------------------------------------
@@ -141,13 +133,13 @@ void CXDeviceSignaling::Connect(char * s_ip, char * uuid, char * user)
 			//
 			if (0 != m_pTcpStream->SyncWriteAndRead(pSendBuffer, sizeof(signaling_channel_head_t), &msg_key_recv, sizeof(signaling_channel_head_t), 5))
 			{
-				//CROSS_TRACE("CMediaDevInterface::Login -- request key error -- 1");
+				CROSS_TRACE("CXDeviceSignaling::Connect -- error --- 2");
 				break;
 			}
 			//
 			if ((msg_key_recv.cmd != SINGNALING_CHANNEL_CMD_LOGIN_NEED_SESSION) || (msg_key_recv.result != SINGNALING_CHANNEL_RESULT_OK))
 			{
-				//CROSS_TRACE("CMediaDevInterface::Login -- request key error -- 2");
+				CROSS_TRACE("CXDeviceSignaling::Connect -- error --- 3");
 				break;
 			}
 			//
@@ -160,57 +152,31 @@ void CXDeviceSignaling::Connect(char * s_ip, char * uuid, char * user)
 			XDESEncode(user, m_nSessionID, stLogin.userdes);
 			XDESEncode(uuid, m_nSessionID, stLogin.uuiddes);
 			//
-			// 			char szSendBuffer[1024] = { 0 };
-			// 			ST_SREVER_LOGIN_INFO msg_login_info;
-			// 			ST_SERVER_HEAD msg_login_send;
-			// 			ST_SERVER_HEAD msg_login_recv;
-			memset(pSendBuffer, 0, sizeof(ST_DEVICE_SIGNALING_SEND_BUFFER));
-			// 			memset(&msg_login_send, 0, sizeof(ST_SERVER_HEAD));
-			// 			memset(&msg_login_recv, 0, sizeof(ST_SERVER_HEAD));
-			// 			//
+			memset(pSendBuffer, 0, sizeof(ST_DEVICE_SIGNALING_SEND_BUFFER));	
 			pSendBuffer->head.cmd = SINGNALING_CHANNEL_CMD_LOGIN;
 			pSendBuffer->head.session = m_nSessionID;
 			pSendBuffer->head.datalen = sizeof(signaling_channel_device_login_t);
-			// 			//
-			// 			msg_login_info.dev_id = classic_dev_id;
-			// 			msg_login_info.dev_channel = 0;
-			// 			memcpy(msg_login_info.user, user_name.c_str(), user_name.length());
-			// 			memcpy(msg_login_info.pwd, enc_pwd, strlen(enc_pwd));
 			//
 			memcpy(pSendBuffer->msg, &stLogin, sizeof(signaling_channel_device_login_t));
-			//memcpy(szSendBuffer + sizeof(ST_SERVER_HEAD), &msg_login_info, sizeof(ST_SREVER_LOGIN_INFO));
 			//
 			if (0 != m_pTcpStream->SyncWriteAndRead(pSendBuffer, sizeof(signaling_channel_head_t) + sizeof(signaling_channel_device_login_t), &msg_key_recv, sizeof(signaling_channel_head_t)))
 			{
-				//CROSS_TRACE("CMediaDevInterface::Login -- login error -- 1");
+				CROSS_TRACE("CXDeviceSignaling::Connect -- error --- 4");
 				break;
 			}
 			//
 			if ((msg_key_recv.cmd != SINGNALING_CHANNEL_CMD_LOGIN) || (msg_key_recv.result != SINGNALING_CHANNEL_RESULT_OK))
 			{
-				//CROSS_TRACE("CMediaDevInterface::Login -- login error -- 2");
+				CROSS_TRACE("CXDeviceSignaling::Connect -- error --- 5");
 				break;
 			}
-			//CROSS_TRACE("CMediaDevInterface::Login ------------------------- 6");
+			//--------------------------------------------------------------------------------------------------------------------------
 			m_pTcpStream->SetStreamData(this);
-			//		m_dwLastTick = CrossGetTickCount64();
+			m_dwLastTick = CrossGetTickCount64();
 			bLoginOK = TRUE;
-
-#if XINTERNET_TEST_STATUS
-			CXTestCounter::Instance().ReleaseFailed();
-			CXTestCounter::Instance().AddSuccess();
-			m_bCanReleaseSuccessCounter = TRUE;
-#endif
-			//CROSS_TRACE("CMediaDevInterface::Login ------------------------- 7");
-			//if (m_bUserOpenPreview)
-			// 			{
-			// 				AddSendMessge(Z_CMD_OF_SERVER_OPEN_STREAM, NULL, 0);
-			// 			}
+			//--------------------------------------------------------------------------------------------------------------------------
 		} while (0);
-
-
-
-		//CROSS_TRACE("CMediaDevInterface::Login ------------------------- 8");
+		//
 		if (!bLoginOK)
 		{
 			if (m_pTcpStream)
@@ -219,9 +185,6 @@ void CXDeviceSignaling::Connect(char * s_ip, char * uuid, char * user)
 				m_pTcpStream = NULL;
 			}
 		}
-
-
-
 	}
 }
 void CXDeviceSignaling::Disconnect()
@@ -235,13 +198,13 @@ void CXDeviceSignaling::Disconnect()
 		m_bIsError = TRUE;
 	}
 }
-BOOL CXDeviceSignaling::IsError()
+BOOL CXDeviceSignaling::IsConnectError()
 {
-	if ((CrossGetTickCount64() - m_dwLastTick) > 20000)
+	if ((CrossGetTickCount64() - m_dwLastTick) > 10000)
 	{
 		m_bIsError = TRUE;
+		CROSS_TRACE("CXDeviceSignaling----->>>>>> IsConnectError");
 	}
-
 	return m_bIsError;
 }
 void CXDeviceSignaling::AddSendMessage(int type,char *buffer, int len)
@@ -252,7 +215,7 @@ void CXDeviceSignaling::AddSendMessage(int type,char *buffer, int len)
 	pMsg->head.cmd = type;
 	pMsg->head.datalen = len;
 	pMsg->head.session = m_nSessionID;
-
+	//
 	if (len > 0)
 	{
 		memcpy(pMsg->msg, buffer, len);
@@ -279,18 +242,18 @@ void CXDeviceSignaling::DoMsg()
 {
 	m_dwLastTick = CrossGetTickCount64();
 
-	if (m_head.cmd == SINGNALING_CHANNEL_CMD_HEARBEAT)
+	if (m_head.cmd == SINGNALING_CHANNEL_CMD_HEARTBEAT)
 	{
-		CROSS_TRACE("CXDeviceSignaling::DoMsg() -> SINGNALING_CHANNEL_CMD_HEARBEAT");
+		//CROSS_TRACE("CXDeviceSignaling::DoMsg() -> SINGNALING_CHANNEL_CMD_HEARBEAT");
 	}
 
 	if (m_head.cmd == SINGNALING_CHANNEL_CMD_TRANS)
 	{
-		AddSendMessage(m_head.cmd, m_pBuffer, m_head.datalen);
+		//AddSendMessage(m_head.cmd, m_pBuffer, m_head.datalen);
 	}
 
 	if (m_head.cmd > SINGNALING_CHANNEL_CMD_LOGOUT)
 	{
-		m_pCallBack->OnDeviceMessageCallback(m_head.cmd, m_pBuffer, m_head.datalen);
+		m_pCallBack->OnDeviceMessageCallback(m_pBuffer, m_head.datalen);
 	}
 };

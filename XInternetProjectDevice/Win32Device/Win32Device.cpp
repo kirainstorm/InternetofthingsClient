@@ -12,7 +12,7 @@ public:
 	MessageCallback(){};
 	~MessageCallback(){};
 
-	virtual void OnDeviceMessageCallback(int type, char *buffer, int len)
+	virtual void OnDeviceMessageCallback(const char *jsonbuffer, int len)
 	{
 
 	};
