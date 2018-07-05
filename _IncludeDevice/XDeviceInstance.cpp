@@ -131,7 +131,7 @@ void CXDeviceInstance::Woker()
 
 		}
 		//-----------------------------------------------------------------------------
-#if 0
+#if 1
 
 		if (m_pSignaling->IsConnectError())
 		{
