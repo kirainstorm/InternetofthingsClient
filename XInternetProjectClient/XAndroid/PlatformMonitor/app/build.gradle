@@ -5,15 +5,15 @@ android {
         config {
             keyAlias 'srilive'
             keyPassword '123456'
-            storeFile file('G:/LatestPlatform/WinclientAndApp/Android/PlatformMonitor/signAPK/srilive.jks')
+            storeFile file('C:\\boost_1_65_1111\\build\\_2\\XInternetProjectClient\\XAndroid\\PlatformMonitor\\signAPK\\srilive.jks')
             storePassword '123456'
         }
     }
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId 'com.srilive.platform'
-        minSdkVersion 14
+        applicationId 'com.warningsys.platform'
+        minSdkVersion 15
         targetSdkVersion 26
         versionCode 3
         versionName "1.2"
@@ -46,22 +46,23 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //compile 'in.srain.cube:ultra-ptr:1.0.11'
     //compile 'com.veinhorn.scrollgalleryview:library:1.0.5'
     //compile 'com.yydcdut.sdlv:sdlv:0.5.4'
     //compile 'com.github.lovetuzitong:MultiImageSelector:1.2'
-    compile files('libs/universal-image-loader-1.9.5.jar')
+    implementation files('libs/universal-image-loader-1.9.5.jar')
     //compile 'com.lzy.widget:view-core:0.1.5'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
-    compile 'com.github.fengdai:alertdialogpro-theme-material:0.2.6'
-    compile 'com.baoyz.swipemenulistview:library:1.3.0'
-    compile 'com.linsea:universalvideoview:1.1.0'
-    compile 'com.github.chrisbanes:PhotoView:1.2.7'
-    compile 'com.bigkoo:pickerview:2.1.0'
-    compile 'com.yinglan.alphatabs:library:1.0.8'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.baoyz.pullrefreshlayout:library:1.2.0'
+    implementation 'com.github.fengdai:alertdialogpro-theme-material:0.2.6'
+    implementation 'com.baoyz.swipemenulistview:library:1.3.0'
+    implementation 'com.linsea:universalvideoview:1.1.0'
+    implementation 'com.github.chrisbanes:PhotoView:1.2.7'
+    implementation 'com.bigkoo:pickerview:2.1.0'
+    implementation 'com.yinglan.alphatabs:library:1.0.8'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
 }

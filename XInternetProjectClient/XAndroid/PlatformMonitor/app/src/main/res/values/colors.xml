@@ -6,6 +6,8 @@
     <color name="as_windows_bg">#ffffffff</color>
 
 
+    <color name="hint_foreground_material_light">#00000000</color>
+    <color name="hint_foreground_material_dark">#00000000</color>
 
 
     <!--  -->
