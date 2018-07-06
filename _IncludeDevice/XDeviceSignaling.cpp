@@ -11,6 +11,7 @@ CXDeviceSignaling::CXDeviceSignaling(XDeviceMessageCallback *cb)
 	m_pTcpStream = NULL;
 	m_bIsError = TRUE;
 	m_pBuffer = CLittleBufferPool::Instance().malloc();
+	m_dwLastTick = CrossGetTickCount64() - 100000;
 }
 
 CXDeviceSignaling::~CXDeviceSignaling()
@@ -99,7 +100,7 @@ void CXDeviceSignaling::Connect(char * s_ip, char * uuid, char * user)
 {
 	if (NULL == m_pTcpStream)
 	{
-		m_bIsError = FALSE;
+		
 		BOOL bLoginOK = FALSE;
 		ST_DEVICE_SIGNALING_SEND_BUFFER *pSendBuffer = CXDeviceSignalingBufferPool::Instance().malloc();;
 		signaling_channel_head_t msg_key_recv;
@@ -171,6 +172,7 @@ void CXDeviceSignaling::Connect(char * s_ip, char * uuid, char * user)
 				break;
 			}
 			//--------------------------------------------------------------------------------------------------------------------------
+			m_bIsError = FALSE;
 			m_pTcpStream->SetStreamData(this);
 			m_dwLastTick = CrossGetTickCount64();
 			bLoginOK = TRUE;

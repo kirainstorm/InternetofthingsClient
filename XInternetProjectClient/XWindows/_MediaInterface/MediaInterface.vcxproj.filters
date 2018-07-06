@@ -33,6 +33,21 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\_Include\ClassicClientInstance.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_Include\IOTClientInstance.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_Include\XClientHislog.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_Include\XClientSignaling.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_Include\XClientStream.cpp">
+      <Filter>CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MediaInterface.h">
@@ -97,6 +112,24 @@
     </ClInclude>
     <ClInclude Include="..\..\_Include\XDefineMediaChannelStruct.h">
       <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\ClassicClientInstance.h">
+      <Filter>CPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\IOTClientInstance.h">
+      <Filter>CPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XClientHislog.h">
+      <Filter>CPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XClientSignaling.h">
+      <Filter>CPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XClientStream.h">
+      <Filter>CPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_Include\XClientStructDefine.h">
+      <Filter>CPP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

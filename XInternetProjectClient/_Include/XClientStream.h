@@ -14,7 +14,7 @@
 
 //
 #ifdef _PLATFORM_WINDOW
-#include "waveOut.hpp"
+//#include "waveOut.hpp"
 #endif
 
 
@@ -148,7 +148,7 @@ private:
 	list<ST_STREAM_BUFFER *> m_VoiceBufferList;
 	//list< boost::shared_ptr<CMediaPlayInterfaceVoiceBuffer> > m_VoiceList;
 #ifdef _PLATFORM_WINDOW
-	CWaveOut m_waveout;
+//	CWaveOut m_waveout;
 #endif
 #ifdef _PLATFORM_ANDROID
 	JNIEnv *m_AudioThreadEnvLocal;

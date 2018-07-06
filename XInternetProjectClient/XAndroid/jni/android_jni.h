@@ -9,6 +9,7 @@ extern "C"
 //init
 JNIEXPORT void JNICALL Java_com_platform_nativecaller_NativeCaller_Init(JNIEnv *env ,jobject obj)
 JNIEXPORT void JNICALL Java_com_platform_nativecaller_NativeCaller_Free(JNIEnv *, jobject);
+JNIEXPORT void JNICALL Java_com_platform_nativecaller_NativeCaller_SetInfo(JNIEnv *, jobject, jstring ip, jint port, jstring user, jstring pwd);
 //msg notify
 JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_SetMsgNotify(JNIEnv * env, jobject obj, jobject context_obj);
 JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_ResetMsgNotify(JNIEnv * env, jobject obj);
@@ -23,10 +24,10 @@ JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_openglResume(J
 JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_openglClear(JNIEnv *env, jobject obj);
 
 //
-JNIEXPORT jobjectArray Java_com_platform_nativecaller_NativeCaller_GetDeviceList(JNIEnv * env, jobject obj, jstring ip, jint port, jstring user, jstring pwd);
+JNIEXPORT jobjectArray Java_com_platform_nativecaller_NativeCaller_GetDeviceListClassic(JNIEnv * env, jobject obj);
 
 //real-play
-JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_StartLivestream(JNIEnv *env, jobject obj, jint devid, jint channel, jstring ip, jint port, jstring user, jstring pwd);
+JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_StartLivestream(JNIEnv *env, jobject obj, jstring uid);
 JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_StopLivestream(JNIEnv *env, jobject obj);
 JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_CtrlLivestreamAudio(JNIEnv *env, jobject obj, jobject context_obj, jint open);
 JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_ChannelRecord(JNIEnv *env, jobject obj, jstring filepath, jstring devname, jint open);

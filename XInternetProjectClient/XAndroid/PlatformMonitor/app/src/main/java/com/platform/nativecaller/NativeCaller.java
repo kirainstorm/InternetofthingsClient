@@ -6,56 +6,41 @@ import android.content.Context;
  * Created by kiki on 2016/7/28.
  */
 public class NativeCaller {
-//        static {
-//            System.loadLibrary("crypto");
-//            System.loadLibrary("ssl");
-//            System.loadLibrary("xmedia");
-//        }
+        static {
+            //System.loadLibrary("crypto");
+            //System.loadLibrary("ssl");
+            System.loadLibrary("xmedia");
+        }
 
     //
     public native static void Init();
-
     public native static void Free();
-
+    public native static void SetInfo(String ip, int port, String user, String pwd);
     //
     public native static void SetMsgNotify(Context object);
-
     public native static void ResetMsgNotify();
 
     //
     public static native void openglViewport(int x, int y,int width, int height); // onSurfaceChanged
-
     public static native void openglStep(); // onDrawFrame
-
     public static native void openglInit();// onSurfaceCreated
-
     public static native void openglStop(); //
-
     public static native void openglPause(); //
-
     public static native void openglResume(); //
-
     public static native void openglClear(); //
 
     //
-    public native static DeviceListItem[] GetDeviceList(String ip, int port,
-                                                        String user, String pwd);
+    public native static DeviceListItem[] GetDeviceListClassic();
 
     //
-    public native static int StartLivestream(int devid, int channel, String ip,
-                                             int port, String user, String pwd);
-
+    public native static int StartLivestream(String uid);
     public native static int StopLivestream();
-
     public native static int CtrlLivestreamAudio(Context context_obj, int open);
-
-    public native static int ChannelRecord(String filepath, String filepathEx,
-                                           int start);
-
+    public native static int ChannelRecord(String filepath, String filepathEx, int start);
     public native static int CapPic(String filepath, String filename);
     public native static int GetLivestreamStatus();
 
-
+    //
     public native static HislogListItem[] GetHisLogList(String ip, int port, String user, String pwd ,int devid,int year ,int mon , int day ,int starthour,int startmin);
 
 

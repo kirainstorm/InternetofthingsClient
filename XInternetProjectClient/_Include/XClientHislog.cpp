@@ -29,7 +29,7 @@ CXClientHislog::CXClientHislog(emXClientType type, const char * uuid, int channe
 
 #ifdef _PLATFORM_WINDOW
 	pDecoder = NULL;
-	pWaveOut = NULL;
+	//pWaveOut = NULL;
 	pAudioDecIns = NULL;
 	pVideoCallback = NULL;
 #endif
@@ -314,12 +314,12 @@ int CXClientHislog::XClientDownloadInterfaceDownloadClose()
 	}
 
 
-	if (pWaveOut)
-	{
-		pWaveOut->Close();
-		delete pWaveOut;
-		pWaveOut = NULL;
-	}
+// 	if (pWaveOut)
+// 	{
+// 		pWaveOut->Close();
+// 		delete pWaveOut;
+// 		pWaveOut = NULL;
+// 	}
 	if (pAudioDecIns)
 	{
 		DestoryAudioDecInstance(pAudioDecIns);
@@ -359,30 +359,30 @@ int CXClientHislog::XClientDownloadInterfacePlayFrameWindows(HWND hwnd)
 
 	if (pData->nAudioCount > 0)
 	{
-		if (NULL == pWaveOut)
-		{
-			pWaveOut = new CWaveOut();
-			pWaveOut->Open(2048, 1, 8000, 16);
-			pAudioDecIns = CreateAudioDecInstance(RSPLAYER_CODEC_AUDIO_TYPE_AAC);
-		}
-
-
-
-		for (int i = 0; i < pData->nAudioCount; i++)
-		{
-			int len = 0;
-			char pszBuf[4096] = { 0 };
-			ST_XMEDIA_HEAD *pAudioHeadTemp = (ST_XMEDIA_HEAD *)pData->pAudioBuffer[i];
-			AudioDecData(pAudioDecIns, pData->pAudioBuffer[i] + sizeof(ST_XMEDIA_HEAD) + sizeof(ST_XMEDIA_AVHEAD), 
-				pAudioHeadTemp->datalen - sizeof(ST_XMEDIA_AVHEAD), pszBuf, &len);
-			pszBuf[len] = '\0';
-			//
-			if (pWaveOut->inlineis_start())
-			{
-				pWaveOut->input((unsigned char *)pszBuf, len);
-			}
-
-		}
+// 		if (NULL == pWaveOut)
+// 		{
+// 			pWaveOut = new CWaveOut();
+// 			pWaveOut->Open(2048, 1, 8000, 16);
+// 			pAudioDecIns = CreateAudioDecInstance(RSPLAYER_CODEC_AUDIO_TYPE_AAC);
+// 		}
+// 
+// 
+// 
+// 		for (int i = 0; i < pData->nAudioCount; i++)
+// 		{
+// 			int len = 0;
+// 			char pszBuf[4096] = { 0 };
+// 			ST_XMEDIA_HEAD *pAudioHeadTemp = (ST_XMEDIA_HEAD *)pData->pAudioBuffer[i];
+// 			AudioDecData(pAudioDecIns, pData->pAudioBuffer[i] + sizeof(ST_XMEDIA_HEAD) + sizeof(ST_XMEDIA_AVHEAD), 
+// 				pAudioHeadTemp->datalen - sizeof(ST_XMEDIA_AVHEAD), pszBuf, &len);
+// 			pszBuf[len] = '\0';
+// 			//
+// 			if (pWaveOut->inlineis_start())
+// 			{
+// 				pWaveOut->input((unsigned char *)pszBuf, len);
+// 			}
+// 
+// 		}
 	}
 
 

@@ -1,4 +1,4 @@
-package com.sricamlive.platform;
+package com.warningsys.platform;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,7 +42,7 @@ public class AppMainActivity extends AppCompatActivity {
         viewPager.setAdapter(new MainAdapter(getSupportFragmentManager()));
         alphaTabsIndicator = (com.yinglan.alphatabs.AlphaTabsIndicator) findViewById(R.id.alphaIndicator);
         alphaTabsIndicator.setViewPager(viewPager);
-        alphaTabsIndicator.setTabCurrenItem(1);
+        alphaTabsIndicator.setTabCurrenItem(0);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {

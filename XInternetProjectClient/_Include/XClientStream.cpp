@@ -209,7 +209,7 @@ int CXClientStream::XClientStreamSound(BOOL bOpenSound)
 			{
 				m_hEvtVoiceWorkerStop = TRUE;
 #ifdef _PLATFORM_WINDOW
-				m_waveout.Close();
+//				m_waveout.Close();
 #endif
 				//�ر������߳�
 				CrossWaitThread(m_hVoiceWorkerThread);
@@ -232,7 +232,7 @@ int CXClientStream::XClientStreamSound(BOOL bOpenSound)
 	{
 		m_Voice = CreateAudioDecInstance(RSPLAYER_CODEC_AUDIO_TYPE_AAC);
 #ifdef _PLATFORM_WINDOW
-		m_waveout.Open(2048, 1, 8000, 16);
+		//m_waveout.Open(2048, 1, 8000, 16);
 #endif
 		if (m_hVoiceWorkerThread == CROSS_THREAD_NULL)
 		{
@@ -547,7 +547,7 @@ void CXClientStream::DoMsg()
 		return;
 	}
 
-	//CROSS_TRACE("CMediaDevInterface::DoMsg ------------------------- 1");
+	CROSS_TRACE("CXClientStream::DoMsg ------------------------- 1");
 	//
 
 	ST_XMEDIA_AVHEAD avheader;
@@ -928,10 +928,10 @@ void CXClientStream::VoiceWorker()
 #ifdef _PLATFORM_WINDOW
 		//����
 		//TRACE("DecodeInputVoiceData - %d\n", len);
-		if (m_waveout.inlineis_start())
-		{
-			m_waveout.input((unsigned char *)pszBuf, len);
-		}
+// 		if (m_waveout.inlineis_start())
+// 		{
+// 			m_waveout.input((unsigned char *)pszBuf, len);
+// 		}
 #endif
 
 		//CROSS_TRACE("CMediaPreviewInterface::VoiceWorker #### - %d\n", len);

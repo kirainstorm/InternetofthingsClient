@@ -7,9 +7,11 @@
 //----------------------------------------
 CXDeviceStream::CXDeviceStream()
 {
+	m_nCanSendStream = FALSE;
 	m_pTcpStream = NULL;
 	m_bIsError = TRUE;
 	m_pBuffer = CLittleBufferPool::Instance().malloc();
+	m_dwLastTick = CrossGetTickCount64() - 100000;
 }
 CXDeviceStream::~CXDeviceStream()
 {
@@ -101,7 +103,7 @@ void CXDeviceStream::Connect(char * s_ip, char * uuid, char * user)
 
 	if (NULL == m_pTcpStream)
 	{
-		m_bIsError = FALSE;
+		m_nCanSendStream = FALSE;
 		BOOL bLoginOK = FALSE;
 		ST_DEVICE_STREAM_SEND_BUFFER *pSendBuffer = CXDeviceStreamBufferPool::Instance().malloc();;
 		ST_XMEDIA_HEAD msg_key_recv;
@@ -173,6 +175,7 @@ void CXDeviceStream::Connect(char * s_ip, char * uuid, char * user)
 				break;
 			}
 			//--------------------------------------------------------------------------------------------------------------------------
+			m_bIsError = FALSE;
 			m_pTcpStream->SetStreamData(this);
 			m_dwLastTick = CrossGetTickCount64();
 			bLoginOK = TRUE;
@@ -206,6 +209,7 @@ BOOL CXDeviceStream::IsConnectError()
 	{
 		CROSS_TRACE("CXDeviceStream----->>>>>> IsConnectError");
 		m_bIsError = TRUE;
+		m_nCanSendStream = FALSE;
 	}
 
 	return m_bIsError;
@@ -214,6 +218,10 @@ int CXDeviceStream::AddSendStream(emMEDIA_FRAME_TYPE_DEFINE nAVFrameType, const 
 	uint16_t nVideoFrameRate, uint16_t nVideoWidth, uint16_t nVideoHeight,
 	uint16_t nAudioChannels, uint16_t nAudioSamplesRate, uint16_t nAudioBitsPerSample)
 {
+	if (!m_nCanSendStream)
+	{
+		return -3;
+	}
 
 	if (m_bIsError)
 	{
@@ -279,4 +287,17 @@ void CXDeviceStream::ClearSendBufferList()
 void CXDeviceStream::DoMsg()
 {
 	m_dwLastTick = CrossGetTickCount64();
+
+
+	if (m_head.cmd == XMEDIA_COMMAND_OPEN_MAIN_STREAM || m_head.cmd == XMEDIA_COMMAND_OPEN_SUB_STREAM)
+	{
+		m_nCanSendStream = TRUE;
+	}
+
+
+	if (m_head.cmd == XMEDIA_COMMAND_CLOSE_MAIN_STREAM || m_head.cmd == XMEDIA_COMMAND_CLOSE_SUB_STREAM)
+	{
+		m_nCanSendStream = FALSE;
+	}
+
 };

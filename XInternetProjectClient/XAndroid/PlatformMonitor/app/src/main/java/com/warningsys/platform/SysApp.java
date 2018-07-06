@@ -1,4 +1,4 @@
-package com.sricamlive.platform;
+package com.warningsys.platform;
 
 import android.app.Application;
 import android.content.Context;
@@ -40,7 +40,7 @@ public class SysApp extends Application {
     //
     //
     public String mIp ;//= "xplat.srikam.com";//13.75.108.171
-    public int mPort = 7600;
+    public int mPort = 6499;
     //
     public String mUser;
     public String mPassword;
@@ -74,9 +74,7 @@ public class SysApp extends Application {
     public void onInitNative() {
         if (!SysApp.Ins().bInit) {
             Log.i(LdTag, "onInitNative");
-            System.loadLibrary("crypto");
-            System.loadLibrary("ssl");
-            System.loadLibrary("xmedia");
+            //System.loadLibrary("xmedia");
 
             picPath = getSDPath() + "/PLAT/Picture/";
             sdRecPath = getSDPath() + "/PLAT/Record";
@@ -284,15 +282,11 @@ public class SysApp extends Application {
 
         if (POSITION_FROM_LIVE)
         {
-            return NativeCaller.StartLivestream(dev.plat_dev_id, channel,
-                    dev.plat_dev_publish_ip, dev.plat_dev_publish_port, mUser,
-                    mPassword);
+            return NativeCaller.StartLivestream(Integer.toString(dev.plat_dev_id));
         }
         else
         {
-            return NativeCaller.StartLivestream(dev.plat_dev_id, channel,
-                    dev.plat_dev_media_ip, dev.plat_dev_media_port, mUser,
-                    mPassword);
+            return NativeCaller.StartLivestream(Integer.toString(dev.plat_dev_id));
         }
 
 
@@ -308,7 +302,11 @@ public class SysApp extends Application {
     public boolean GetDevList()
     {
         synchronized(this) {
-            DeviceListItem[] list = NativeCaller.GetDeviceList(SysApp.Ins().mIp, SysApp.Ins().mPort, SysApp.Ins().mUser, SysApp.Ins().mPassword);
+
+            //
+            NativeCaller.SetInfo(SysApp.Ins().mIp, SysApp.Ins().mPort, SysApp.Ins().mUser, SysApp.Ins().mPassword);
+
+            DeviceListItem[] list = NativeCaller.GetDeviceListClassic();
             if (list != null) {
                 dev_list_device.clear();
                 dev_list_live.clear();

@@ -15,7 +15,11 @@
 #include "XStream.hpp"
 //---------------------------
 
-#include"XClientStructDefine.h"
+
+#include "XClientStructDefine.h"
+#include "ClassicClientInstance.h"
+#include "IOTClientInstance.h"
+//---------------------------
 
 JavaVM* g_JavaVM = NULL;
 
@@ -56,63 +60,118 @@ extern "C" {
 
 	//----------------------------------------------------------------------
 	CrossCriticalSection m_cs;
-	//CXMediaDeviceInterface *g_devInterface = NULL;
-	//COpenglRenderer * render = NULL;
-	//CAndroidDataCallback *pCallback = NULL;
+	//
+	CXClientInferface * pInstance = nullptr;
+	COpenglRenderer * render = NULL;
+	CAndroidDataCallback *pCallback = NULL;
+	CXClientStreamInterface * pClientStreamInterface = nullptr;
+	//
+	char m_szIP[128],m_szUser[128],m_szPwd[128];
+
+	//
 	//--------------------------------------------
 	//CDownloadCallback m_DownloadCallback;
 	CROSS_THREAD_HANDLE	m_hWorkerThreadRealtime = CROSS_THREAD_NULL;
 	BOOL m_bWorkerRealtimeStop = TRUE;
 	BOOL m_pPause = FALSE;
 	/************************************************************************/
+	class CSignalingMessageCallback : public CXSignalingChannelMessageCallback
+	{
+	public:
+		CSignalingMessageCallback(){
+			
+		};
+		~CSignalingMessageCallback(){
+			
+		};
+	public:
+		virtual void OnSignalingChannelMessageCallback(const char * jsondata, int datalen)
+		{
+
+		};
+	};
+	CSignalingMessageCallback *	m_pSignalingMessageCallback = nullptr;
+
 	JNIEXPORT void JNICALL Java_com_platform_nativecaller_NativeCaller_Init(JNIEnv *env, jobject obj)
 	{
 		XNetStartStreamManager();
-		//render = new COpenglRenderer();
-		//pCallback = new CAndroidDataCallback(render);
-		//g_devInterface = NULL;
+		render = new COpenglRenderer();
+		pCallback = new CAndroidDataCallback(render);
+		m_pSignalingMessageCallback = new CSignalingMessageCallback;
+		//
+		// if (type == X_CLIENT_XXX_TYPE_CLASSIC)
+		{
+			pInstance = new CXClassicClientInstance();
+		}
+		// else
+		// {
+		// 	pInstance = new CXIotClientInstance();
+		// }
 	}
 	JNIEXPORT void JNICALL Java_com_platform_nativecaller_NativeCaller_Free(JNIEnv *env, jobject obj)
 	{
-		//delete (render);
-		//delete (pCallback);
+		pInstance->XDelete();
+		delete render;
+		delete pCallback;
+		delete m_pSignalingMessageCallback;
 		XNetStopStreamManager();
 	}
 
+	JNIEXPORT void JNICALL Java_com_platform_nativecaller_NativeCaller_SetInfo(JNIEnv *env, jobject obj, jstring ip, jint port, jstring user, jstring pwd)
+	{
+		char *szIP, *szUser, *szPwd;
+		szIP = (char*)env->GetStringUTFChars(ip, 0);
+		szUser = (char*)env->GetStringUTFChars(user, 0);
+		szPwd = (char*)env->GetStringUTFChars(pwd, 0);
+		//m_szIP[128],m_szUser[128],m_szPwd[128];
+		memset(m_szIP,0,sizeof(m_szIP));
+		memset(m_szUser,0,sizeof(m_szUser));
+		memset(m_szPwd,0,sizeof(m_szPwd));
+		//
+		CROSS_STRCPY(m_szIP,szIP);
+		CROSS_STRCPY(m_szUser,szUser);
+		CROSS_STRCPY(m_szPwd,szPwd);
+		//
+		env->ReleaseStringUTFChars(ip, szIP);
+		env->ReleaseStringUTFChars(user, szUser);
+		env->ReleaseStringUTFChars(pwd, szPwd);
+		//
+		pInstance->InitInstance(m_szIP, m_szUser, m_szPwd, m_pSignalingMessageCallback);
+	}
 
 	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_openglInit(JNIEnv *env, jobject obj)
 	{
-		//render->init();
+		render->init();
 		return 0;
 	}
 	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_openglViewport(JNIEnv *env, jobject obj, jint x, jint y, jint width, jint height)
 	{
-		//render->Viewport(x,y,width, height);
+		render->Viewport(x,y,width, height);
 		return 0;
 	}
 	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_openglStep(JNIEnv *env, jobject obj)
 	{
-		//render->step();
+		render->step();
 		return 0;
 	}
 	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_openglStop(JNIEnv *env, jobject obj)
 	{
-		//render->destroy();
+		render->destroy();
 		return 0;
 	}
 	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_openglPause(JNIEnv *env, jobject obj)
 	{
-		//render->Pause();
+		render->Pause();
 		return 0;
 	}
 	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_openglResume(JNIEnv *env, jobject obj)
 	{
-		//render->Resume();
+		render->Resume();
 		return 0;
 	}
 	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_openglClear(JNIEnv *env, jobject obj)
 	{
-		//render->clear();
+		render->clear();
 		return 0;
 	}
 
@@ -142,31 +201,48 @@ extern "C" {
 
 
 
-	JNIEXPORT jobjectArray Java_com_platform_nativecaller_NativeCaller_GetDeviceList(JNIEnv * env, jobject obj, jstring ip, jint port, jstring user, jstring pwd)
+	JNIEXPORT jobjectArray Java_com_platform_nativecaller_NativeCaller_GetDeviceListClassic(JNIEnv * env, jobject obj)
 	{
 		CROSS_TRACE("_GetDeviceList........");
 
 		//
 		jobjectArray args = 0;
-#if 0
-		char *szIP, *szUser, *szPwd;
-		szIP = (char*)env->GetStringUTFChars(ip, 0);
-		szUser = (char*)env->GetStringUTFChars(user, 0);
-		szPwd = (char*)env->GetStringUTFChars(pwd, 0);
+#if 1
+
+		//
+		char *pRecvBuffer = new char[3 * 1024 * 1024];
+		int nRecv = 0;
+		//
 		do 
 		{
-			vector<ST_SREVER_DEVICE_INFO_BASE> r;
-			
-			if (0 != CNetToServer::Instance().GetUserDevices(szIP,port,szUser,szPwd,r))
-			{
-				CROSS_TRACE("_GetDeviceList........ GetUserDevices Error");
-				break;
-			}
-			if (r.size() == 0)
+			pInstance->GetDevices(pRecvBuffer, nRecv);
+			if (nRecv <= 0)
 			{
 				CROSS_TRACE("_GetDeviceList........ GetUserDevices = 0");
 				break;
 			}
+
+			vector<ST_CLASSIC_DEVICE_INFO_BASE> r;
+			for (int i = 0; i < (int)(nRecv / sizeof(ST_CLASSIC_DEVICE_INFO_BASE)); i++)
+			{
+				ST_CLASSIC_DEVICE_INFO_BASE st;
+				memset(&st, 0, sizeof(st));
+				memcpy(&st, pRecvBuffer + i*sizeof(ST_CLASSIC_DEVICE_INFO_BASE), sizeof(ST_CLASSIC_DEVICE_INFO_BASE));
+				r.push_back(st);
+			}
+
+			
+			
+			// if (0 != CNetToServer::Instance().GetUserDevices(szIP,port,szUser,szPwd,r))
+			// {
+			// 	CROSS_TRACE("_GetDeviceList........ GetUserDevices Error");
+			// 	break;
+			// }
+			// if (r.size() == 0)
+			// {
+			// 	CROSS_TRACE("_GetDeviceList........ GetUserDevices = 0");
+			// 	break;
+			// }
 			//
 			
 			//查找java层的DeviceListItem
@@ -191,13 +267,13 @@ extern "C" {
 			jfieldID fid_areaname = env->GetFieldID(clazz, "plat_dev_area_name", "Ljava/lang/String;");
 			//
 			jfieldID fid_mediaip = env->GetFieldID(clazz, "plat_dev_media_ip", "Ljava/lang/String;");
-			jfieldID fid_mediaport = env->GetFieldID(clazz, "plat_dev_media_port", "I");			
+			//jfieldID fid_mediaport = env->GetFieldID(clazz, "plat_dev_media_port", "I");			
 			//
-			jfieldID fid_playbackip = env->GetFieldID(clazz, "plat_dev_playback_ip", "Ljava/lang/String;");
-			jfieldID fid_playbackport = env->GetFieldID(clazz, "plat_dev_playback_port", "I");
+			//jfieldID fid_playbackip = env->GetFieldID(clazz, "plat_dev_playback_ip", "Ljava/lang/String;");
+			//jfieldID fid_playbackport = env->GetFieldID(clazz, "plat_dev_playback_port", "I");
 			//
-			jfieldID fid_publiship = env->GetFieldID(clazz, "plat_dev_publish_ip", "Ljava/lang/String;");
-			jfieldID fid_publishport = env->GetFieldID(clazz, "plat_dev_publish_port", "I");
+			//jfieldID fid_publiship = env->GetFieldID(clazz, "plat_dev_publish_ip", "Ljava/lang/String;");
+			//jfieldID fid_publishport = env->GetFieldID(clazz, "plat_dev_publish_port", "I");
 
 			//  
 			for (int i = 0; i < len; i++)
@@ -224,15 +300,15 @@ extern "C" {
 				//CROSS_TRACE("........ 7");
 				(env)->SetObjectField(_obj, fid_mediaip, (env)->NewStringUTF((const char*)r[i].dev_media_ip));
 				//CROSS_TRACE("........ 8");
-				(env)->SetIntField(_obj, fid_mediaport, r[i].dev_media_port);
-				//CROSS_TRACE("........ 9");
-				(env)->SetObjectField(_obj, fid_playbackip, (env)->NewStringUTF((const char*)r[i].dev_media_ip));
-				//CROSS_TRACE("........ 10");
-				(env)->SetIntField(_obj, fid_playbackport, r[i].dev_playback_port);
-				//CROSS_TRACE("........ 11");
-				(env)->SetObjectField(_obj, fid_publiship, (env)->NewStringUTF((const char*)r[i].dev_publish_ip));
-				//CROSS_TRACE("........ 10");
-				(env)->SetIntField(_obj, fid_publishport, r[i].dev_publish_port);
+				// (env)->SetIntField(_obj, fid_mediaport, r[i].dev_media_port);
+				// //CROSS_TRACE("........ 9");
+				// (env)->SetObjectField(_obj, fid_playbackip, (env)->NewStringUTF((const char*)r[i].dev_media_ip));
+				// //CROSS_TRACE("........ 10");
+				// (env)->SetIntField(_obj, fid_playbackport, r[i].dev_playback_port);
+				// //CROSS_TRACE("........ 11");
+				// (env)->SetObjectField(_obj, fid_publiship, (env)->NewStringUTF((const char*)r[i].dev_publish_ip));
+				// //CROSS_TRACE("........ 10");
+				// (env)->SetIntField(_obj, fid_publishport, r[i].dev_publish_port);
 				//CROSS_TRACE("........ 11");
 				//*****************************************
 				//set object
@@ -242,14 +318,180 @@ extern "C" {
 
 		} while (0);
 
-		env->ReleaseStringUTFChars(ip, szIP);
-		env->ReleaseStringUTFChars(user, szUser);
-		env->ReleaseStringUTFChars(pwd, szPwd);
+
+		delete []pRecvBuffer;
 
 #endif
 		return args;
 	}
-	JNIEXPORT jobjectArray Java_com_platform_nativecaller_NativeCaller_GetHisLogList(JNIEnv * env, jobject obj,
+	
+
+
+
+
+	//real-play
+	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_StartLivestream(JNIEnv *env, jobject obj, jstring uid)
+	{
+		int nRet = -1;
+
+		if(pClientStreamInterface)
+		{
+			return -1;
+		}
+#if 1
+		m_cs.Lock();
+		do 
+		{
+			char *szUUID  = (char*)env->GetStringUTFChars(uid, 0);
+			pClientStreamInterface = pInstance->CreateXClientStreamInterface(szUUID,0);
+			pClientStreamInterface->XClientStreamSetDecodeVideoCallBack(pCallback,0);
+			pClientStreamInterface->XClientStreamPlay();
+			env->ReleaseStringUTFChars(uid, szUUID);
+			nRet = 0;
+		} while (0);
+		//
+		
+		m_cs.Unlock();
+#endif
+		return nRet;
+	}
+	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_StopLivestream(JNIEnv *env, jobject obj)
+	{
+#if 1
+		m_cs.Lock();
+		do 
+		{
+			if(!pClientStreamInterface)
+			{
+				break;
+			}
+			//
+			pClientStreamInterface->XClientStreamClose();
+			pClientStreamInterface->XDelete();
+			pClientStreamInterface =nullptr;
+		} while (0);
+		m_cs.Unlock();
+#endif
+		Log("StopLivestream  ....... okokokok\n");
+		return 0;
+	}
+	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_CtrlLivestreamAudio(JNIEnv *env, jobject obj, jobject context_obj, jint open)
+	{
+
+#if 0
+
+		m_cs.Lock();
+		do
+		{
+			if(!pClientStreamInterface)
+			{
+				break;
+			}
+
+			if ((m_pEnvForAudio == NULL) && (open > 0))
+			{
+				Log("CtrlLivestreamAudio  ....... start\n");
+				m_pEnvForAudio = env;
+				g_AudioObj = env->NewGlobalRef(context_obj);
+				g_devInterface->XPreviewSound(1);
+			}
+			else
+			{
+				Log("CtrlLivestreamAudio  ....... stop\n");
+				g_devInterface->XPreviewSound(0);
+				m_pEnvForAudio->DeleteGlobalRef(g_AudioObj);
+				m_pEnvForAudio = NULL;
+				g_AudioObj = NULL;
+			}
+
+		} while (0);
+		m_cs.Unlock();
+
+		Log("CtrlLivestreamAudio  .......\n");
+#endif
+		return 0;
+	}
+	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_ChannelRecord(JNIEnv *env, jobject obj, jstring filepath, jstring devname, jint open)
+	{
+#if 1
+		m_cs.Lock();
+		do
+		{
+			if(!pClientStreamInterface)
+			{
+				break;
+			}
+
+			char *k = (char*)env->GetStringUTFChars(filepath, 0);
+			char *f = (char*)env->GetStringUTFChars(devname, 0);
+			pClientStreamInterface->XClientStreamRecord((const char*)k, (const char*)f, open == 1 ? TRUE : FALSE);
+			env->ReleaseStringUTFChars(filepath, k);
+			env->ReleaseStringUTFChars(devname, f);
+
+		} while (0);
+		m_cs.Unlock();
+		Log("ChannelRecord  .......\n");
+#endif
+		return 0;
+	}
+	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_CtrlPTZ(JNIEnv *, jobject, jint devid, jint ptzID, jint param, jint val)
+	{
+#if 0
+		Log("CtrlPTZ  .......\n");
+		if (NULL == g_devInterface)
+		{
+			Log("CtrlPTZ  ....... == NULL");
+			return -1;
+		}
+
+		//g_devInterface->XDevicePTZControl(devid, ptzID, param, val);
+
+#endif
+		return 0;
+	}
+	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_CapPic(JNIEnv *env, jobject obj, jstring filepath, jstring fileName)
+	{
+		m_cs.Lock();
+		do
+		{
+			if(!pClientStreamInterface)
+			{
+				break;
+			}
+			char *k = (char*)env->GetStringUTFChars(filepath, 0);
+			char *f = (char*)env->GetStringUTFChars(fileName, 0);
+			pClientStreamInterface->XClientStreamCapturePictures((const char*)k, (const char*)f);
+			env->ReleaseStringUTFChars(filepath, k);
+			env->ReleaseStringUTFChars(fileName, f);
+
+		} while (0);
+		m_cs.Unlock();
+		Log("CapPic  .......\n");
+		return 0;
+	}
+	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_GetLivestreamStatus(JNIEnv *env, jobject obj)
+	{
+		int ret = 0;		
+#if 1
+		//Log("GetLivestreamStatus  .......\n");
+		m_cs.Lock();
+		do
+		{
+			if(!pClientStreamInterface)
+			{
+				break;
+			}
+			emClientNetStatus em = pClientStreamInterface->XClientStreamGetStatus();
+			ret = em;
+		} while (0);
+		m_cs.Unlock();
+		//Log("GetLivestreamStatus  .......\n");
+#endif
+		return ret;
+	}
+
+
+JNIEXPORT jobjectArray Java_com_platform_nativecaller_NativeCaller_GetHisLogList(JNIEnv * env, jobject obj,
 			jstring ip, jint port, jstring user, jstring pwd,jint devid,jint year ,jint mon , jint day ,jint starthour,jint startmin)
 	{
 				//define jobjectArray
@@ -456,235 +698,6 @@ extern "C" {
 		//CROSS_TRACE("GetHisLogList........ 10");
 		return args;
 	}
-
-
-
-
-	//real-play
-	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_StartLivestream(JNIEnv *env, jobject obj, jint devid, jint channel, jstring ip, jint port, jstring user, jstring pwd)
-	{
-		int nRet = -1;
-#if 0
-
-
-		m_cs.Lock();
-
-		Log("StartLivestream  .......\n");
-		
-		char *szIP, *szUser, *szPwd;
-		szIP = (char*)env->GetStringUTFChars(ip, 0);
-		szUser = (char*)env->GetStringUTFChars(user, 0);
-		szPwd = (char*)env->GetStringUTFChars(pwd, 0);
-
-
-		do 
-		{
-			if ((NULL != g_devInterface))
-			{
-				Log("StartLivestream  ....... !=NULL\n");
-				break;
-			}
-			g_devInterface = new CMediaDevInterface();
-			if (NULL == g_devInterface)
-			{
-				Log("StartLivestream  ....... new CMediaDevInterface()==NULL\n");
-				break;
-			}
-
-
-			DeviceInfo_T t;
-			memset(&t, 0, sizeof(DeviceInfo_T));
-			strcpy(t.core_svr_ip, szIP);
-			t.core_svr_port = port;
-			strcpy(t.user_name, szUser);
-			strcpy(t.user_pwd, szPwd);
-			t.dev_id = devid;
-			t.dev_channel = 0;
-
-			CROSS_TRACE("StartLivestream %s -- %s -- %d -- %s --  %d", szUser, szPwd, devid, szIP, port);
-
-
-
-			g_devInterface->XDeviceSetInfo(t);
-			g_devInterface->XDeviceLogin();
-			g_devInterface->XPreviewOpenForApp(pCallback, NULL);
-
-			Log("StartLivestream  ....... ok\n");
-			nRet = 0;
-		} while (0);
-		
-		env->ReleaseStringUTFChars(pwd, szPwd);
-		env->ReleaseStringUTFChars(user, szUser);
-		env->ReleaseStringUTFChars(ip, szIP);
-
-		m_cs.Unlock();
-#endif
-		return nRet;
-	}
-	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_StopLivestream(JNIEnv *env, jobject obj)
-	{
-#if 0
-		m_cs.Lock();
-		do 
-		{
-			//Log("StopLivestream  ....... 1\n");
-			if ((NULL == g_devInterface))
-			{
-				Log("StopLivestream  ....... ==NULL\n");
-				break;
-			}
-
-			//Log("StopLivestream  ....... 2\n");
-			if (g_devInterface)
-			{
-				//Log("StopLivestream  ....... 2-1\n");
-				g_devInterface->XPreviewClose();
-				//Log("StopLivestream  ....... 2-2\n");
-				g_devInterface->XDeviceLogout();
-				//Log("StopLivestream  ....... 2-3\n");
-				g_devInterface->XDeviceDelete();
-				//Log("StopLivestream  ....... 2-3\n");
-				g_devInterface = NULL;
-				//Log("StopLivestream  ....... 2-4\n");
-			}
-		} while (0);
-
-		m_cs.Unlock();
-
-#endif
-		Log("StopLivestream  ....... okokokok\n");
-		return 0;
-	}
-	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_CtrlLivestreamAudio(JNIEnv *env, jobject obj, jobject context_obj, jint open)
-	{
-
-#if 0
-
-		m_cs.Lock();
-		do
-		{
-			if ((NULL == g_devInterface))
-			{
-				Log("CtrlLivestreamAudio  ....... ==NULL\n");
-				break;
-			}
-
-			if ((m_pEnvForAudio == NULL) && (open > 0))
-			{
-				Log("CtrlLivestreamAudio  ....... start\n");
-				m_pEnvForAudio = env;
-				g_AudioObj = env->NewGlobalRef(context_obj);
-				g_devInterface->XPreviewSound(1);
-			}
-			else
-			{
-				Log("CtrlLivestreamAudio  ....... stop\n");
-				g_devInterface->XPreviewSound(0);
-				m_pEnvForAudio->DeleteGlobalRef(g_AudioObj);
-				m_pEnvForAudio = NULL;
-				g_AudioObj = NULL;
-			}
-
-		} while (0);
-		m_cs.Unlock();
-
-		Log("CtrlLivestreamAudio  .......\n");
-#endif
-		return 0;
-	}
-	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_ChannelRecord(JNIEnv *env, jobject obj, jstring filepath, jstring devname, jint open)
-	{
-#if 0
-		m_cs.Lock();
-		do
-		{
-			if ((NULL == g_devInterface))
-			{
-				Log("ChannelRecord  ....... ==NULL\n");
-				break;
-			}
-
-			char *k = (char*)env->GetStringUTFChars(filepath, 0);
-			char *f = (char*)env->GetStringUTFChars(devname, 0);
-			g_devInterface->XPreviewRecord((const char*)k, (const char*)f, open == 1 ? TRUE : FALSE);
-			env->ReleaseStringUTFChars(filepath, k);
-			env->ReleaseStringUTFChars(devname, f);
-
-		} while (0);
-		m_cs.Unlock();
-		Log("ChannelRecord  .......\n");
-
-#endif
-		return 0;
-	}
-	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_CtrlPTZ(JNIEnv *, jobject, jint devid, jint ptzID, jint param, jint val)
-	{
-#if 0
-		Log("CtrlPTZ  .......\n");
-		if (NULL == g_devInterface)
-		{
-			Log("CtrlPTZ  ....... == NULL");
-			return -1;
-		}
-
-		//g_devInterface->XDevicePTZControl(devid, ptzID, param, val);
-
-#endif
-		return 0;
-	}
-	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_CapPic(JNIEnv *env, jobject obj, jstring filepath, jstring fileName)
-	{
-
-#if 0
-
-		m_cs.Lock();
-		do
-		{
-			if ((NULL == g_devInterface))
-			{
-				Log("CapPic  ....... ==NULL\n");
-				break;
-			}
-
-			char *k = (char*)env->GetStringUTFChars(filepath, 0);
-			char *f = (char*)env->GetStringUTFChars(fileName, 0);
-			g_devInterface->XPreviewCapturePictures((const char*)k, (const char*)f);
-			env->ReleaseStringUTFChars(filepath, k);
-			env->ReleaseStringUTFChars(fileName, f);
-
-		} while (0);
-
-		m_cs.Unlock();
-
-		Log("CapPic  .......\n");
-#endif
-		return 0;
-	}
-	JNIEXPORT int JNICALL Java_com_platform_nativecaller_NativeCaller_GetLivestreamStatus(JNIEnv *env, jobject obj)
-	{
-		int ret = 0;		
-		#if 0
-		//Log("GetLivestreamStatus  .......\n");
-		m_cs.Lock();
-
-		do
-		{
-			if ((NULL == g_devInterface))
-			{
-				Log("GetLivestreamStatus  ....... ==NULL\n");
-				break;
-			}
-
-			ret = g_devInterface->XDeviceGetStatus(XMEDIA_DEVICE_STATUS_PREVIEW);
-		} while (0);
-		m_cs.Unlock();
-		//Log("GetLivestreamStatus  .......\n");
-		#endif
-		return ret;
-	}
-
-
-
 
 
 	static int WorkerThreadOnlinePlayback(void*)

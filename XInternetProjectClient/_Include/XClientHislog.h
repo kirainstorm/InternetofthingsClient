@@ -12,7 +12,7 @@
 #define MAX_BUFFER_SIZE MAX_FRAME_SIZE
 //
 #ifdef _PLATFORM_WINDOW
-#include "waveOut.hpp"
+//#include "waveOut.hpp"
 #endif
 //
 #ifdef _PLATFORM_ANDROID
@@ -113,7 +113,7 @@ private:
 #ifdef _PLATFORM_WINDOW
 	HWND m_hwnd;
 	void * pDecoder;
-	CWaveOut *pWaveOut;
+//	CWaveOut *pWaveOut;
 	void *pAudioDecIns;
 	CDecDataCallback * pVideoCallback;
 #endif

@@ -1,4 +1,4 @@
-package com.sricamlive.platform;
+package com.warningsys.platform;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -162,13 +162,13 @@ public class LoginPlatActivity extends AppCompatActivity {
         SysApp.Ins().onInitNative();
 
         mEmailView = (EditText) findViewById(R.id.platuser);
-        mEmailView.setText(read_name());
+        //mEmailView.setText(read_name());
 
         mPasswordView = (EditText) findViewById(R.id.platpwd);
-        mPasswordView.setText(read_pwd());
+        //mPasswordView.setText(read_pwd());
 
         mSvrIPView = (EditText) findViewById(R.id.platip);
-        mSvrIPView.setText(read_ip());
+        //mSvrIPView.setText(read_ip());
 
         mPasswordView
                 .setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -370,14 +370,13 @@ public class LoginPlatActivity extends AppCompatActivity {
             // TODO: attempt authentication against a network service.
             // ------------------------------------------------------
             //放在AsyncTask中，，主线程不能访问网络
-            SysApp.Ins().mIp = GetInetAddress("xplat.srikam.com");
+            SysApp.Ins().mIp = "47.96.249.142";//GetInetAddress("xplat.srikam.com");
             if ("" == SysApp.Ins().mIp) {
                 ErrorAlertDialogShow(R.string.title_activity_plat_login_6);
                 return false;
             }
-
-            DeviceListItem[] list = NativeCaller.GetDeviceList(SysApp.Ins().mIp,
-                    SysApp.Ins().mPort, SysApp.Ins().mUser, SysApp.Ins().mPassword);
+            NativeCaller.SetInfo(SysApp.Ins().mIp, SysApp.Ins().mPort, SysApp.Ins().mUser, SysApp.Ins().mPassword);
+            DeviceListItem[] list = NativeCaller.GetDeviceListClassic();
             if (list == null) {
                 return false;
             }
@@ -414,6 +413,7 @@ public class LoginPlatActivity extends AppCompatActivity {
                 // mPasswordView.requestFocus();
             }
         }
+
 
         @Override
         protected void onCancelled() {

@@ -1,4 +1,4 @@
-package com.sricamlive.platform;
+package com.warningsys.platform;
 
 import android.content.DialogInterface;
 import android.opengl.GLSurfaceView;

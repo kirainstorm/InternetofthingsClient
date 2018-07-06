@@ -1,4 +1,4 @@
-package com.sricamlive.platform;
+package com.warningsys.platform;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;

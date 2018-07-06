@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="100dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.sricamlive.platform.LoginPlatActivity"
+    tools:context="com.warningsys.platform.LoginPlatActivity"
     tools:showIn="@layout/activity_login_plat">
     <!-- Login progress -->
 
@@ -63,7 +63,8 @@
                 android:hint="请填写用户名"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="13800138000" />
 
             <EditText
                 android:id="@+id/platpwd"
@@ -74,7 +75,8 @@
                 android:hint="请填写密码"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="13800138000" />
 
             <EditText
                 android:id="@+id/platip"
@@ -84,7 +86,8 @@
                 android:layout_marginRight="30dp"
                 android:hint="请填写服务器地址"
                 android:inputType="textPersonName"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="47.96.249.142" />
 
             <Button
                 android:id="@+id/sign_in_button"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sricamlive.platform">
+    package="com.warningsys.platform">
 
     <!-- Tell the system this app requires OpenGL ES 2.0. -->
     <uses-feature
@@ -40,12 +40,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.sricamlive.platform.AppMainActivity"
+            android:name="com.warningsys.platform.AppMainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sricamlive.platform.StartupActivity"
+            android:name="com.warningsys.platform.StartupActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WelcomeTheme">
             <intent-filter>
@@ -55,33 +55,33 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.sricamlive.platform.LoginPlatActivity"
+            android:name="com.warningsys.platform.LoginPlatActivity"
             android:label="@string/title_activity_login_plat"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sricamlive.platform.AlbumActivity"
+            android:name="com.warningsys.platform.AlbumActivity"
             android:label="@string/title_activity_album"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sricamlive.platform.PreviewDeviceActivity"
+            android:name="com.warningsys.platform.PreviewDeviceActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_preview_device"
             android:screenOrientation="sensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sricamlive.platform.AlbumViewActivity"
+            android:name="com.warningsys.platform.AlbumViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="sensor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sricamlive.platform.PlaybackLocalActivity"
+            android:name="com.warningsys.platform.PlaybackLocalActivity"
             android:label="@string/title_activity_playback_local"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sricamlive.platform.PlaybackLocalMediaActivity"
+            android:name="com.warningsys.platform.PlaybackLocalMediaActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_playback_media"
             android:screenOrientation="landscape"
@@ -92,33 +92,33 @@
             <!--android:screenOrientation="portrait"-->
             <!--android:theme="@style/AppTheme.NoActionBar" />-->
         <activity
-            android:name="com.sricamlive.platform.PreviewLiveActivity"
+            android:name="com.warningsys.platform.PreviewLiveActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape"
             android:label="@string/title_activity_preview_live"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sricamlive.platform.CommunityActivity"
+            android:name="com.warningsys.platform.CommunityActivity"
             android:label="@string/title_activity_community"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sricamlive.platform.AboutActivity"
+            android:name="com.warningsys.platform.AboutActivity"
             android:label="@string/title_activity_about"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sricamlive.platform.OnlinePlaybackActivity"
+            android:name="com.warningsys.platform.OnlinePlaybackActivity"
             android:label="@string/title_activity_online_playback"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sricamlive.platform.PreviewOnlineActivity"
+            android:name="com.warningsys.platform.PreviewOnlineActivity"
             android:label="@string/title_activity_preview_online"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.sricamlive.platform.FragmentHtml5Activity"
+            android:name="com.warningsys.platform.FragmentHtml5Activity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:hardwareAccelerated="true"

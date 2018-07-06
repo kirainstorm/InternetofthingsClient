@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements
         android.view.SurfaceHolder.Callback, PcmAudioRecoder.AudioRecordResult {
     int width = 640, height = 480;
     int framerate, bitrate;
-    int mCameraId = Camera.CameraInfo.CAMERA_FACING_BACK;
+    int mCameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
     MediaCodec mMediaCodec;
     SurfaceView surfaceView;
     SurfaceHolder surfaceHolder;

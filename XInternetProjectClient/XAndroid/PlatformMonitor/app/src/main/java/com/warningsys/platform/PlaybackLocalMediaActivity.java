@@ -1,4 +1,4 @@
-package com.sricamlive.platform;
+package com.warningsys.platform;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;

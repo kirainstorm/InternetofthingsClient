@@ -315,7 +315,7 @@ void CXClientSignaling::DoMsg()
 {
 	m_dwLastTick = CrossGetTickCount64();
 
-	if (m_head.cmd == SINGNALING_CHANNEL_CMD_HEARBEAT)
+	if (m_head.cmd == SINGNALING_CHANNEL_CMD_HEARTBEAT)
 	{
 		//CROSS_TRACE("CXDeviceSignaling::DoMsg() -> SINGNALING_CHANNEL_CMD_HEARBEAT");
 	}
@@ -386,7 +386,7 @@ void CXClientSignaling::Woker()
 		else
 		{
 			//����
-			AddSendMessage(SINGNALING_CHANNEL_CMD_HEARBEAT, nullptr, 0);
+			AddSendMessage(SINGNALING_CHANNEL_CMD_HEARTBEAT, nullptr, 0);
 		}
 
 

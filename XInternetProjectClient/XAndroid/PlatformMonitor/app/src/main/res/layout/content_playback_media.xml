@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.sricamlive.platform.PlaybackLocalMediaActivity"
+    tools:context="com.warningsys.platform.PlaybackLocalMediaActivity"
     tools:showIn="@layout/activity_playback_media">
     <FrameLayout
         android:id="@+id/video_layout"

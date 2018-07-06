@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="0dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.sricamlive.platform.CommunityActivity"
+    tools:context="com.warningsys.platform.CommunityActivity"
     tools:showIn="@layout/activity_community">
     <ProgressBar
         android:id="@+id/myProgressBar_community"

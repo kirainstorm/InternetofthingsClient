@@ -59,14 +59,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_WINSOCK_DEPRECATED_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\_MfcClass;..\..\_Include;..\..\_ThirdParty\windows32_msvc12\include;..\..\_ThirdParty\windows32_msvc12\include\ffmpeg;..\..\_ThirdParty\windows32_msvc12\include\libjpeg-turbo;..\..\_ThirdParty\windows32_msvc12\include\fdk_aac_amr;..\_Include;..\..\_Protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\_MfcClass;..\..\..\_Include;..\..\..\_ThirdParty\windows32_msvc12\include;..\..\..\_ThirdParty\windows32_msvc12\include\ffmpeg;..\..\..\_ThirdParty\windows32_msvc12\include\libjpeg-turbo;..\..\..\_ThirdParty\windows32_msvc12\include\fdk_aac_amr;..\..\_Include;..\..\..\_Protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalOptions>-Zm174 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\_ThirdParty\windows32_msvc12\lib;..\..\_ThirdParty\windows32_msvc12\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\_ThirdParty\windows32_msvc12\lib;..\..\..\_ThirdParty\windows32_msvc12\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>

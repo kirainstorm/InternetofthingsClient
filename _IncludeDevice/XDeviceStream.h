@@ -52,6 +52,9 @@ public:
 		uint16_t nAudioChannels, uint16_t nAudioSamplesRate, uint16_t nAudioBitsPerSample);
 
 private:
+	volatile BOOL m_nCanSendStream;
+
+private:
 	volatile BOOL m_bIsError;//init : TRUE
 	CXNetStream* m_pTcpStream;
 	//
