@@ -53,9 +53,12 @@ public class MainActivity extends AppCompatActivity implements
 //            }
 //        });
 
+
         //
         MyApplication.Ins().ApplicationInit();
-        DeviceNativeCaller.StartService("47.96.249.142","3001");
+        //DeviceNativeCaller.StartService("47.96.249.142","3001");
+
+        DeviceNativeCaller.StartService("192.168.1.209","122");
 
         initMediaCodec();
         //

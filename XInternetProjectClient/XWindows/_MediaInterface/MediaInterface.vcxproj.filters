@@ -62,51 +62,6 @@
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\_Include\XPlayer.hpp">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\XPlayerCapturePictures.h">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\XPlayerD3DSurfaceRender.hpp">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\XPlayerDecdatacallback.hpp">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\XPlayerFdkaac.hpp">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\XPlayerFFmpegDecoder.hpp">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\XStream.hpp">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\XStreamConnect.hpp">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\XStreamInterface.h">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\XStreamManager.hpp">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\Mp4File.hpp">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\Mp4Reader.hpp">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\Mp4Writer.hpp">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\PlatformDefine.h">
-      <Filter>_INC</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\_Include\XDes.h">
-      <Filter>_INC</Filter>
-    </ClInclude>
     <ClInclude Include="..\_Include\XMediaInterface.h">
       <Filter>inc</Filter>
     </ClInclude>

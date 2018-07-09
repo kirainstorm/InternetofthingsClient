@@ -127,26 +127,11 @@
   <ItemGroup>
     <ClInclude Include="..\..\_Include\ClassicClientInstance.h" />
     <ClInclude Include="..\..\_Include\IOTClientInstance.h" />
-    <ClInclude Include="..\..\_Include\Mp4File.hpp" />
-    <ClInclude Include="..\..\_Include\Mp4Reader.hpp" />
-    <ClInclude Include="..\..\_Include\Mp4Writer.hpp" />
-    <ClInclude Include="..\..\_Include\PlatformDefine.h" />
     <ClInclude Include="..\..\_Include\XClientHislog.h" />
     <ClInclude Include="..\..\_Include\XClientSignaling.h" />
     <ClInclude Include="..\..\_Include\XClientStream.h" />
     <ClInclude Include="..\..\_Include\XClientStructDefine.h" />
     <ClInclude Include="..\..\_Include\XDefineMediaChannelStruct.h" />
-    <ClInclude Include="..\..\_Include\XDes.h" />
-    <ClInclude Include="..\..\_Include\XPlayer.hpp" />
-    <ClInclude Include="..\..\_Include\XPlayerCapturePictures.h" />
-    <ClInclude Include="..\..\_Include\XPlayerD3DSurfaceRender.hpp" />
-    <ClInclude Include="..\..\_Include\XPlayerDecdatacallback.hpp" />
-    <ClInclude Include="..\..\_Include\XPlayerFdkaac.hpp" />
-    <ClInclude Include="..\..\_Include\XPlayerFFmpegDecoder.hpp" />
-    <ClInclude Include="..\..\_Include\XStream.hpp" />
-    <ClInclude Include="..\..\_Include\XStreamConnect.hpp" />
-    <ClInclude Include="..\..\_Include\XStreamInterface.h" />
-    <ClInclude Include="..\..\_Include\XStreamManager.hpp" />
     <ClInclude Include="..\_Include\XMediaInterface.h" />
     <ClInclude Include="MediaInterface.h" />
     <ClInclude Include="Resource.h" />

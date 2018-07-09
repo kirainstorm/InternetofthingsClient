@@ -11,11 +11,11 @@ enum emXInternetType
 
 //-------------------------------------------------
 //for vs native
-//#define _PLATFORM_WINDOW
+#define _PLATFORM_WINDOW
 //for vs-win10-uwp
 //#define _PLATFORM_WINDOW_WIN10_UWP
 //for android
-#define _PLATFORM_ANDROID
+//#define _PLATFORM_ANDROID
 //for ioss
 //#define _PLATFORM_IOS
 //-------------------------------------------------

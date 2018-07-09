@@ -118,7 +118,6 @@ struct stFrameX_T
 
 //ST_XMEDIA_LOGIN_INFO
 //设备：只填充pwd
-//客户端：devid//设备在数据库的ID--devchannel//一定是0，即使是NVR，每个通道都有一个独立ID
 struct ST_XMEDIA_LOGIN_INFO
 {
 	int reserve[2];

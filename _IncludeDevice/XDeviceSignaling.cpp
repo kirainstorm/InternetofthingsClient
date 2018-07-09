@@ -246,7 +246,9 @@ void CXDeviceSignaling::DoMsg()
 
 	if (m_head.cmd == SINGNALING_CHANNEL_CMD_HEARTBEAT)
 	{
-		//CROSS_TRACE("CXDeviceSignaling::DoMsg() -> SINGNALING_CHANNEL_CMD_HEARBEAT");
+#ifdef _WIN32
+		CROSS_TRACE("CXDeviceSignaling::DoMsg() -> SINGNALING_CHANNEL_CMD_HEARBEAT");
+#endif
 	}
 
 	if (m_head.cmd == SINGNALING_CHANNEL_CMD_TRANS)

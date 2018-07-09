@@ -289,6 +289,13 @@ void CXDeviceStream::DoMsg()
 	m_dwLastTick = CrossGetTickCount64();
 
 
+	if (m_head.cmd == XMEDIA_COMMAND_HEARTBEAT)
+	{
+#ifdef _WIN32
+		CROSS_TRACE("CXDeviceStream::DoMsg() -> XMEDIA_COMMAND_HEARTBEAT");
+#endif
+	}
+
 	if (m_head.cmd == XMEDIA_COMMAND_OPEN_MAIN_STREAM || m_head.cmd == XMEDIA_COMMAND_OPEN_SUB_STREAM)
 	{
 		m_nCanSendStream = TRUE;
