@@ -154,6 +154,8 @@ void CXDeviceInstance::Woker()
 
 #endif
 		//-----------------------------------------------------------------------------
+
+#if 0
 		if (m_pStream->IsConnectError())
 		{
 			//connect
@@ -165,6 +167,8 @@ void CXDeviceInstance::Woker()
 			//
 			m_pStream->AddHeartbeat();
 		}
+#endif
+
 		//-----------------------------------------------------------------------------
 		for (int i = 0; i< 100; i ++)
 		{

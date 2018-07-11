@@ -1,0 +1,157 @@
+﻿@import "https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"; 
+@import "https://cdn.bootcss.com/magnific-popup.js/1.1.0/magnific-popup.min.css";
+@import "https://cdn.bootcss.com/bootstrap-select/1.13.1/css/bootstrap-select.min.css";
+@import "https://cdn.bootcss.com/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css";
+@import "https://cdn.bootcss.com/bootstrap-slider/10.0.1/css/bootstrap-slider.min.css";
+
+@import "login.css";
+@import "font-awesome.css";
+
+
+/*
+@import "https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap-reboot.min.css";
+@import "https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap-grid.min.css";
+<link href="css/login.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/font-awesome.css" rel="stylesheet">
+*/
+
+
+body {
+    padding-top: 5px;
+    padding-bottom: 20px;
+	background-color:#9a9e9e;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+/* bootstrap 只定义到 @media (min-width:1200px) */
+
+/* 1366 1440*/
+@media (min-width: 1300px) {
+    .container {
+        width: 1250px
+    }
+}
+
+/*1600*/
+@media (min-width: 1559px) {
+    .container {
+        width: 1470px
+    }
+}
+/*1920*/
+@media (min-width: 1809px) {
+    .container {
+        width: 1650px
+    }
+}
+@media (min-width: 2059px) {
+    .container {
+        width: 1850px
+    }
+}
+
+.error {
+    color: red;
+}
+
+.overLoading {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f5f5f5;
+            opacity:0.5;
+            z-index: 1000;
+       }
+    .layoutLoading {
+        display: none;
+        position: absolute;
+        top: 40%;
+        left: 40%;
+        width: 20%;
+        height: 20%;
+        z-index: 1001;
+        text-align:center;
+    }
+	
+	
+	
+/*my input*/
+.myinput_css {
+    
+	margin-bottom:4px;
+    padding: 2px;	
+}
+
+.myinput_css input[type="text"],.myinput_css  input[type="password"] {
+	float: left;
+    background: none;
+    outline: none;
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff;
+    padding: 10px 10px;
+    border: none;
+    border-bottom: 1px solid #000066;
+    width: 98%;
+    display: inline-block;
+    margin-left: 7px;
+}
+.mysubmit_css {
+	text-align: center;
+}
+.mysubmit_css input[type="submit"] {
+float: left;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fa3;
+    padding: 10px 10px;
+    background-color: transparent;
+    display: inline-block;
+    width: 120px;
+	outline:none;
+	border:0px solid white;
+	cursor:pointer;
+	text-transform:uppercase;
+	margin-left: 7px;
+	text-align: left;
+}
+.mysubmit_css input[type="submit"]:hover{
+	transition: all 0.3s ease;
+     -webkit-transition: all 0.3s ease;
+     -moz-transition: all 0.3s ease;
+     -o-transition: all 0.3s ease;
+	 border:1px solid #fa6;
+}

@@ -53,7 +53,9 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	//connect
 	//pDevice->XConnect(pBack, "47.96.249.142", "3001");
-	pDevice->XConnect(pBack, "172.25.189.244", "122");
+	//pDevice->XConnect(pBack, "172.25.189.244", "122");
+
+	pDevice->XConnect(pBack, "192.168.1.205", "3001");
 
 
 
