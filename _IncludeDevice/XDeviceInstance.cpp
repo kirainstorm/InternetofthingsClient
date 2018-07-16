@@ -155,7 +155,7 @@ void CXDeviceInstance::Woker()
 #endif
 		//-----------------------------------------------------------------------------
 
-#if 0
+#if 1
 		if (m_pStream->IsConnectError())
 		{
 			//connect

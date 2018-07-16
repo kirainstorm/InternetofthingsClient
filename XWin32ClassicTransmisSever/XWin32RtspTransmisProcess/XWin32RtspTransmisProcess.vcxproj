@@ -41,9 +41,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>c:\output32\bin64\</OutDir>
+    <IntDir>C:\VSIntermediate\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>c:\output32\bin64\</OutDir>
+    <IntDir>C:\VSIntermediate\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -52,10 +56,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\_Include;..\..\_ThirdParty\windows32_msvc12\include;..\..\_ThirdParty\windows32_msvc12\include\live;..\_Include;..\_live;..\..\_IncludeDevice;..\..\_Protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-Zm111 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\..\_ThirdParty\windows32_msvc12\lib;..\..\_ThirdParty\windows32_msvc12\lib\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -79,10 +86,34 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\_IncludeDevice\XDevice.h" />
+    <ClInclude Include="..\..\_IncludeDevice\XDeviceInstance.h" />
+    <ClInclude Include="..\..\_IncludeDevice\XDeviceSignaling.h" />
+    <ClInclude Include="..\..\_IncludeDevice\XDeviceStream.h" />
+    <ClInclude Include="..\..\_IncludeDevice\XDeviceStructDefine.h" />
+    <ClInclude Include="..\_include\TransmisClient.hpp" />
+    <ClInclude Include="..\_include\TransmisDefine.h" />
+    <ClInclude Include="..\_include\TransmisServer.hpp" />
+    <ClInclude Include="..\_live\CRTSPSession.h" />
+    <ClInclude Include="..\_live\MIH264Sink.h" />
+    <ClInclude Include="..\_live\ourRTSPClient.h" />
+    <ClInclude Include="..\_live\RTSPClient.h" />
+    <ClInclude Include="..\_live\RTSPUlitily.h" />
+    <ClInclude Include="..\_live\StreamClientState.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\_IncludeDevice\XDevice.cpp" />
+    <ClCompile Include="..\..\_IncludeDevice\XDeviceInstance.cpp" />
+    <ClCompile Include="..\..\_IncludeDevice\XDeviceSignaling.cpp" />
+    <ClCompile Include="..\..\_IncludeDevice\XDeviceStream.cpp" />
+    <ClCompile Include="..\_live\CRTSPSession.cpp" />
+    <ClCompile Include="..\_live\MIH264Sink.cpp" />
+    <ClCompile Include="..\_live\ourRTSPClient.cpp" />
+    <ClCompile Include="..\_live\RTSPClient.cpp" />
+    <ClCompile Include="..\_live\RTSPUlitily.cpp" />
+    <ClCompile Include="..\_live\StreamClientState.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="_INC_LIVE">
+      <UniqueIdentifier>{04551b49-c3c2-476c-90e8-442f92605925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_INC_DEVICE">
+      <UniqueIdentifier>{3a526b0b-1963-4860-8fd9-abf450b07eab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_INC_TRAN">
+      <UniqueIdentifier>{bb8997d5-bc03-47a1-8cd2-1338407b2c71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -24,6 +33,48 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\_live\CRTSPSession.h">
+      <Filter>_INC_LIVE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_live\MIH264Sink.h">
+      <Filter>_INC_LIVE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_live\ourRTSPClient.h">
+      <Filter>_INC_LIVE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_live\RTSPClient.h">
+      <Filter>_INC_LIVE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_live\RTSPUlitily.h">
+      <Filter>_INC_LIVE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_live\StreamClientState.h">
+      <Filter>_INC_LIVE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_IncludeDevice\XDevice.h">
+      <Filter>_INC_DEVICE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_IncludeDevice\XDeviceInstance.h">
+      <Filter>_INC_DEVICE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_IncludeDevice\XDeviceSignaling.h">
+      <Filter>_INC_DEVICE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_IncludeDevice\XDeviceStream.h">
+      <Filter>_INC_DEVICE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\_IncludeDevice\XDeviceStructDefine.h">
+      <Filter>_INC_DEVICE</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_include\TransmisClient.hpp">
+      <Filter>_INC_TRAN</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_include\TransmisDefine.h">
+      <Filter>_INC_TRAN</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_include\TransmisServer.hpp">
+      <Filter>_INC_TRAN</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -31,6 +82,36 @@
     </ClCompile>
     <ClCompile Include="XWin32RtspTransmisProcess.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_live\CRTSPSession.cpp">
+      <Filter>_INC_LIVE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_live\MIH264Sink.cpp">
+      <Filter>_INC_LIVE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_live\ourRTSPClient.cpp">
+      <Filter>_INC_LIVE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_live\RTSPClient.cpp">
+      <Filter>_INC_LIVE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_live\RTSPUlitily.cpp">
+      <Filter>_INC_LIVE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\_live\StreamClientState.cpp">
+      <Filter>_INC_LIVE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_IncludeDevice\XDevice.cpp">
+      <Filter>_INC_DEVICE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_IncludeDevice\XDeviceInstance.cpp">
+      <Filter>_INC_DEVICE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_IncludeDevice\XDeviceSignaling.cpp">
+      <Filter>_INC_DEVICE</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\_IncludeDevice\XDeviceStream.cpp">
+      <Filter>_INC_DEVICE</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

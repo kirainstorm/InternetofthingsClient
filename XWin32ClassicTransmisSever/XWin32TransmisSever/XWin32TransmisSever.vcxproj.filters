@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="_INC">
+      <UniqueIdentifier>{9193314a-f3b9-4898-8fe9-6c00294cf919}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -23,6 +26,21 @@
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_include\TransmisClient.hpp">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_include\DatabaseForClassicTransmis.h">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_include\TransmisServer.hpp">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_include\TransmisDefine.h">
+      <Filter>_INC</Filter>
+    </ClInclude>
+    <ClInclude Include="..\_include\XReadParameterSetting.hpp">
+      <Filter>_INC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

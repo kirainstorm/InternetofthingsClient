@@ -13,3 +13,6 @@
 
 
 // TODO: reference additional headers your program requires here
+#include "PlatformDefine.h"
+#pragma comment(lib, "Ws2_32.lib")
+#pragma comment(lib, "live555D.lib")
