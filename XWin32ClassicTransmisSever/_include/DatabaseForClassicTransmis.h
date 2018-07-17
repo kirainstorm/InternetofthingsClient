@@ -111,7 +111,7 @@ public:
 	void GetTransmisDevices(vector<st_database_Transmis_stream_rtmp *> & v)
 	{
 
-#if 1
+#if 0
 		st_database_Transmis_stream_rtmp * p = new st_database_Transmis_stream_rtmp();
 		CROSS_STRCPY(p->url, "rtsp://192.168.1.228:8554/stream1");
 		v.push_back(p);
@@ -135,8 +135,8 @@ public:
 
 			//------------------------------------------------------------------------------
 			try {
-#if 0
-				string s = "SELECT d.D_Type , d.D_IP  FROM [Devices] as d "\
+#if 1
+				string s = "SELECT d.D_Type , d.D_Content  FROM [Devices] as d "\
 					"INNER JOIN Servers as s ON s.ID=d.CoreServerID "\
 					" where s.S_Serial = :S_Serial";
 				soci::rowset<soci::row> rs = (sql.prepare << s, soci::use(CXReadParameterSetting::Instance().strClassicSerial));
@@ -149,7 +149,7 @@ public:
 					//
 					st_database_Transmis_stream_rtmp * p = new st_database_Transmis_stream_rtmp();
 					//
-					sprintf_s(p->url, "rtsp://%s:22/122", ip.c_str());
+					CROSS_STRCPY(p->url, ip.c_str());
 					//
 					v.push_back(p);
 				}
