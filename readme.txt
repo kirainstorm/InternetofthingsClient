@@ -1,4 +1,4 @@
-XInternetProjectClient 
+XInternetProjectClient
 	|
 	|
 	|------_Include <---核心库，包括跨平台头文件，网络，播放，mp4，pool，des
@@ -59,4 +59,6 @@ XInternetProjectClient
 	|------XInternetProjectWin32TransmisSever <---扩展传输示例，用于各类设备与服务器连接，服务器与服务器连接
 	|
 	|------二次开发文档 
+	|
+	|
 
